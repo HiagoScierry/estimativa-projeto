@@ -40,20 +40,21 @@ public class PerfisDeProjetoView extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setText("PERFIS DE PROJETO");
 
+        tblPerfisDeProjeto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblPerfisDeProjeto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tblPerfisDeProjeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome do projeto", "Tipo de aplicação", "Tempo gasto", "Custo"
+                "", "Nome do projeto", "Tipo de aplicação", "Tempo gasto", "Custo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -64,8 +65,20 @@ public class PerfisDeProjetoView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPerfisDeProjeto.setRowHeight(35);
+        tblPerfisDeProjeto.setShowHorizontalLines(true);
+        tblPerfisDeProjeto.setShowVerticalLines(true);
+        tblPerfisDeProjeto.getTableHeader().setResizingAllowed(false);
         tblPerfisDeProjeto.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblPerfisDeProjeto);
+        if (tblPerfisDeProjeto.getColumnModel().getColumnCount() > 0) {
+            tblPerfisDeProjeto.getColumnModel().getColumn(0).setResizable(false);
+            tblPerfisDeProjeto.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tblPerfisDeProjeto.getColumnModel().getColumn(1).setResizable(false);
+            tblPerfisDeProjeto.getColumnModel().getColumn(2).setResizable(false);
+            tblPerfisDeProjeto.getColumnModel().getColumn(3).setResizable(false);
+            tblPerfisDeProjeto.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         lblDescricao1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDescricao1.setText("1. A seguir, selecione qual(is) perfil(is) de projeto você deseja inserir em seu novo projeto. Após isso, clique no botão \"Criar projeto\".");

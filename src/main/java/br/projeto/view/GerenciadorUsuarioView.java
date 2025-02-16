@@ -62,6 +62,8 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        tblUsuariosCadastrados.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tblUsuariosCadastrados.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tblUsuariosCadastrados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -73,11 +75,22 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        tblUsuariosCadastrados.setRowHeight(35);
+        tblUsuariosCadastrados.setShowHorizontalLines(true);
+        tblUsuariosCadastrados.setShowVerticalLines(true);
+        tblUsuariosCadastrados.getTableHeader().setResizingAllowed(false);
         tblUsuariosCadastrados.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblUsuariosCadastrados);
 

@@ -32,8 +32,6 @@ public class LoginView extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         pswSenha = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
-        lblSemConta = new javax.swing.JLabel();
-        btnSignUp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,11 +51,6 @@ public class LoginView extends javax.swing.JFrame {
         btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEntrar.setText("Entrar");
 
-        lblSemConta.setText("Eu não tenho uma conta");
-
-        btnSignUp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnSignUp.setText("Sign Up");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,12 +69,6 @@ public class LoginView extends javax.swing.JFrame {
                             .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblUsuario))))
                 .addContainerGap(88, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblSemConta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSignUp)
-                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,11 +85,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addComponent(pswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSemConta)
-                    .addComponent(btnSignUp))
-                .addGap(21, 21, 21))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,9 +128,7 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel lblLogin;
-    private javax.swing.JLabel lblSemConta;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField pswSenha;
