@@ -1,7 +1,7 @@
 package br.projeto.presenter;
 
 import br.projeto.command.*;
-import br.projeto.model.Projeto;
+import br.projeto.model.ProjetoClayton;
 import br.projeto.presenter.helpers.WindowManager;
 import br.projeto.presenter.window_command.*;
 import br.projeto.repository.ProjetoRepositoryMock;
@@ -83,8 +83,8 @@ public final class PrincipalPresenter implements Observer {
         raiz.adicionarFilho(noPerfis);
         raiz.adicionarFilho(noProjetos);
 
-        List<Projeto> listaProjetos = repository.getProjetos();
-        for (final Projeto projeto : listaProjetos) {
+        List<ProjetoClayton> listaProjetos = repository.getProjetos();
+        for (final ProjetoClayton projeto : listaProjetos) {
             AbrirDetalhesProjetoProjetoCommand cmdDetalhes = new AbrirDetalhesProjetoProjetoCommand(repository, view.getDesktop()) {
                 @Override
                 public void execute() {
@@ -116,7 +116,7 @@ public final class PrincipalPresenter implements Observer {
         view.setTree(arvore);
     }
 
-    private void adicionarMenuContextual(Projeto projeto, NoArvoreComposite noProjeto) {
+    private void adicionarMenuContextual(ProjetoClayton projeto, NoArvoreComposite noProjeto) {
         noProjeto.setMenuContextual(() -> {
             JPopupMenu menu = new JPopupMenu();
             JMenuItem excluirProjetoItem = new JMenuItem("Excluir Projeto");
@@ -131,7 +131,7 @@ public final class PrincipalPresenter implements Observer {
 
 
     @Override
-    public void update(final List<Projeto> listaProjetos) {
+    public void update(final List<ProjetoClayton> listaProjetos) {
         SwingUtilities.invokeLater(() -> {
             WindowCommand fecharJanelasCommand = new FecharJanelasRelacionadasCommand(view.getDesktop(), listaProjetos);
             fecharJanelasCommand.execute();
