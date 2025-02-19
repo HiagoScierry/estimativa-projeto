@@ -4,6 +4,9 @@
  */
 package br.projeto.view;
 
+import javax.swing.JButton;
+import javax.swing.JTable;
+
 /**
  *
  * @author Cauã
@@ -36,9 +39,11 @@ public class PerfisDeProjetoView extends javax.swing.JFrame {
         btnCriarNovoPerfilProjeto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setText("PERFIS DE PROJETO");
+        getContentPane().add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(493, 23, -1, -1));
 
         tblPerfisDeProjeto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblPerfisDeProjeto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -80,71 +85,27 @@ public class PerfisDeProjetoView extends javax.swing.JFrame {
             tblPerfisDeProjeto.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 154, 812, -1));
+
         lblDescricao1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDescricao1.setText("1. A seguir, selecione qual(is) perfil(is) de projeto você deseja inserir em seu novo projeto. Após isso, clique no botão \"Criar projeto\".");
         lblDescricao1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(lblDescricao1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 73, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 128, -1, -1));
 
         lblDescricao2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDescricao2.setText("2. Caso queira criar um novo perfil de projeto, clique no botão \"Criar novo perfil de projeto\".");
+        getContentPane().add(lblDescricao2, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 101, -1, -1));
 
         btnCriarProjeto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCriarProjeto.setText("Criar projeto");
+        getContentPane().add(btnCriarProjeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 609, -1, -1));
 
         btnCriarNovoPerfilProjeto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCriarNovoPerfilProjeto.setText("Criar novo perfil de projeto");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(493, 493, 493)
-                        .addComponent(lblTitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(283, 283, 283)
-                        .addComponent(lblDescricao2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(200, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCriarNovoPerfilProjeto)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnCriarProjeto)
-                        .addGap(417, 417, 417))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblDescricao1)
-                        .addGap(151, 151, 151))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
-                .addComponent(lblDescricao1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDescricao2)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel3)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCriarProjeto)
-                    .addComponent(btnCriarNovoPerfilProjeto))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
+        getContentPane().add(btnCriarNovoPerfilProjeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 609, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,6 +144,18 @@ public class PerfisDeProjetoView extends javax.swing.JFrame {
                 new PerfisDeProjetoView().setVisible(true);
             }
         });
+    }
+
+    public JButton getBtnCriarNovoPerfilProjeto() {
+        return btnCriarNovoPerfilProjeto;
+    }
+
+    public JButton getBtnCriarProjeto() {
+        return btnCriarProjeto;
+    }
+
+    public JTable getTblPerfisDeProjeto() {
+        return tblPerfisDeProjeto;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

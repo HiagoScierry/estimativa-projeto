@@ -4,6 +4,10 @@
  */
 package br.projeto.view;
 
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Cauã
@@ -89,6 +93,7 @@ public class LoginView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -124,6 +129,18 @@ public class LoginView extends javax.swing.JFrame {
                 new LoginView().setVisible(true);
             }
         });
+    }
+
+    public JButton getBtnEntrar() {
+        return btnEntrar;
+    }
+
+    public JPasswordField getPswSenha() {
+        return pswSenha;
+    }
+
+    public JTextField getTxtNomeUsuario() {
+        return txtNomeUsuario;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

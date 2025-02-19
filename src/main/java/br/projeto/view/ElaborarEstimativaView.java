@@ -4,6 +4,11 @@
  */
 package br.projeto.view;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Cauã
@@ -44,14 +49,16 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
         chcAndroid = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPrecosPorDiaTrabalho = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnCriarEstimativa = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblValoresFinais = new javax.swing.JTable();
+        lblNomeProjeto = new javax.swing.JLabel();
+        txtNomeProjeto = new javax.swing.JTextField();
 
         jScrollPane2.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblEstimativaProjeto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblEstimativaProjeto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -167,24 +174,37 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
             tblEstimativaProjeto.getColumnModel().getColumn(6).setPreferredWidth(18);
         }
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1559, -1));
+
         lblWeb.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblWeb.setText("WEB E BACK-END");
+        getContentPane().add(lblWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
 
         lblIOS.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblIOS.setText("iOS");
+        getContentPane().add(lblIOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, -1));
 
         lblAndroid.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblAndroid.setText("ANDROID");
+        getContentPane().add(lblAndroid, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 20, -1, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 13, 52));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 22, 52));
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, -1));
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 20, 31, 52));
 
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 20, 50, 52));
+        getContentPane().add(chcWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, -1, -1));
+        getContentPane().add(chcIOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, -1, -1));
+        getContentPane().add(chcAndroid, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 50, -1, -1));
 
         tblPrecosPorDiaTrabalho.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblPrecosPorDiaTrabalho.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -237,11 +257,11 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
             tblPrecosPorDiaTrabalho.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Criar Estimativa");
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 1214, 179));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("ELABORAR ESTIMATIVA DE PROJETO");
+        btnCriarEstimativa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCriarEstimativa.setText("Criar Estimativa");
+        getContentPane().add(btnCriarEstimativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 720, -1, -1));
 
         tblValoresFinais.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblValoresFinais.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -264,9 +284,16 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblValoresFinais.setRowHeight(50);
@@ -275,100 +302,19 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
         tblValoresFinais.getTableHeader().setResizingAllowed(false);
         tblValoresFinais.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(tblValoresFinais);
+        if (tblValoresFinais.getColumnModel().getColumnCount() > 0) {
+            tblValoresFinais.getColumnModel().getColumn(0).setResizable(false);
+            tblValoresFinais.getColumnModel().getColumn(1).setResizable(false);
+        }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(683, 683, 683)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(chcWeb)
-                                        .addGap(88, 88, 88))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lblWeb)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblIOS)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(chcIOS)))
-                                .addGap(87, 87, 87)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
-                                        .addComponent(chcAndroid))
-                                    .addComponent(lblAndroid))
-                                .addGap(55, 55, 55)
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(317, 317, 317))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jButton1)
-                                                .addGap(336, 336, 336))
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(365, 365, 365))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1559, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))))
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(647, 647, 647)
-                        .addComponent(jLabel1)))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblWeb)
-                        .addGap(6, 6, 6)
-                        .addComponent(chcWeb))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblIOS)
-                        .addGap(6, 6, 6)
-                        .addComponent(chcIOS))
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAndroid)
-                        .addGap(6, 6, 6)
-                        .addComponent(chcAndroid))
-                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 520, 340, 179));
+
+        lblNomeProjeto.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblNomeProjeto.setText("Nome do Projeto:");
+        getContentPane().add(lblNomeProjeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
+        txtNomeProjeto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        getContentPane().add(txtNomeProjeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 330, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -408,13 +354,44 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
         });
     }
 
+    public JButton getBtnCriarEstimativa() {
+        return btnCriarEstimativa;
+    }
+
+    public JCheckBox getChcAndroid() {
+        return chcAndroid;
+    }
+
+    public JCheckBox getChcIOS() {
+        return chcIOS;
+    }
+
+    public JCheckBox getChcWeb() {
+        return chcWeb;
+    }
+
+    public JTable getTblEstimativaProjeto() {
+        return tblEstimativaProjeto;
+    }
+
+    public JTable getTblPrecosPorDiaTrabalho() {
+        return tblPrecosPorDiaTrabalho;
+    }
+
+    public JTable getTblValoresFinais() {
+        return tblValoresFinais;
+    }
+
+    public JTextField getTxtNomeProjeto() {
+        return txtNomeProjeto;
+    } 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCriarEstimativa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox chcAndroid;
     private javax.swing.JCheckBox chcIOS;
     private javax.swing.JCheckBox chcWeb;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -427,9 +404,11 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblAndroid;
     private javax.swing.JLabel lblIOS;
+    private javax.swing.JLabel lblNomeProjeto;
     private javax.swing.JLabel lblWeb;
     private javax.swing.JTable tblEstimativaProjeto;
     private javax.swing.JTable tblPrecosPorDiaTrabalho;
     private javax.swing.JTable tblValoresFinais;
+    private javax.swing.JTextField txtNomeProjeto;
     // End of variables declaration//GEN-END:variables
 }

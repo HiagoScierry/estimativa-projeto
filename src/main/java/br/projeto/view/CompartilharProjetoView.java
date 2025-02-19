@@ -4,6 +4,9 @@
  */
 package br.projeto.view;
 
+import javax.swing.JButton;
+import javax.swing.JTable;
+
 /**
  *
  * @author Cauã
@@ -33,9 +36,11 @@ public class CompartilharProjetoView extends javax.swing.JFrame {
         btnCompartilhar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCompartilharProjeto.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCompartilharProjeto.setText("COMPARTILHAR PROJETO");
+        getContentPane().add(lblCompartilharProjeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 34, -1, -1));
 
         tblUsuariosDisponiveis.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblUsuariosDisponiveis.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -75,47 +80,15 @@ public class CompartilharProjetoView extends javax.swing.JFrame {
             tblUsuariosDisponiveis.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 118, 818, -1));
+
         lblDescricao.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDescricao.setText("A seguir, selecione o(s) usuário(s) com quem compartilhará o projeto.");
+        getContentPane().add(lblDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 78, -1, -1));
 
         btnCompartilhar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCompartilhar.setText("Compartilhar");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(249, 249, 249)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDescricao)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(lblCompartilharProjeto)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCompartilhar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(417, 417, 417))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(lblCompartilharProjeto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblDescricao)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCompartilhar)
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
+        getContentPane().add(btnCompartilhar, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 563, 128, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -154,6 +127,14 @@ public class CompartilharProjetoView extends javax.swing.JFrame {
                 new CompartilharProjetoView().setVisible(true);
             }
         });
+    }
+
+    public JButton getBtnCompartilhar() {
+        return btnCompartilhar;
+    }
+
+    public JTable getTblUsuariosDisponiveis() {
+        return tblUsuariosDisponiveis;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -37,6 +37,7 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
         txtPlataformas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblValoresFinais.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblValoresFinais.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -81,6 +82,8 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
             tblValoresFinais.getColumnModel().getColumn(0).setResizable(false);
             tblValoresFinais.getColumnModel().getColumn(1).setResizable(false);
         }
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1072, 485, 564, 182));
 
         tblTaxasExtras.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblTaxasExtras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -130,8 +133,11 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
             tblTaxasExtras.getColumnModel().getColumn(1).setPreferredWidth(20);
         }
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1072, 141, 564, 326));
+
         lblVisualizarEstimativa.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblVisualizarEstimativa.setText("VISUALIZAR ESTIMATIVA DE PROJETO");
+        getContentPane().add(lblVisualizarEstimativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 31, -1, -1));
 
         tblFuncionalidadesProjeto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblFuncionalidadesProjeto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -178,54 +184,15 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
             tblFuncionalidadesProjeto.getColumnModel().getColumn(2).setPreferredWidth(20);
         }
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 141, 977, 526));
+
         lblPlataformas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblPlataformas.setText("Plataformas:");
+        getContentPane().add(lblPlataformas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 98, -1, -1));
 
         txtPlataformas.setEditable(false);
         txtPlataformas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblVisualizarEstimativa)
-                .addGap(623, 623, 623))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblPlataformas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPlataformas, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4))
-                        .addGap(0, 50, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(lblVisualizarEstimativa)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPlataformas)
-                    .addComponent(txtPlataformas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
+        getContentPane().add(txtPlataformas, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 95, 238, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
