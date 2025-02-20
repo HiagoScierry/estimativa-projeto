@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPane1">
+        </Component>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="false"/>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="40" y="90" width="1559" height="-1"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tblEstimativaProjeto">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="7" rowCount="66">
+                <Column editable="true" title="" type="java.lang.Boolean">
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="false"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="false" title="Funcionalidade que o aplicativo ter&#xe1;" type="java.lang.String">
+                  <Data value="Pequeno"/>
+                  <Data value="M&#xe9;dio"/>
+                  <Data value="Grande"/>
+                  <Data value="MVP"/>
+                  <Data value="B&#xe1;sico"/>
+                  <Data value="Profissional"/>
+                  <Data value="Cadastro por E-mail e Senha"/>
+                  <Data value="Cadastro pelo Facebook"/>
+                  <Data value="Cadastro pelo Twitter"/>
+                  <Data value="Cadastro pelo Google"/>
+                  <Data value="Cadastro pelo Linkedln"/>
+                  <Data value="Cadastro pelo Github"/>
+                  <Data value="E-mails de Convite de Usu&#xe1;rio"/>
+                  <Data value="Contas Multi-tenant"/>
+                  <Data value="Subdom&#xed;nios"/>
+                  <Data value="Dom&#xed;nios Personalizados"/>
+                  <Data value="Painel (Dashboard)"/>
+                  <Data value="Feed de Atividades (Activity Feed)"/>
+                  <Data value="Upload de Arquivos (File Uploading)"/>
+                  <Data value="Upload de M&#xed;dia (Media Uploading"/>
+                  <Data value="Perfis de Usu&#xe1;rio (User Profiles)"/>
+                  <Data value="E-mails Transacionais (Transactional Emails)"/>
+                  <Data value="Tags"/>
+                  <Data value="Avalia&#xe7;&#xf5;es ou Coment&#xe1;rios (Rating or Reviews)"/>
+                  <Data value="Processamento de &#xc1;udio/V&#xed;deo)"/>
+                  <Data value="Pesquisa de Texto Livre (Free text searching)"/>
+                  <Data value="Pesquisa (Searching)"/>
+                  <Data value="Calend&#xe1;rio (Calendaring)"/>
+                  <Data value="Exibi&#xe7;&#xe3;o de Dados de Mapa / Geolocaliza&#xe7;&#xe3;o"/>
+                  <Data value="Exibi&#xe7;&#xe3;o de Marcadores/Regi&#xf5;es de Mapa Personalizados"/>
+                  <Data value="Reservas (Bookings)"/>
+                  <Data value="Mensagens (Messaging)"/>
+                  <Data value="F&#xf3;runs ou Coment&#xe1;rios"/>
+                  <Data value="Compartilhamento Social (Social Sharing)"/>
+                  <Data value="Integra&#xe7;&#xe3;o com Facebook Open Graph (Push to Facebook Open Graph)"/>
+                  <Data value="Notifica&#xe7;&#xf5;es Push (Push Notifications)"/>
+                  <Data value="Planos de Assinatura (Subscription plans)"/>
+                  <Data value="Processamento de Pagamentos (Payment processing)"/>
+                  <Data value="Carrinho de Compras (Shopping Cart)"/>
+                  <Data value="Marketplace de Usu&#xe1;rios (User Marketplace)"/>
+                  <Data value="Gerenciamento de Produtos (Product Management)"/>
+                  <Data value="Compras dentro do Aplicativo (In-App Purchasing)"/>
+                  <Data value="Coleta de Informa&#xe7;&#xf5;es de Pagamento"/>
+                  <Data value="Integra&#xe7;&#xe3;o com CMS (CMS Integration)"/>
+                  <Data value="P&#xe1;ginas de Administra&#xe7;&#xe3;o de Usu&#xe1;rios (User Admin pages)"/>
+                  <Data value="Modera&#xe7;&#xe3;o / Aprova&#xe7;&#xe3;o de Conte&#xfa;do (Moderation / Content Approval)"/>
+                  <Data value="Intercom"/>
+                  <Data value="An&#xe1;lises de Uso (Usage Analytics)"/>
+                  <Data value="Relat&#xf3;rio de Erros (Crash Reporting)"/>
+                  <Data value="Monitoramento de Performance (Performance Monitoring)"/>
+                  <Data value="Suporte Multil&#xed;ngue (Multilingual Support)"/>
+                  <Data value="Conectar a um ou mais servi&#xe7;os de terceiros"/>
+                  <Data value="Uma API para que terceiros integrem ao seu app"/>
+                  <Data value="Envio de SMS (SMS Messaging)"/>
+                  <Data value="Mascaramento de N&#xfa;mero de Telefone (Phone Number Masking)"/>
+                  <Data value="Seguran&#xe7;a baseada em Certificado SSL"/>
+                  <Data value="Prote&#xe7;&#xe3;o contra DoS (DoS protection)"/>
+                  <Data value="Autentica&#xe7;&#xe3;o em Duas Etapas (Two Factor Authentication)"/>
+                  <Data value="Desenvolvimento Espec&#xed;fico do Aplicativo"/>
+                  <Data value="Design de &#xcd;cone do App (App Icon Design)"/>
+                  <Data value="Sincroniza&#xe7;&#xe3;o em Nuvem (Cloud Syncing)"/>
+                  <Data value="Dados de Sensores do Dispositivo (Device Sensor Data)"/>
+                  <Data value="C&#xf3;digos de Barras ou QR Codes (Barcodes ou QR Codes)"/>
+                  <Data value="Dados de Sa&#xfa;de (Health Data)"/>
+                  <Data value="Apple Watch"/>
+                  <Data value="Gerente de Projeto (Project Manager)"/>
+                </Column>
+                <Column editable="false" title="Dias (ou %)" type="java.lang.String">
+                  <Data value="                     10"/>
+                  <Data value="                     30"/>
+                  <Data value="                     50"/>
+                  <Data value="                     30%"/>
+                  <Data value="                     50%"/>
+                  <Data value="                     70%"/>
+                  <Data value="                     1                     "/>
+                  <Data value="                     2                     "/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     3"/>
+                  <Data value="                     4"/>
+                  <Data value="                     4"/>
+                  <Data value="                     5"/>
+                  <Data value="                     4"/>
+                  <Data value="                     4"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     7"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     8"/>
+                  <Data value="                     6"/>
+                  <Data value="                     5"/>
+                  <Data value="                     2"/>
+                  <Data value="                     5"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     8"/>
+                  <Data value="                     5"/>
+                  <Data value="                     8"/>
+                  <Data value="                     12"/>
+                  <Data value="                     4"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     7"/>
+                  <Data value="                     3"/>
+                  <Data value="                     4"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     0"/>
+                  <Data value="                     1"/>
+                  <Data value="                     4"/>
+                  <Data value="                     6"/>
+                  <Data value="                     8"/>
+                  <Data value="                     4"/>
+                  <Data value="                     4"/>
+                  <Data value="                     3"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     0"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     10"/>
+                </Column>
+                <Column editable="false" title="Dias (ou %)" type="java.lang.String">
+                  <Data value="                     10"/>
+                  <Data value="                     30"/>
+                  <Data value="                     50"/>
+                  <Data value="                     30%"/>
+                  <Data value="                     50%"/>
+                  <Data value="                     70%"/>
+                  <Data value="                     1"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     4"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     4"/>
+                  <Data value="                     2"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     2"/>
+                  <Data value="                     5"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     3"/>
+                  <Data value="                     6"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     1"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     3"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     1"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     4"/>
+                  <Data value="                     3"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     4"/>
+                  <Data value="                     4"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     0"/>
+                  <Data value="                     7"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     2"/>
+                  <Data value="                     4"/>
+                  <Data value="                     7"/>
+                  <Data value="                     10"/>
+                </Column>
+                <Column editable="false" title="Dias (ou %)" type="java.lang.String">
+                  <Data value="                     10"/>
+                  <Data value="                     30"/>
+                  <Data value="                     50"/>
+                  <Data value="                     30%"/>
+                  <Data value="                     50%"/>
+                  <Data value="                     70%"/>
+                  <Data value="                     1"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     2"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     4"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     4"/>
+                  <Data value="                     2"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     2"/>
+                  <Data value="                     5"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     3"/>
+                  <Data value="                     6"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     1"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     3"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     3"/>
+                  <Data value="                     3"/>
+                  <Data value="                     1"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     4"/>
+                  <Data value="                     3"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     4"/>
+                  <Data value="                     4"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     5"/>
+                  <Data value="                     0"/>
+                  <Data value="                     7"/>
+                  <Data value="                     5"/>
+                  <Data value="                     5"/>
+                  <Data value="                     2"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     10"/>
+                </Column>
+                <Column editable="false" title="Total de dias" type="java.lang.Integer"/>
+                <Column editable="false" title="Valor total" type="java.lang.Double"/>
+              </Table>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="autoResizeMode" type="int" value="1"/>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="0" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="350" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="18" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+            <Property name="rowHeight" type="int" value="50"/>
+            <Property name="selectionMode" type="int" value="0"/>
+            <Property name="showHorizontalLines" type="boolean" value="true"/>
+            <Property name="showVerticalLines" type="boolean" value="true"/>
+            <Property name="surrendersFocusOnKeystroke" type="boolean" value="true"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblWeb">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="20" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="WEB E BACK-END"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="670" y="20" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIOS">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="20" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="iOS"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="930" y="20" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblAndroid">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="20" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="ANDROID"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1100" y="20" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="650" y="20" width="13" height="52"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator2">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="850" y="20" width="22" height="52"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator3">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="0" y="0" width="0" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator4">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1040" y="20" width="31" height="52"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator5">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1250" y="20" width="50" height="52"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chcWeb">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="740" y="50" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chcIOS">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="930" y="50" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chcAndroid">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1130" y="50" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="40" y="520" width="1214" height="179"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tblPrecosPorDiaTrabalho">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="5" rowCount="11">
+                <Column editable="false" title="" type="java.lang.String"/>
+                <Column editable="false" title="Taxas extras" type="java.lang.String">
+                  <Data value="Pre&#xe7;o por dia de traballho  -Designer UI/UX"/>
+                  <Data value="Pre&#xe7;o por dia de traballho - Ger&#xea;ncia de Projeto"/>
+                  <Data value="Pre&#xe7;o por dia de traballho  - Desenvolvimento"/>
+                  <Data value="Custo com hardware e instala&#xe7;&#xf5;es f&#xed;sicas."/>
+                  <Data value="Custo com softwares."/>
+                  <Data value="Custo com riscos."/>
+                  <Data value="Custo com garantia."/>
+                  <Data value="Fundo de reserva"/>
+                  <Data value="Outros custos."/>
+                  <Data value="Percentual com impostos(%)"/>
+                  <Data value="Percentual de Lucro desejado (%)"/>
+                </Column>
+                <Column editable="true" title="Valor" type="java.lang.String"/>
+                <Column editable="true" title="Valor" type="java.lang.String">
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                </Column>
+                <Column editable="true" title="Valor" type="java.lang.String">
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value=""/>
+                  <Data value="                     ---"/>
+                  <Data value="                     ---"/>
+                </Column>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="18" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="355" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="rowHeight" type="int" value="50"/>
+            <Property name="showHorizontalLines" type="boolean" value="true"/>
+            <Property name="showVerticalLines" type="boolean" value="true"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="btnCriarEstimativa">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Criar Estimativa"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="770" y="720" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1260" y="520" width="340" height="179"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tblValoresFinais">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="2" rowCount="9">
+                <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String">
+                  <Data value="Valor"/>
+                  <Data value="+ Taxas Extras"/>
+                  <Data value="Imposto  Calculado"/>
+                  <Data value="+ Impostos"/>
+                  <Data value="Lucro Calculado"/>
+                  <Data value="Dias"/>
+                  <Data value="Meses"/>
+                  <Data value="Pre&#xe7;o Final ao Cliente"/>
+                  <Data value="M&#xe9;dia por M&#xea;s"/>
+                </Column>
+                <Column editable="false" title="Valor" type="java.lang.Double"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="rowHeight" type="int" value="50"/>
+            <Property name="showHorizontalLines" type="boolean" value="true"/>
+            <Property name="showVerticalLines" type="boolean" value="true"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblNomeProjeto">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="16" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Nome do Projeto:"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="40" y="40" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNomeProjeto">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="16" style="0"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="180" y="40" width="330" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+  </SubComponents>
+</Form>
