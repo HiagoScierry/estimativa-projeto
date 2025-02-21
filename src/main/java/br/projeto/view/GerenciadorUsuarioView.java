@@ -36,13 +36,10 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
-        lblSenha = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuariosCadastrados = new javax.swing.JTable();
         lblCadastrar1 = new javax.swing.JLabel();
-        pswSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,9 +52,11 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
         lblUsuario.setText("Usuário:");
         getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 87, -1, -1));
 
+        txtUsuario.setEditable(false);
         txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 115, 187, -1));
 
+        txtEmail.setEditable(false);
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 189, 187, -1));
 
@@ -65,16 +64,8 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
         lblEmail.setText("E-Mail:");
         getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 161, -1, -1));
 
-        lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblSenha.setText("Senha:");
-        getContentPane().add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 235, -1, -1));
-
-        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCadastrar.setText("Cadastrar");
-        getContentPane().add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 315, -1, -1));
-
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 68, 50, 315));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 50, 315));
 
         tblUsuariosCadastrados.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblUsuariosCadastrados.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -111,11 +102,8 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 90, 491, 285));
 
         lblCadastrar1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblCadastrar1.setText("CADASTRAR");
-        getContentPane().add(lblCadastrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 32, -1, -1));
-
-        pswSenha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        getContentPane().add(pswSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 269, 187, -1));
+        lblCadastrar1.setText("DADOS DA CONTA");
+        getContentPane().add(lblCadastrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,14 +144,6 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
         });
     }
 
-    public JButton getBtnCadastrar() {
-        return btnCadastrar;
-    }
-
-    public JPasswordField getPswSenha() {
-        return pswSenha;
-    }
-
     public JTable getTblUsuariosCadastrados() {
         return tblUsuariosCadastrados;
     }
@@ -177,15 +157,12 @@ public class GerenciadorUsuarioView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCadastrar;
     private javax.swing.JLabel lblCadastrar1;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JPasswordField pswSenha;
     private javax.swing.JTable tblUsuariosCadastrados;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtUsuario;
