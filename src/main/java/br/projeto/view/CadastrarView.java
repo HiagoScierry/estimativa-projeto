@@ -12,12 +12,12 @@ import javax.swing.JTextField;
  *
  * @author Cauã
  */
-public class LoginView extends javax.swing.JFrame {
+public class CadastrarView extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginView
+     * Creates new form CadastrarViewa
      */
-    public LoginView() {
+    public CadastrarView() {
         initComponents();
     }
 
@@ -30,38 +30,41 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblLogin = new javax.swing.JLabel();
-        lblUsuario = new javax.swing.JLabel();
-        txtNomeUsuario = new javax.swing.JTextField();
+        lblTitulo = new javax.swing.JLabel();
+        lblNomeUsuario = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
-        pswSenha = new javax.swing.JPasswordField();
-        btnEntrar = new javax.swing.JButton();
-        lblCadastrar = new javax.swing.JLabel();
+        txtNomeUsuario = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        pswSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblLogin.setText("LOGIN");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo.setText("CADASTRO");
 
-        lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblUsuario.setText("Usuário:");
+        lblNomeUsuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomeUsuario.setText("Nome:");
 
-        txtNomeUsuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblEmail.setText("E-mail:");
 
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblSenha.setText("Senha:");
 
-        pswSenha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtNomeUsuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEntrar.setText("Entrar");
-
-        lblCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblCadastrar.setText("Não tem uma conta? Cadastre-se");
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCadastrar.setText("Cadastrar");
+
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCancelar.setText("Cancelar");
+
+        pswSenha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,52 +73,54 @@ public class LoginView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(lblLogin))
+                        .addGap(105, 105, 105)
+                        .addComponent(lblTitulo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(lblUsuario))
+                        .addGap(75, 75, 75)
+                        .addComponent(lblNomeUsuario))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
+                        .addGap(75, 75, 75)
                         .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(lblSenha))
+                        .addGap(75, 75, 75)
+                        .addComponent(lblEmail))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(pswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(75, 75, 75)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(btnEntrar))
+                        .addGap(75, 75, 75)
+                        .addComponent(btnCancelar)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnCadastrar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(lblCadastrar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnCadastrar)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSenha))))
+                .addGap(75, 75, 75))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblLogin)
-                .addGap(12, 12, 12)
-                .addComponent(lblUsuario)
+                .addGap(28, 28, 28)
+                .addComponent(lblTitulo)
+                .addGap(32, 32, 32)
+                .addComponent(lblNomeUsuario)
                 .addGap(6, 6, 6)
                 .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblSenha)
-                .addGap(6, 6, 6)
-                .addComponent(pswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblEmail)
+                .addGap(12, 12, 12)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEntrar)
-                .addGap(102, 102, 102)
+                .addComponent(lblSenha)
+                .addGap(12, 12, 12)
+                .addComponent(pswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lblCadastrar))
+                    .addComponent(btnCancelar)
                     .addComponent(btnCadastrar))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,48 +144,54 @@ public class LoginView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginView().setVisible(true);
+                new CadastrarView().setVisible(true);
             }
         });
-    }
-
-    public JButton getBtnEntrar() {
-        return btnEntrar;
-    }
-
-    public JPasswordField getPswSenha() {
-        return pswSenha;
-    }
-
-    public JTextField getTxtNomeUsuario() {
-        return txtNomeUsuario;
     }
 
     public JButton getBtnCadastrar() {
         return btnCadastrar;
     }
 
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JTextField getTxtEmail() {
+        return txtEmail;
+    }
+
+    public JTextField getTxtNomeUsuario() {
+        return txtNomeUsuario;
+    }
+
+    public JPasswordField getPswSenha() {
+        return pswSenha;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnEntrar;
-    private javax.swing.JLabel lblCadastrar;
-    private javax.swing.JLabel lblLogin;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblNomeUsuario;
     private javax.swing.JLabel lblSenha;
-    private javax.swing.JLabel lblUsuario;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPasswordField pswSenha;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNomeUsuario;
     // End of variables declaration//GEN-END:variables
 }
