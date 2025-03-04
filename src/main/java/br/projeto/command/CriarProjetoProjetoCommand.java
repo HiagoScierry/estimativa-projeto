@@ -1,6 +1,6 @@
 package br.projeto.command;
 
-import br.projeto.model.Projeto;
+import br.projeto.model.ProjetoClayton;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.CriarProjetoMock;
 
@@ -20,7 +20,7 @@ public class CriarProjetoProjetoCommand implements ProjetoCommand {
 
     @Override
     public void execute() {
-        Optional<Projeto> projetoCriado = criarProjetoMock.criarProjetoAleatorio();
+        Optional<ProjetoClayton> projetoCriado = criarProjetoMock.criarProjetoAleatorio();
 
         projetoCriado.ifPresentOrElse(
                 projeto -> {

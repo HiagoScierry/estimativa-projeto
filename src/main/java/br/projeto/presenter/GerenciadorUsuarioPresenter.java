@@ -5,6 +5,7 @@
 package br.projeto.presenter;
 
 import br.projeto.model.ProjetoClayton;
+import br.projeto.model.ProjetoClayton;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.view.GerenciadorUsuarioView;
 import java.util.List;
@@ -42,8 +43,7 @@ public class GerenciadorUsuarioPresenter implements Observer {
 
 
     @Override
-    public void update(List<ProjetoClayton> projetos) {
-        inserirDadosUsuarioLogado();
+    public void update(List<Projeto> projetos) {
         atualizarTabelaUsuarios();
     }
 

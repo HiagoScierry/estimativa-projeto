@@ -1,6 +1,6 @@
 package br.projeto.service;
 
-import br.projeto.model.Projeto;
+import br.projeto.model.ProjetoClayton;
 import br.projeto.repository.ProjetoRepositoryMock;
 
 import java.util.*;
@@ -12,15 +12,15 @@ public class CriarProjetoMock {
         this.repository = repository;
     }
 
-    public Optional<Projeto> criarProjetoAleatorio() {
-        List<Projeto> projetosExistentes = repository.getProjetos();
+    public Optional<ProjetoClayton> criarProjetoAleatorio() {
+        List<ProjetoClayton> projetosExistentes = repository.getProjetos();
 
         if (projetosExistentes.isEmpty()) {
             return Optional.empty();
         }
 
         Random random = new Random();
-        Projeto projetoBase = projetosExistentes.get(random.nextInt(projetosExistentes.size()));
+        ProjetoClayton projetoBase = projetosExistentes.get(random.nextInt(projetosExistentes.size()));
 
         List<String> tipos = combinarTipos(projetosExistentes, random);
         if (tipos.size() < 1 || tipos.size() > 2) {
@@ -35,7 +35,7 @@ public class CriarProjetoMock {
         String compartilhadoPor = compartilhado ? projetoBase.getCriador() : null;
         Map<String, Integer> funcionalidades = combinarFuncionalidades(projetosExistentes, random);
 
-        return Optional.of(new Projeto(nome, criador, dataCriacao, status, compartilhado, compartilhadoPor, tipos, funcionalidades));
+        return Optional.of(new ProjetoClayton(nome, criador, dataCriacao, status, compartilhado, compartilhadoPor, tipos, funcionalidades));
     }
 
     private String gerarNomeDoProjeto(List<String> tipos) {
@@ -62,11 +62,11 @@ public class CriarProjetoMock {
         return String.format("%02d/%02d/%d", dia, mes, ano);
     }
 
-    private List<String> combinarTipos(List<Projeto> projetos, Random random) {
+    private List<String> combinarTipos(List<ProjetoClayton> projetos, Random random) {
         Set<String> tiposCombinados = new HashSet<>();
         List<String> todosOsTipos = new ArrayList<>();
 
-        for (Projeto projeto : projetos) {
+        for (ProjetoClayton projeto : projetos) {
             todosOsTipos.addAll(projeto.getPerfis());
         }
 
@@ -80,12 +80,12 @@ public class CriarProjetoMock {
         return new ArrayList<>(tiposCombinados);
     }
 
-    private Map<String, Integer> combinarFuncionalidades(List<Projeto> projetos, Random random) {
+    private Map<String, Integer> combinarFuncionalidades(List<ProjetoClayton> projetos, Random random) {
         Map<String, Integer> funcionalidadesCombinadas = new HashMap<>();
         int numProjetosParaCombinar = 1 + random.nextInt(projetos.size());
 
         for (int i = 0; i < numProjetosParaCombinar; i++) {
-            Projeto projeto = projetos.get(random.nextInt(projetos.size()));
+            ProjetoClayton projeto = projetos.get(random.nextInt(projetos.size()));
             Map<String, Integer> funcionalidades = projeto.getFuncionalidadesEscolhidas();
 
             int numFuncionalidades = 1 + random.nextInt(funcionalidades.size());
