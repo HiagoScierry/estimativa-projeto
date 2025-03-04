@@ -4,7 +4,6 @@
  */
 package br.projeto.presenter;
 
-import br.projeto.model.Projeto;
 import br.projeto.model.ProjetoClayton;
 import br.projeto.view.CompartilharProjetoView;
 import br.projeto.repository.ProjetoRepositoryMock;
