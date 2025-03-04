@@ -4,8 +4,12 @@
  */
 package br.projeto.presenter;
 
+<<<<<<< HEAD
+import br.projeto.model.Projeto;
+=======
 import br.projeto.model.ProjetoClayton;
 import br.projeto.model.ProjetoClayton;
+>>>>>>> 5b1bfcf62375dd7afcf47f6232c1e014e98f4861
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.view.GerenciadorUsuarioView;
 import java.util.List;
@@ -44,6 +48,10 @@ public class GerenciadorUsuarioPresenter implements Observer {
 
     @Override
     public void update(List<Projeto> projetos) {
+<<<<<<< HEAD
+        inserirDadosUsuarioLogado();
+=======
+>>>>>>> 5b1bfcf62375dd7afcf47f6232c1e014e98f4861
         atualizarTabelaUsuarios();
     }
 
