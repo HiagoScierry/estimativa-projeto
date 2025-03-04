@@ -1,6 +1,6 @@
 package br.projeto.presenter;
 
-import br.projeto.model.Projeto;
+import br.projeto.model.ProjetoClayton;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.EstimaProjetoService;
 import br.projeto.view.DetalheProjetoView;
@@ -25,14 +25,14 @@ public class DetalheProjetoPresenter implements Observer {
     }
 
     private void carregarDetalhesProjeto() {
-        Projeto projeto = repository.getProjetoPorNome(projetoNome);
+        ProjetoClayton projeto = repository.getProjetoPorNome(projetoNome);
         if (projeto != null) {
             carregarCabecalho(projeto);
             carregarDetalhes(projeto);
         }
     }
 
-    private void carregarCabecalho(Projeto projeto) {
+    private void carregarCabecalho(ProjetoClayton projeto) {
         String tiposConcatenados = projeto.getPerfis().stream()
                 .collect(Collectors.joining(", "));
 
@@ -45,7 +45,7 @@ public class DetalheProjetoPresenter implements Observer {
         );
     }
 
-    private void carregarDetalhes(Projeto projeto) {
+    private void carregarDetalhes(ProjetoClayton projeto) {
         Object[][] dadosTabela = projeto.getFuncionalidadesEscolhidas()
                 .entrySet()
                 .stream()
@@ -61,7 +61,7 @@ public class DetalheProjetoPresenter implements Observer {
         view.atualizarTabela(dadosTabela, valorTotal);
     }
 
-    private double calcularValorTotal(Projeto projeto) {
+    private double calcularValorTotal(ProjetoClayton projeto) {
         return projeto.getFuncionalidadesEscolhidas()
                 .entrySet()
                 .stream()
@@ -73,7 +73,7 @@ public class DetalheProjetoPresenter implements Observer {
     }
 
     @Override
-    public void update(List<Projeto> projetos) {
+    public void update(List<ProjetoClayton> projetos) {
         carregarDetalhesProjeto();
     }
 }

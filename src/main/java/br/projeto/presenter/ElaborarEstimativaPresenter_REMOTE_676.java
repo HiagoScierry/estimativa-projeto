@@ -5,10 +5,7 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
-<<<<<<< HEAD
-=======
 import br.projeto.model.ProjetoClayton;
->>>>>>> 5b1bfcf62375dd7afcf47f6232c1e014e98f4861
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.view.ElaborarEstimativaView;
 import javax.swing.*;
@@ -112,7 +109,7 @@ public class ElaborarEstimativaPresenter implements Observer {
     }
 
     @Override
-    public void update(List<Projeto> projetos) {
+    public void update(List<ProjetoClayton> projetos) {
         //implementar
     }
 

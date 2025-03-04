@@ -1,6 +1,6 @@
 package br.projeto.presenter;
 
-import br.projeto.model.Projeto;
+import br.projeto.model.ProjetoClayton;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.EstimaProjetoService;
 import br.projeto.view.DashBoardProjetoView;
@@ -25,7 +25,7 @@ public class DashBoardProjetoPresenter implements Observer {
     }
 
     private void carregarDashboard() {
-        List<Projeto> projetos = repository.getProjetos();
+        List<ProjetoClayton> projetos = repository.getProjetos();
 
         int totalProjetos = projetos.size();
         int diasTotais = projetos.stream()
@@ -43,16 +43,16 @@ public class DashBoardProjetoPresenter implements Observer {
         view.atualizarGraficos(datasetCustos, datasetProjetos);
     }
 
-    private DefaultPieDataset gerarDatasetCustos(List<Projeto> projetos) {
+    private DefaultPieDataset gerarDatasetCustos(List<ProjetoClayton> projetos) {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        for (Projeto projeto : projetos) {
+        for (ProjetoClayton projeto : projetos) {
             double custo = estimaService.calcularCusto(projeto);
             dataset.setValue(projeto.getNome(), custo);
         }
         return dataset;
     }
 
-    private DefaultPieDataset gerarDatasetProjetos(List<Projeto> projetos) {
+    private DefaultPieDataset gerarDatasetProjetos(List<ProjetoClayton> projetos) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         Map<String, Long> tipos = projetos.stream()
                 .flatMap(projeto -> projeto.getPerfis().stream())
@@ -65,7 +65,7 @@ public class DashBoardProjetoPresenter implements Observer {
     }
 
     @Override
-    public void update(List<Projeto> projetos) {
+    public void update(List<ProjetoClayton> projetos) {
         carregarDashboard();
     }
 }

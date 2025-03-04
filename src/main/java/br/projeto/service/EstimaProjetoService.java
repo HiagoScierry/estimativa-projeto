@@ -1,6 +1,6 @@
 package br.projeto.service;
 
-import br.projeto.model.Projeto;
+import br.projeto.model.ProjetoClayton;
 
 import java.util.Map;
 
@@ -9,11 +9,11 @@ public class EstimaProjetoService {
     private static final double VALOR_DIARIA_GERENCIA = 300.0;
     private static final double VALOR_DIARIA_UI_UX = 550.0;
 
-    public int calcularDiasTotais(Projeto projeto) {
+    public int calcularDiasTotais(ProjetoClayton projeto) {
         return calcularDiasFuncionalidades(projeto.getFuncionalidadesEscolhidas());
     }
 
-    public double calcularCusto(Projeto projeto) {
+    public double calcularCusto(ProjetoClayton projeto) {
         int diasTotais = calcularDiasTotais(projeto);
         return diasTotais * VALOR_DIARIA_DESENVOLVIMENTO;
     }

@@ -1,13 +1,13 @@
 package br.projeto.repository;
 
-import br.projeto.model.Projeto;
+import br.projeto.model.ProjetoClayton;
 import br.projeto.model.Subject;
 import br.projeto.presenter.Observer;
 
 import java.util.*;
 
 public class ProjetoRepositoryMock implements Subject {
-    private final List<Projeto> projetos;
+    private final List<ProjetoClayton> projetos;
     private final List<Observer> observers;
 
     public ProjetoRepositoryMock() {
@@ -28,7 +28,7 @@ public class ProjetoRepositoryMock implements Subject {
         funcionalidades1.put("Monitoramento de Performance", 1);
         funcionalidades1.put("Relatórios de Erros", 1);
 
-        projetos.add(new Projeto(
+        projetos.add(new ProjetoClayton(
                 "Gerenciamento Corporativo",
                 "Usuario 1",
                 "01/01/2023",
@@ -52,7 +52,7 @@ public class ProjetoRepositoryMock implements Subject {
         funcionalidades2.put("Apple Watch", 7);
         funcionalidades2.put("Sincronização em Nuvem", 5);
 
-        projetos.add(new Projeto(
+        projetos.add(new ProjetoClayton(
                 "Aplicativo Social iOS",
                 "Usuario 2",
                 "02/02/2023",
@@ -75,7 +75,7 @@ public class ProjetoRepositoryMock implements Subject {
         funcionalidades3.put("Dados de Sensores do Dispositivo", 5);
         funcionalidades3.put("Códigos de Barras ou QR Codes", 2);
 
-        projetos.add(new Projeto(
+        projetos.add(new ProjetoClayton(
                 "Aplicativo de Marketplace Android",
                 "Usuario 3",
                 "03/03/2023",
@@ -99,7 +99,7 @@ public class ProjetoRepositoryMock implements Subject {
         funcionalidades4.put("Planos de Assinatura", 8);
         funcionalidades4.put("Envio de SMS", 4);
 
-        projetos.add(new Projeto(
+        projetos.add(new ProjetoClayton(
                 "Aplicativo Financeiro Completo",
                 "Usuario 4",
                 "04/04/2023",
@@ -123,7 +123,7 @@ public class ProjetoRepositoryMock implements Subject {
         funcionalidades5.put("Processamento de Pagamentos", 5);
         funcionalidades5.put("Suporte Multilíngue", 4);
 
-        projetos.add(new Projeto(
+        projetos.add(new ProjetoClayton(
                 "Plataforma de Compras Android",
                 "Usuario 5",
                 "05/05/2023",
@@ -145,7 +145,7 @@ public class ProjetoRepositoryMock implements Subject {
         funcionalidades6.put("Conectar a um ou mais serviços de terceiros", 6);
         funcionalidades6.put("Moderação / Aprovação de Conteúdo", 4);
 
-        projetos.add(new Projeto(
+        projetos.add(new ProjetoClayton(
                 "Sistema de Suporte Web",
                 "Usuario 6",
                 "06/06/2023",
@@ -157,11 +157,11 @@ public class ProjetoRepositoryMock implements Subject {
         ));
     }
 
-    public List<Projeto> getProjetos() {
+    public List<ProjetoClayton> getProjetos() {
         return projetos;
     }
 
-    public Projeto getProjetoPorNome(String nome) {
+    public ProjetoClayton getProjetoPorNome(String nome) {
         return projetos.stream()
                 .filter(projeto -> projeto.getNome().equals(nome))
                 .findFirst()
@@ -171,7 +171,7 @@ public class ProjetoRepositoryMock implements Subject {
     public void adicionarProjeto(String nome, String criador, String dataCriacao, String status,
                                  boolean compartilhado, String compartilhadoPor,
                                  List<String> tipos, Map<String, Integer> funcionalidadesEscolhidas) {
-        Projeto novoProjeto = new Projeto(nome, criador, dataCriacao, status, compartilhado,
+        ProjetoClayton novoProjeto = new ProjetoClayton(nome, criador, dataCriacao, status, compartilhado,
                 compartilhadoPor, tipos, funcionalidadesEscolhidas);
         projetos.add(novoProjeto);
         notifyObservers();

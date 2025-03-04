@@ -1,63 +1,116 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package br.projeto.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * @author hiago
+ */
 public class Projeto {
-    private String nome;
-    private String criador;
-    private String dataCriacao;
-    private String status;
-    private boolean compartilhado;
-    private String compartilhadoPor;
-    private List<String> perfis;
-    private Map<String, Integer> funcionalidadesEscolhidas;
+    private int id;
+    private String nomeProjeto;
+    private LocalDate date;
+    private Usuario usuario;
+    private int usuarioId;
+    private Map<String, Integer> funcionalidades;
+    private List<Projeto> projetos;
+    private boolean foiCompartilhado;
+    private List<ValorBase> valorBase;
+    private List<Usuario> usuariosCompartilhados;
 
-    public Projeto(String nome, String criador, String dataCriacao, String status, boolean compartilhado,
-                   String compartilhadoPor, List<String> perfis, Map<String, Integer> funcionalidadesEscolhidas) {
-        if (perfis == null || perfis.isEmpty() || perfis.size() > 2) {
-            throw new IllegalArgumentException("Um projeto deve conter entre 1 e 2 tipos.");
-        }
-
-        this.nome = nome;
-        this.criador = criador;
-        this.dataCriacao = dataCriacao;
-        this.status = status;
-        this.compartilhado = compartilhado;
-        this.compartilhadoPor = compartilhadoPor;
-        this.perfis = perfis;
-        this.funcionalidadesEscolhidas = funcionalidadesEscolhidas;
+    public Projeto(int id, String nomeProjeto, LocalDate date) {
+        this.id = id;
+        this.nomeProjeto = nomeProjeto;
+        this.date = date;
     }
 
-    public String getNome() {
-        return nome;
+    public List<ValorBase> getValorBase() {
+        return valorBase;
     }
 
-    public String getCriador() {
-        return criador;
+    /**
+     *
+     * @param valorBase
+     */
+    public void setValorBase(List<ValorBase> valorBase) {
+        this.valorBase = valorBase;
+    }
+    
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public String getDataCriacao() {
-        return dataCriacao;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public String getStatus() {
-        return status;
+    public int getId() {
+        return id;
     }
 
-    public boolean isCompartilhado() {
-        return compartilhado;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCompartilhadoPor() {
-        return compartilhadoPor;
+    public String getNomeProjeto() {
+        return nomeProjeto;
     }
 
-    public List<String> getPerfis() {
-        return perfis;
+    public void setNomeProjeto(String nomeProjeto) {
+        this.nomeProjeto = nomeProjeto;
     }
 
-    public Map<String, Integer> getFuncionalidadesEscolhidas() {
-        return funcionalidadesEscolhidas;
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Map<String, Integer> getFuncionalidades() {
+        return funcionalidades;
+    }
+
+    public void setFuncionalidades(Map<String, Integer> funcionalidades) {
+       this.funcionalidades = funcionalidades;
+    }
+
+    public List<Projeto> getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(List<Projeto> projetos) {
+        this.projetos = projetos;
+    }
+
+    public boolean isFoiCompartilhado() {
+        return foiCompartilhado;
+    }
+
+    public void setFoiCompartilhado(boolean foiCompartilhado) {
+        this.foiCompartilhado = foiCompartilhado;
+    }
+
+    public List<Usuario> getUsuariosCompartilhados() {
+        return usuariosCompartilhados;
+    }
+
+    public void setUsuariosCompartilhados(List<Usuario> usuariosCompartilhados) {
+        this.usuariosCompartilhados = usuariosCompartilhados;
+    }
+    
+    public void addProjeto(Projeto projeto){
+        this.projetos.add(projeto);
+    }
+    
+    public void addFuncionalidade(String nomeFuncionalidade, int horas){
+        this.funcionalidades.put(nomeFuncionalidade, horas);
     }
 }
