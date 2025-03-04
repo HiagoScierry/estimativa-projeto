@@ -4,7 +4,7 @@
  */
 package br.projeto.presenter;
 
-import br.projeto.model.ProjetoClayton;
+import br.projeto.model.Projeto;
 import br.projeto.view.CompartilharProjetoView;
 import br.projeto.repository.ProjetoRepositoryMock;
 import java.awt.event.ActionEvent;
@@ -46,9 +46,9 @@ public class CompartilharProjetoPresenter implements Observer{
     }
     
     @Override
-    public void update(List<ProjetoClayton> projetos) {
+    public void update(List<Projeto> projetos) {
         StringBuilder projetosList = new StringBuilder("Projetos Disponíveis:\n");
-        for (ProjetoClayton projeto : projetos) {
+        for (Projeto projeto : projetos) {
             projetosList.append(projeto.getNome()).append("\n");
         }
     }
