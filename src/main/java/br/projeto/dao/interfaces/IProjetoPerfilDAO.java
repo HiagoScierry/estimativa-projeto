@@ -4,10 +4,15 @@
  */
 package br.projeto.dao.interfaces;
 
+import br.projeto.model.Perfil;
+import java.util.List;
+
 /**
  *
  * @author hiago
  */
 public interface IProjetoPerfilDAO {
     void associarPerfilaProjeto(int projetoId, int perfilId);
+    List<Perfil> listarPerfisPorProjeto(int projetoId);
+    void atualizarPerfisProjeto(int projetoId, List<Perfil> perfis);
 }

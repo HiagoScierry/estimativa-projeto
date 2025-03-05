@@ -3,6 +3,7 @@ package br.projeto.dao;
 import br.projeto.dao.factory.IDAOFactory;
 import br.projeto.dao.interfaces.ICustoAdicionalDAO;
 import br.projeto.dao.interfaces.IFuncionalidadeDAO;
+import br.projeto.dao.interfaces.INivelUIDAO;
 import br.projeto.dao.interfaces.IPerfilDAO;
 import br.projeto.dao.interfaces.IProjetoCustoAdicionalDAO;
 import br.projeto.dao.interfaces.IProjetoDAO;
@@ -31,6 +32,7 @@ public class DaoUtil {
     private IProjetoFuncionalidadeDAO projetoFuncionalidadeDao;
     private IProjetoPerfilDAO projetoPerfilDao;
     private IUsuarioDAO usuarioDao;
+    private INivelUIDAO nivelUIDao;
 
     private DaoUtil() throws SQLException, Exception {
     }
@@ -46,6 +48,7 @@ public class DaoUtil {
         this.projetoFuncionalidadeDao = daoFactory.getProjetoFuncionalidadeDao();
         this.projetoPerfilDao = daoFactory.getProjetoPerfil();
         this.usuarioDao = daoFactory.getUsuarioDao();
+        this.nivelUIDao = daoFactory.getNivelUIDao();
     }
 
     public static void configureInstance(IDAOFactory daoFactory) throws Exception {
@@ -92,4 +95,7 @@ public class DaoUtil {
         return usuarioDao;
     }
 
+    public INivelUIDAO getNivelUIDao() {
+        return nivelUIDao;
+    }
 }
