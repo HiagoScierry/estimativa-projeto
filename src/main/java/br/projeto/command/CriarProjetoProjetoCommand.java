@@ -1,6 +1,6 @@
 package br.projeto.command;
 
-import br.projeto.model.ProjetoClayton;
+import br.projeto.model.Projeto;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.CriarProjetoMock;
 
@@ -20,22 +20,22 @@ public class CriarProjetoProjetoCommand implements ProjetoCommand {
 
     @Override
     public void execute() {
-        Optional<ProjetoClayton> projetoCriado = criarProjetoMock.criarProjetoAleatorio();
+        Optional<Projeto> projetoCriado = criarProjetoMock.criarProjetoAleatorio();
 
-        projetoCriado.ifPresentOrElse(
-                projeto -> {
-                    repository.adicionarProjeto(
-                            projeto.getNome(),
-                            projeto.getCriador(),
-                            projeto.getDataCriacao(),
-                            projeto.getStatus(),
-                            projeto.isCompartilhado(),
-                            projeto.getCompartilhadoPor(),
-                            projeto.getPerfis(),
-                            projeto.getFuncionalidadesEscolhidas()
-                    );
-                    new MostrarMensagemProjetoCommand("Projeto \"" + projeto.getNome() + "\" criado com sucesso!").execute();
-                },
-                () -> new MostrarMensagemProjetoCommand("Falha ao criar o projeto.").execute());
+//        projetoCriado.ifPresentOrElse(
+//                projeto -> {
+//                    repository.adicionarProjeto(
+//                            projeto.getNome(),
+//                            projeto.getCriador().getNome(),
+//                            projeto.getDataCriacao(),
+//                            projeto.getStatus(),
+//                            projeto.isCompartilhado(),
+//                            projeto.getCompartilhadoPor().getNome(),
+//                            projeto.getPerfis().get(0).getNome(),
+//                            projeto.getFuncionalidadesEscolhidas()
+//                    );
+//                    new MostrarMensagemProjetoCommand("Projeto \"" + projeto.getNome() + "\" criado com sucesso!").execute();
+//                },
+//                () -> new MostrarMensagemProjetoCommand("Falha ao criar o projeto.").execute());
     }
 }

@@ -1,19 +1,21 @@
 package br.projeto.service;
 
-import br.projeto.model.ProjetoClayton;
+import br.projeto.model.Funcionalidade;
+import br.projeto.model.Projeto;
 
 import java.util.Map;
 
 public class EstimaProjetoService {
+    private static final int HORAS_TRABALHADAS_POR_DIA = 8;
     private static final double VALOR_DIARIA_DESENVOLVIMENTO = 450.0;
     private static final double VALOR_DIARIA_GERENCIA = 300.0;
     private static final double VALOR_DIARIA_UI_UX = 550.0;
 
-    public int calcularDiasTotais(ProjetoClayton projeto) {
+    public int calcularDiasTotais(Projeto projeto) {
         return calcularDiasFuncionalidades(projeto.getFuncionalidadesEscolhidas());
     }
 
-    public double calcularCusto(ProjetoClayton projeto) {
+    public double calcularCusto(Projeto projeto) {
         int diasTotais = calcularDiasTotais(projeto);
         return diasTotais * VALOR_DIARIA_DESENVOLVIMENTO;
     }
@@ -31,11 +33,11 @@ public class EstimaProjetoService {
     }
 
     public int calcularDiasFuncionalidades(Map<String, Integer> funcionalidadesEscolhidas) {
-        int totalDias = 0;
-        for (Integer dias : funcionalidadesEscolhidas.values()) {
-            totalDias += dias;
+        int totalHoras = 0;
+        for (Integer horas : funcionalidadesEscolhidas.values()) {
+            totalHoras += horas;
         }
-        return totalDias;
+        return (int) Math.ceil((double) totalHoras / HORAS_TRABALHADAS_POR_DIA);
     }
 
     public double calcularCustosAdicionais(double custoHardware, double custoSoftware, double custoRiscos, double custoGarantia, double fundoReserva, double outrosCustos) {

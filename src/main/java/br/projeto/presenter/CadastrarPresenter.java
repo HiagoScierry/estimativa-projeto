@@ -1,6 +1,7 @@
 package br.projeto.presenter;
 
-import br.projeto.repository.ProjetoRepositoryMock;
+import br.projeto.model.Usuario;
+import br.projeto.repository.UsuarioRepository;
 import br.projeto.view.CadastrarView;
 import javax.swing.JOptionPane;
 
@@ -10,11 +11,9 @@ import javax.swing.JOptionPane;
  */
 public class CadastrarPresenter {
     private final CadastrarView view;
-    private final ProjetoRepositoryMock repository;
 
-    public CadastrarPresenter(ProjetoRepositoryMock repository) {
+    public CadastrarPresenter() {
         this.view = new CadastrarView();
-        this.repository = repository;
 
         configurarEventos();
         view.setVisible(true);
@@ -48,7 +47,12 @@ public class CadastrarPresenter {
 
     //só uma simulação, temos que aplicar a lógica aqui
     private boolean cadastrarNoSistema(String nomeUsuario, String email, String senha) {
-        return nomeUsuario.equals("novo_usuario") && senha.length() > 3;
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        Usuario usuario = new Usuario(0, nomeUsuario, email, senha);
+        
+        usuarioRepository.cadatrarUsuario(usuario);
+        
+        return true;
     }
 
     private void cancelarCadastro() {
@@ -59,7 +63,4 @@ public class CadastrarPresenter {
         return view;
     }
 
-    public ProjetoRepositoryMock getRepository() {
-        return repository;
-    }
 }

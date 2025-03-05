@@ -1,6 +1,6 @@
 package br.projeto.presenter;
 
-import br.projeto.model.ProjetoClayton;
+import br.projeto.model.Projeto;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.EstimaProjetoService;
 import br.projeto.view.DashBoardProjetoView;
@@ -25,7 +25,7 @@ public class DashBoardProjetoPresenter implements Observer {
     }
 
     private void carregarDashboard() {
-        List<ProjetoClayton> projetos = repository.getProjetos();
+        List<Projeto> projetos = repository.getProjetos();
 
         int totalProjetos = projetos.size();
         int diasTotais = projetos.stream()
@@ -43,29 +43,29 @@ public class DashBoardProjetoPresenter implements Observer {
         view.atualizarGraficos(datasetCustos, datasetProjetos);
     }
 
-    private DefaultPieDataset gerarDatasetCustos(List<ProjetoClayton> projetos) {
+    private DefaultPieDataset gerarDatasetCustos(List<Projeto> projetos) {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        for (ProjetoClayton projeto : projetos) {
+        for (Projeto projeto : projetos) {
             double custo = estimaService.calcularCusto(projeto);
             dataset.setValue(projeto.getNome(), custo);
         }
         return dataset;
     }
 
-    private DefaultPieDataset gerarDatasetProjetos(List<ProjetoClayton> projetos) {
+    private DefaultPieDataset gerarDatasetProjetos(List<Projeto> projetos) {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        Map<String, Long> tipos = projetos.stream()
-                .flatMap(projeto -> projeto.getPerfis().stream())
-                .collect(Collectors.groupingBy(tipo -> tipo, Collectors.counting()));
-
-        for (Map.Entry<String, Long> entry : tipos.entrySet()) {
-            dataset.setValue(entry.getKey(), entry.getValue());
-        }
+//        Map<String, Long> tipos = projetos.stream()
+//                .flatMap(projeto -> projeto.getPerfis().stream())
+//                .collect(Collectors.groupingBy(tipo -> tipo, Collectors.counting()));
+//
+//        for (Map.Entry<String, Long> entry : tipos.entrySet()) {
+//            dataset.setValue(entry.getKey(), entry.getValue());
+//        }
         return dataset;
     }
 
     @Override
-    public void update(List<ProjetoClayton> projetos) {
+    public void update(List<Projeto> projetos) {
         carregarDashboard();
     }
 }

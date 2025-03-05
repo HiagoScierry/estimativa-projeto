@@ -2,6 +2,7 @@ package br.projeto.presenter;
 
 import br.projeto.presenter.helpers.WindowManager;
 import br.projeto.repository.ProjetoRepositoryMock;
+import br.projeto.repository.UsuarioRepository;
 import br.projeto.view.LoginView;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -12,12 +13,9 @@ import javax.swing.SwingUtilities;
  */
 public class LoginPresenter {
     private final LoginView view;
-    private final ProjetoRepositoryMock repository;
 
-    public LoginPresenter(ProjetoRepositoryMock repository) {
+    public LoginPresenter() {
         this.view = new LoginView();
-        this.repository = repository;
-
         configurarEventos();
         view.setVisible(true);
     }
@@ -51,13 +49,14 @@ public class LoginPresenter {
     }
 
     private boolean autenticarUsuario(String nomeUsuario, String senha) {
-        // simulação de autenticação (implementar autenticação clayton)
-        return nomeUsuario.equals("admin") && senha.equals("1234");
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+
+        return usuarioRepository.autenticar(nomeUsuario, senha);
     }
 
     private void redirecionarCadastro() {
         SwingUtilities.invokeLater(() -> {
-            CadastrarPresenter cadastrarPresenter = new CadastrarPresenter(repository);
+            CadastrarPresenter cadastrarPresenter = new CadastrarPresenter();
             cadastrarPresenter.getView().setVisible(true);
         });
     }

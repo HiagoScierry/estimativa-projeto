@@ -1,6 +1,6 @@
 package br.projeto.service;
 
-import br.projeto.model.ProjetoClayton;
+import br.projeto.model.Projeto;
 import br.projeto.repository.ProjetoRepositoryMock;
 
 import java.util.*;
@@ -12,15 +12,15 @@ public class CriarProjetoMock {
         this.repository = repository;
     }
 
-    public Optional<ProjetoClayton> criarProjetoAleatorio() {
-        List<ProjetoClayton> projetosExistentes = repository.getProjetos();
+    public Optional<Projeto> criarProjetoAleatorio() {
+        List<Projeto> projetosExistentes = repository.getProjetos();
 
         if (projetosExistentes.isEmpty()) {
             return Optional.empty();
         }
 
         Random random = new Random();
-        ProjetoClayton projetoBase = projetosExistentes.get(random.nextInt(projetosExistentes.size()));
+        Projeto projetoBase = projetosExistentes.get(random.nextInt(projetosExistentes.size()));
 
         List<String> tipos = combinarTipos(projetosExistentes, random);
         if (tipos.size() < 1 || tipos.size() > 2) {
@@ -28,14 +28,14 @@ public class CriarProjetoMock {
         }
 
         String nome = gerarNomeDoProjeto(tipos);
-        String criador = projetoBase.getCriador();
+        String criador = projetoBase.getCriador().getNome();
         String dataCriacao = gerarDataAleatoria();
         String status = random.nextBoolean() ? "Estimado" : "Em andamento";
         boolean compartilhado = random.nextBoolean();
-        String compartilhadoPor = compartilhado ? projetoBase.getCriador() : null;
+        String compartilhadoPor = compartilhado ? projetoBase.getCriador().getNome() : null;
         Map<String, Integer> funcionalidades = combinarFuncionalidades(projetosExistentes, random);
 
-        return Optional.of(new ProjetoClayton(nome, criador, dataCriacao, status, compartilhado, compartilhadoPor, tipos, funcionalidades));
+        return Optional.empty();
     }
 
     private String gerarNomeDoProjeto(List<String> tipos) {
@@ -62,30 +62,16 @@ public class CriarProjetoMock {
         return String.format("%02d/%02d/%d", dia, mes, ano);
     }
 
-    private List<String> combinarTipos(List<ProjetoClayton> projetos, Random random) {
-        Set<String> tiposCombinados = new HashSet<>();
-        List<String> todosOsTipos = new ArrayList<>();
-
-        for (ProjetoClayton projeto : projetos) {
-            todosOsTipos.addAll(projeto.getPerfis());
-        }
-
-        Collections.shuffle(todosOsTipos, random);
-        int quantidadeDeTipos = 1 + random.nextInt(2);
-
-        for (int i = 0; i < quantidadeDeTipos && i < todosOsTipos.size(); i++) {
-            tiposCombinados.add(todosOsTipos.get(i));
-        }
-
-        return new ArrayList<>(tiposCombinados);
+    private List<String> combinarTipos(List<Projeto> projetos, Random random) {
+        return new ArrayList<>();
     }
 
-    private Map<String, Integer> combinarFuncionalidades(List<ProjetoClayton> projetos, Random random) {
+    private Map<String, Integer> combinarFuncionalidades(List<Projeto> projetos, Random random) {
         Map<String, Integer> funcionalidadesCombinadas = new HashMap<>();
         int numProjetosParaCombinar = 1 + random.nextInt(projetos.size());
 
         for (int i = 0; i < numProjetosParaCombinar; i++) {
-            ProjetoClayton projeto = projetos.get(random.nextInt(projetos.size()));
+            Projeto projeto = projetos.get(random.nextInt(projetos.size()));
             Map<String, Integer> funcionalidades = projeto.getFuncionalidadesEscolhidas();
 
             int numFuncionalidades = 1 + random.nextInt(funcionalidades.size());

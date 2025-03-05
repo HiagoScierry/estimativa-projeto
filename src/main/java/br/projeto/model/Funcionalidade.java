@@ -8,17 +8,17 @@ package br.projeto.model;
  *
  * @author hiago
  */
-public class Usuario {
+public class Funcionalidade {
     private int id;
     private String nome;
-    private String email;
-    private String senha;
+    private int horasEstimadas;
+    private String plataforma; 
 
-    public Usuario(int id, String nome, String email, String senha) {
+    public Funcionalidade(int id, String nome, int horasEstimadas, String plataforma) {
         this.id = id;
         this.nome = nome;
-        this.email = email;
-        this.senha = senha;
+        this.horasEstimadas = horasEstimadas;
+        this.plataforma = plataforma;
     }
 
     // Getters e Setters
@@ -28,9 +28,10 @@ public class Usuario {
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public int getHorasEstimadas() { return horasEstimadas; }
+    public void setHorasEstimadas(int horasEstimadas) { this.horasEstimadas = horasEstimadas; }
 
-    public String getSenha() { return senha; }
-    public void setSenha(String senha) { this.senha = senha; }
+    public String getPlataforma() { return plataforma; }
+    public void setPlataforma(String plataforma) { this.plataforma = plataforma; }
+    
 }

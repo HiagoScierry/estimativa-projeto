@@ -4,32 +4,48 @@
  */
 package br.projeto.model;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author hiago
  */
+
 public class Estimativa {
+    private int id;
     private Projeto projeto;
-    private LocalDate date;
-    
-    public Estimativa(Projeto projeto){
+    private double custoTotal;
+    private int tempoTotal;
+    private double precoFinal;
+
+    public Estimativa(int id, Projeto projeto, double custoTotal, int tempoTotal, double precoFinal) {
+        this.id = id;
         this.projeto = projeto;
-    }
-    
-    public double custoTotal(){
-        return 0.0;
+        this.custoTotal = custoTotal;
+        this.tempoTotal = tempoTotal;
+        this.precoFinal = precoFinal;
     }
 
-    public double totalDias(){
-        double total = 0.0;
-        
-        for (int value : this.projeto.getFuncionalidades().values()) {
-            total += value;
-        }
-        
-        return total/8; 
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public Projeto getProjeto() { return projeto; }
+    public void setProjeto(Projeto projeto) { this.projeto = projeto; }
+
+    public double getCustoTotal() { return custoTotal; }
+    public void setCustoTotal(double custoTotal) { this.custoTotal = custoTotal; }
+
+    public int getTempoTotal() { return tempoTotal; }
+    public void setTempoTotal(int tempoTotal) { this.tempoTotal = tempoTotal; }
+
+    public double getPrecoFinal() { return precoFinal; }
+    public void setPrecoFinal(double precoFinal) { this.precoFinal = precoFinal; }
+
+    // Métodos
+    public void gerarRelatorioPDF() {
+        // Implementar geração de PDF
     }
-    
+
+    public void gerarRelatorioCSV() {
+        // Implementar geração de CSV
+    }
 }
