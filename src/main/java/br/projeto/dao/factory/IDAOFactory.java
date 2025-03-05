@@ -6,6 +6,7 @@ package br.projeto.dao.factory;
 
 import br.projeto.dao.interfaces.ICustoAdicionalDAO;
 import br.projeto.dao.interfaces.IFuncionalidadeDAO;
+import br.projeto.dao.interfaces.INivelUIDAO;
 import br.projeto.dao.interfaces.IPerfilDAO;
 import br.projeto.dao.interfaces.IProjetoCustoAdicionalDAO;
 import br.projeto.dao.interfaces.IProjetoDAO;
@@ -35,4 +36,6 @@ public interface IDAOFactory {
     public IProjetoPerfilDAO getProjetoPerfil() throws SQLException, Exception;
 
     public IUsuarioDAO getUsuarioDao() throws SQLException, Exception;
+    
+    public INivelUIDAO getNivelUIDao() throws SQLException, Exception;
 }

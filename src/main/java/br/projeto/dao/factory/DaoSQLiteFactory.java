@@ -8,6 +8,7 @@ package br.projeto.dao.factory;
 import br.projeto.config.database.SQLiteConnection;
 import br.projeto.dao.interfaces.ICustoAdicionalDAO;
 import br.projeto.dao.interfaces.IFuncionalidadeDAO;
+import br.projeto.dao.interfaces.INivelUIDAO;
 import br.projeto.dao.interfaces.IPerfilDAO;
 import br.projeto.dao.interfaces.IProjetoCustoAdicionalDAO;
 import br.projeto.dao.interfaces.IProjetoDAO;
@@ -16,6 +17,7 @@ import br.projeto.dao.interfaces.IProjetoPerfilDAO;
 import br.projeto.dao.interfaces.IUsuarioDAO;
 import br.projeto.dao.sqlite.CustoAdicionalSQLiteDao;
 import br.projeto.dao.sqlite.FuncionalidadeSQLiteDao;
+import br.projeto.dao.sqlite.NivelUISQLiteDao;
 import br.projeto.dao.sqlite.PerfilSQLiteDao;
 import br.projeto.dao.sqlite.ProjetoCustoAdicionalSQLiteDao;
 import br.projeto.dao.sqlite.ProjetoFuncionalidadeSQLiteDao;
@@ -99,5 +101,9 @@ public class DaoSQLiteFactory implements IDAOFactory {
     public IUsuarioDAO getUsuarioDao() throws SQLException, Exception {
         return new UsuarioSQLiteDao();
     }
-
+    
+    @Override
+    public INivelUIDAO getNivelUIDao() throws SQLException, Exception {
+        return new NivelUISQLiteDao();
+    }
 }
