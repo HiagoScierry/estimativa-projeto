@@ -1,41 +1,37 @@
 package br.projeto.command;
 
-import br.projeto.model.Projeto;
-import br.projeto.repository.ProjetoRepositoryMock;
-import br.projeto.service.CriarProjetoMock;
-
+import br.projeto.presenter.ElaborarEstimativaPresenter;
+import br.projeto.presenter.helpers.WindowManager;
 import javax.swing.*;
-import java.util.Optional;
 
 public class CriarProjetoProjetoCommand implements ProjetoCommand {
-    private final ProjetoRepositoryMock repository;
     private final JDesktopPane desktop;
-    private final CriarProjetoMock criarProjetoMock;
+    private final String titulo;
 
-    public CriarProjetoProjetoCommand(ProjetoRepositoryMock repository, JDesktopPane desktop) {
-        this.repository = repository;
+    public CriarProjetoProjetoCommand(JDesktopPane desktop, String titulo) {
         this.desktop = desktop;
-        this.criarProjetoMock = new CriarProjetoMock(repository);
+        this.titulo = titulo;
     }
 
     @Override
     public void execute() {
-        Optional<Projeto> projetoCriado = criarProjetoMock.criarProjetoAleatorio();
+        WindowManager windowManager = WindowManager.getInstance();
 
-//        projetoCriado.ifPresentOrElse(
-//                projeto -> {
-//                    repository.adicionarProjeto(
-//                            projeto.getNome(),
-//                            projeto.getCriador().getNome(),
-//                            projeto.getDataCriacao(),
-//                            projeto.getStatus(),
-//                            projeto.isCompartilhado(),
-//                            projeto.getCompartilhadoPor().getNome(),
-//                            projeto.getPerfis().get(0).getNome(),
-//                            projeto.getFuncionalidadesEscolhidas()
-//                    );
-//                    new MostrarMensagemProjetoCommand("Projeto \"" + projeto.getNome() + "\" criado com sucesso!").execute();
-//                },
-//                () -> new MostrarMensagemProjetoCommand("Falha ao criar o projeto.").execute());
+        if (windowManager.isFrameAberto(titulo)) {
+            windowManager.bringToFront(titulo);
+        } else {
+            ElaborarEstimativaPresenter presenter = new ElaborarEstimativaPresenter();
+            JInternalFrame frame = new JInternalFrame(titulo, true, true, true, true);
+            frame.setContentPane(presenter.getView().getContentPane());
+            frame.pack();
+            frame.setSize(desktop.getWidth(), desktop.getHeight());
+            frame.setIconifiable(false);
+            frame.setVisible(true);
+            desktop.add(frame);
+            try {
+                frame.setMaximum(true);
+            } catch (Exception ignored) {
+            }
+        }
     }
 }
