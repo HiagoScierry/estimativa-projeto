@@ -6,6 +6,7 @@ package br.projeto.dao.interfaces;
 
 import br.projeto.model.Usuario;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -14,5 +15,7 @@ import java.util.List;
 public interface IUsuarioDAO {
     void inserir(Usuario usuario);
     Usuario buscarPorId(int id);
+    Optional<Usuario> buscarPorEmail(String email);
     List<Usuario> listarTodos();
+    Optional<Usuario> autenticar(String email, String senha);
 }

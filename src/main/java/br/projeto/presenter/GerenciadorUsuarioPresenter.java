@@ -5,53 +5,57 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
+import br.projeto.model.Usuario;
 import br.projeto.repository.ProjetoRepositoryMock;
+import br.projeto.repository.UsuarioRepository;
+import br.projeto.repository.interfaces.IUsuarioRepository;
+import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.GerenciadorUsuarioView;
 import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Cauã
  */
 
-public class GerenciadorUsuarioPresenter implements Observer {
+public class GerenciadorUsuarioPresenter {
     private final GerenciadorUsuarioView view;
-    private final ProjetoRepositoryMock repository;
+    private UsuarioSingleton usuarioLogado;
 
     public GerenciadorUsuarioPresenter() {
         this.view = new GerenciadorUsuarioView();
-        this.repository = new ProjetoRepositoryMock();
-        this.repository.addObserver(this);
+        this.usuarioLogado = UsuarioSingleton.getInstance();
+        configurarEventos();
+    }
+
+    private void configurarEventos(){
+        inserirDadosUsuarioLogado();
+        atualizarTabelaUsuarios();
     }
 
     private void inserirDadosUsuarioLogado(){
-        //criar logica aqui para inserir os dados
+        view.getTxtEmail().setText(usuarioLogado.getUsuario().getEmail());
+        view.getTxtUsuario().setText(usuarioLogado.getUsuario().getNome());
     }
     
     private void atualizarTabelaUsuarios() {
-       /* Aqui é só um exemplo, precisa ser implementado quando tivermos o repository correto
-        List<Usuario> usuarios = repository.getUsuarios(); 
+        IUsuarioRepository repository = new UsuarioRepository();
+
+        List<Usuario> usuarios = repository.buscarTodos();
         DefaultTableModel tableModel = (DefaultTableModel) view.getTblUsuariosCadastrados().getModel();
-        tableModel.setRowCount(0); 
+        tableModel.setRowCount(0);
 
         for (Usuario usuario : usuarios) {
             Object[] row = {usuario.getNome(), usuario.getEmail()};
             tableModel.addRow(row);
-        }*/
-    }
+        }
 
-
-    @Override
-    public void update(List<Projeto> projetos) {
-        inserirDadosUsuarioLogado();
-        atualizarTabelaUsuarios();
     }
 
     public GerenciadorUsuarioView getView() {
         return view;
     }
 
-    public ProjetoRepositoryMock getRepository() {
-        return repository;
-    }
 }

@@ -1,9 +1,13 @@
 package br.projeto.presenter;
 
+import br.projeto.model.Usuario;
 import br.projeto.presenter.helpers.WindowManager;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.repository.UsuarioRepository;
+import br.projeto.repository.interfaces.IUsuarioRepository;
+import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.LoginView;
+import java.util.Optional;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -49,9 +53,18 @@ public class LoginPresenter {
     }
 
     private boolean autenticarUsuario(String nomeUsuario, String senha) {
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        IUsuarioRepository usuarioRepository = new UsuarioRepository();
 
-        return usuarioRepository.autenticar(nomeUsuario, senha);
+        Optional<Usuario> usuario = usuarioRepository.autenticar(nomeUsuario, senha);
+        
+        if(usuario.isEmpty()){
+            return false;
+        }
+        
+        UsuarioSingleton usuarioSingleton = UsuarioSingleton.getInstance();
+        usuarioSingleton.setUsuario(usuario.get());
+        
+        return true;
     }
 
     private void redirecionarCadastro() {

@@ -2,7 +2,10 @@ package br.projeto.presenter;
 
 import br.projeto.model.Usuario;
 import br.projeto.repository.UsuarioRepository;
+import br.projeto.repository.interfaces.IUsuarioRepository;
+import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.CadastrarView;
+import java.util.Optional;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,19 +43,28 @@ public class CadastrarPresenter {
                 JOptionPane.showMessageDialog(view, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 view.dispose();  // Fecha a tela de cadastro após o sucesso
             } else {
-                JOptionPane.showMessageDialog(view, "Erro ao cadastrar usuário. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(view, "Erro ao cadastrar usuário!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     //só uma simulação, temos que aplicar a lógica aqui
     private boolean cadastrarNoSistema(String nomeUsuario, String email, String senha) {
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        IUsuarioRepository usuarioRepository = new UsuarioRepository();
+
+        // Verifica se o email já está cadastrado
+        Optional<Usuario> usuarioExistente = usuarioRepository.buscarPorEmail(email);
+        if (!(usuarioExistente == null)) {
+            JOptionPane.showMessageDialog(view, "Este email já está cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Cria um novo usuário
         Usuario usuario = new Usuario(0, nomeUsuario, email, senha);
-        
         usuarioRepository.cadatrarUsuario(usuario);
-        
+
         return true;
+
     }
 
     private void cancelarCadastro() {

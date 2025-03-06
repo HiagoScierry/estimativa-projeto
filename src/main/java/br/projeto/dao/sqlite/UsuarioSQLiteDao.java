@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -79,6 +80,49 @@ public class UsuarioSQLiteDao implements IUsuarioDAO{
         }
 
         return usuarios;
+    }
+
+    @Override
+    public Optional<Usuario> autenticar(String email, String senha) {
+        String sql = "SELECT * FROM Usuario WHERE email = ? AND senha = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return Optional.of(new Usuario(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("email"),
+                    rs.getString("senha")
+                ));
+            }
+
+        } catch (Exception e){
+            System.out.println("Erro ao autenticar usuario");
+        }
+
+        return Optional.of(null);
+    }
+
+    @Override
+    public Optional<Usuario> buscarPorEmail(String email) {
+        String sql = "SELECT * FROM Usuario WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return Optional.of(new Usuario(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("email"),
+                    rs.getString("senha")
+                ));
+            }
+        } catch (Exception e){
+            System.out.println("Erro ao encontrar usuario");
+        }
+        return null;
     }
 
 }

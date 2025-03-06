@@ -4,8 +4,7 @@
  */
 package br.projeto.view;
 
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
+import javax.swing.JInternalFrame;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -13,7 +12,7 @@ import javax.swing.JTextField;
  *
  * @author Cauã
  */
-public class GerenciadorUsuarioView extends javax.swing.JFrame {
+public class GerenciadorUsuarioView extends JInternalFrame {
 
     /**
      * Creates new form GerenciadorUsuarioViewa

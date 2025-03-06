@@ -6,12 +6,17 @@ package br.projeto.repository.interfaces;
 
 import br.projeto.model.Usuario;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  *
  * @author hiago
  */
 public interface IUsuarioRepository {
-    boolean autenticar(String email, String senha);
-     public void cadatrarUsuario(Usuario usuario);
+    Optional<Usuario> autenticar(String email, String senha);
+    public void cadatrarUsuario(Usuario usuario);
+    Optional<Usuario> buscarPorEmail(String email);
+    List<Usuario> buscarTodos();
         
 }

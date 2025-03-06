@@ -38,8 +38,6 @@ public class DaoUtil {
     }
 
     private void configurar(IDAOFactory daoFactory) throws SQLException, Exception {
-                                                                                System.out.println("ASDADASDA");
-
         this.custoAdicionalDao = daoFactory.getCustoAdicionalDao();
         this.funcionalidadeDao = daoFactory.getFuncionalidadeDao();
         this.perfilDao = daoFactory.getPerfilDao();
