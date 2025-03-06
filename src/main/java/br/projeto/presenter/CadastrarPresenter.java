@@ -5,8 +5,12 @@ import br.projeto.repository.UsuarioRepository;
 import br.projeto.repository.interfaces.IUsuarioRepository;
 import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.CadastrarView;
+
+import java.util.List;
 import java.util.Optional;
 import javax.swing.JOptionPane;
+
+import com.pss.senha.validacao.ValidadorSenha;
 
 /**
  *
@@ -33,6 +37,18 @@ public class CadastrarPresenter {
         String nomeUsuario = view.getTxtNomeUsuario().getText();
         String email = view.getTxtEmail().getText();
         String senha = new String(view.getPswSenha().getPassword()); // Pegando a senha de forma segura
+
+        ValidadorSenha validadorSenha = new ValidadorSenha();
+        List<String> errosSenha =  validadorSenha.validar(senha);
+
+        if (!errosSenha.isEmpty()) {
+            String mensagemErro = "Erro ao cadastrar usuário!\n";
+            for (String erro : errosSenha) {
+                mensagemErro += erro + "\n";
+            }
+            JOptionPane.showMessageDialog(view, mensagemErro, "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // Verifica se os campos não estão vazios
         if (nomeUsuario.isEmpty() || email.isEmpty() || senha.isEmpty()) {
