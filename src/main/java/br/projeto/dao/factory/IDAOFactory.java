@@ -12,6 +12,7 @@ import br.projeto.dao.interfaces.IProjetoCustoAdicionalDAO;
 import br.projeto.dao.interfaces.IProjetoDAO;
 import br.projeto.dao.interfaces.IProjetoFuncionalidadeDAO;
 import br.projeto.dao.interfaces.IProjetoPerfilDAO;
+import br.projeto.dao.interfaces.IProjetoUsuarioCompartilhadoDAO;
 import br.projeto.dao.interfaces.IUsuarioDAO;
 import java.sql.SQLException;
 
@@ -38,4 +39,6 @@ public interface IDAOFactory {
     public IUsuarioDAO getUsuarioDao() throws SQLException, Exception;
     
     public INivelUIDAO getNivelUIDao() throws SQLException, Exception;
+
+    public IProjetoUsuarioCompartilhadoDAO getProjetoUsuarioCompartilhadoDao() throws SQLException, Exception;
 }
