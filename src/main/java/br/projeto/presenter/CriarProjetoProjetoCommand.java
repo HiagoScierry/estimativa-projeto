@@ -1,4 +1,4 @@
-package br.projeto.command;
+package br.projeto.presenter;
 
 import br.projeto.command.ProjetoCommand;
 import br.projeto.repository.ProjetoRepositoryMock;

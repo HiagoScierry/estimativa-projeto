@@ -54,11 +54,7 @@ public final class PrincipalPresenter implements Observer {
         comandos.put("Visualizar estimativa", new VisualizarEstimativaProjetoCommand(view.getDesktop(), "Visualizar estimativa"));
         comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(view.getDesktop(), "Compartilhar"));
         comandos.put("Exportar projeto de estimativa", new MostrarMensagemProjetoCommand("Exportar ainda não implementado"));
-<<<<<<< Updated upstream
-        comandos.put("Novo projeto", new CriarProjetoProjetoCommand(repository, view.getDesktop()));
-=======
         comandos.put("Novo projeto", new CriarProjetoProjetoCommand(repository)); //AQUI TAMBÉM FOI ALTERADO PARA APARECER A JTREE DE PROJETO 
->>>>>>> Stashed changes
         comandos.put("Excluir projeto", new ExcluirProjetoProjetoCommand(repository));
         comandos.put("Abrir detalhes", new AbrirDetalhesProjetoProjetoCommand(repository, view.getDesktop()));
         return comandos;
