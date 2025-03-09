@@ -132,7 +132,7 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
                 {null, "Gerente de Projeto (Project Manager)", "                     10", "                     10", "                     10", null, null}
             },
             new String [] {
-                "", "Funcionalidade que o aplicativo terá", "Dias (ou %)", "Dias (ou %)", "Dias (ou %)", "Total de dias", "Valor total"
+                "", "Funcionalidade que o aplicativo terá", "Dias(ou %)", "Dias (ou %)", "Dias (ou %)", "Total de dias", "Valor total"
             }
         ) {
             Class[] types = new Class [] {
@@ -152,14 +152,13 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
         });
         tblEstimativaProjeto.setToolTipText("");
         tblEstimativaProjeto.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblEstimativaProjeto.setColumnSelectionAllowed(true);
         tblEstimativaProjeto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblEstimativaProjeto.setRowHeight(50);
-        tblEstimativaProjeto.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblEstimativaProjeto.setShowHorizontalLines(true);
-        tblEstimativaProjeto.setShowVerticalLines(true);
+        tblEstimativaProjeto.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        tblEstimativaProjeto.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        tblEstimativaProjeto.setShowGrid(true);
         tblEstimativaProjeto.setSurrendersFocusOnKeystroke(true);
-        tblEstimativaProjeto.getTableHeader().setResizingAllowed(false);
-        tblEstimativaProjeto.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblEstimativaProjeto);
         if (tblEstimativaProjeto.getColumnModel().getColumnCount() > 0) {
             tblEstimativaProjeto.getColumnModel().getColumn(0).setResizable(false);

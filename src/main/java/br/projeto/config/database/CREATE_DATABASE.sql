@@ -38,17 +38,23 @@ CREATE TABLE IF NOT EXISTS NivelUI (
 CREATE TABLE IF NOT EXISTS Projeto (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
-    criadorId INTEGER NOT NULL,
     dataCriacao TEXT NOT NULL,
     status TEXT NOT NULL,
     compartilhado BOOLEAN NOT NULL,
-    compartilhadoPorId INTEGER,
     nivelUIId INTEGER NOT NULL,
     percentualImpostos REAL NOT NULL,
     percentualLucro REAL NOT NULL,
-    FOREIGN KEY (criadorId) REFERENCES Usuario(id) ON DELETE CASCADE,
-    FOREIGN KEY (compartilhadoPorId) REFERENCES Usuario(id) ON DELETE SET NULL,
     FOREIGN KEY (nivelUIId) REFERENCES NivelUI(id) ON DELETE RESTRICT
+);
+
+-- TabelaProjetoUsuarioCompartilhado (Relação muitos-para-muitos entre Projeto e Usuario)
+CREATE TABLE IF NOT EXISTS ProjetoUsuarioCompartilhado(
+    projetoId INTEGER NOT NULL,
+    usuarioId INTEGER NOT NULL,
+    isCriador BOOLEAN NOT NULL,
+    PRIMARY KEY(projetoId, usuarioId),
+    FOREIGN KEY (projetoId) REFERENCES Projeto(id),
+    FOREIGN KEY (usuarioId) REFERENCES Usuario(id)
 );
 
 -- Tabela ProjetoPerfil (Relação muitos-para-muitos entre Projeto e Perfil)

@@ -9,6 +9,7 @@ import br.projeto.dao.interfaces.IProjetoCustoAdicionalDAO;
 import br.projeto.dao.interfaces.IProjetoDAO;
 import br.projeto.dao.interfaces.IProjetoFuncionalidadeDAO;
 import br.projeto.dao.interfaces.IProjetoPerfilDAO;
+import br.projeto.dao.interfaces.IProjetoUsuarioCompartilhadoDAO;
 import br.projeto.dao.interfaces.IUsuarioDAO;
 import java.sql.SQLException;
 
@@ -33,6 +34,7 @@ public class DaoUtil {
     private IProjetoPerfilDAO projetoPerfilDao;
     private IUsuarioDAO usuarioDao;
     private INivelUIDAO nivelUIDao;
+    private IProjetoUsuarioCompartilhadoDAO projetoUsuarioCompartilhadoDao;
 
     private DaoUtil() throws SQLException, Exception {
     }
@@ -47,6 +49,7 @@ public class DaoUtil {
         this.projetoPerfilDao = daoFactory.getProjetoPerfil();
         this.usuarioDao = daoFactory.getUsuarioDao();
         this.nivelUIDao = daoFactory.getNivelUIDao();
+        this.projetoUsuarioCompartilhadoDao = daoFactory.getProjetoUsuarioCompartilhadoDao();
     }
 
     public static void configureInstance(IDAOFactory daoFactory) throws Exception {
@@ -95,5 +98,9 @@ public class DaoUtil {
 
     public INivelUIDAO getNivelUIDao() {
         return nivelUIDao;
+    }
+    
+    public IProjetoUsuarioCompartilhadoDAO getProjetoUsuarioCompartilhadoDao(){
+        return projetoUsuarioCompartilhadoDao;
     }
 }
