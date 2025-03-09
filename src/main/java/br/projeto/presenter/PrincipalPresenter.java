@@ -17,15 +17,16 @@ import java.util.*;
 
 public final class PrincipalPresenter implements Observer {
     private final PrincipalView view;
-    private final ProjetoRepositoryMock repository;
+    private final ProjetoSingleton projetoSingleton;
     private final ConstrutorDeArvoreNavegacaoService construtorDeArvoreNavegacaoService;
     private final Map<String, ProjetoCommand> comandos;
     private final List<WindowCommand> windowCommands = new ArrayList<>();
 
-    public PrincipalPresenter(ProjetoRepositoryMock repository) {
+    public PrincipalPresenter() {
         this.view = new PrincipalView();
-        this.repository = repository;
-        this.repository.addObserver(this);
+        this.projetoSingleton = ProjetoSingleton.getInstance();
+        this.projetoSingleton.addObserver(this);
+
 
         this.construtorDeArvoreNavegacaoService = new ConstrutorDeArvoreNavegacaoService();
 
@@ -48,14 +49,14 @@ public final class PrincipalPresenter implements Observer {
 
     private Map<String, ProjetoCommand> inicializarComandos() {
         Map<String, ProjetoCommand> comandos = new HashMap<>();
-        comandos.put("Principal", new AbrirDashboardProjetoCommand(view.getDesktop(), repository));
+        comandos.put("Principal", new AbrirDashboardProjetoCommand(view.getDesktop(), projetoSingleton));
         comandos.put("Usuário", new AbrirGerenciadorUsuarioCommand(view.getDesktop(), "Usuário"));
         comandos.put("Ver perfis de projeto", new AbrirPerfisDeProjetoCommand(view.getDesktop(), "Ver Perfis de Projetos"));
         comandos.put("Elaborar estimativa", new CriarEstimativaProjetoCommand(view.getDesktop(), "Elaborar estimativa"));
         comandos.put("Visualizar estimativa", new VisualizarEstimativaProjetoCommand(view.getDesktop(), "Visualizar estimativa"));
         comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(view.getDesktop(), "Compartilhar"));
         comandos.put("Exportar projeto de estimativa", new MostrarMensagemProjetoCommand("Exportar ainda não implementado"));
-        comandos.put("Novo projeto", new CriarProjetoProjetoCommand(view.getDesktop(), "Novo Projeto"));
+        comandos.put("Novo projeto", new CriarProjetoProjetoCommand(projetoSingleton));
         comandos.put("Excluir projeto", new ExcluirProjetoProjetoCommand(projetoSingleton));
         comandos.put("Abrir detalhes", new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()));
         return comandos;
@@ -84,9 +85,9 @@ public final class PrincipalPresenter implements Observer {
         raiz.adicionarFilho(noPerfis);
         raiz.adicionarFilho(noProjetos);
 
-        List<Projeto> listaProjetos = repository.getProjetos();
+        List<Projeto> listaProjetos = projetoSingleton.getProjetos();
         for (final Projeto projeto : listaProjetos) {
-            AbrirDetalhesProjetoProjetoCommand cmdDetalhes = new AbrirDetalhesProjetoProjetoCommand(repository, view.getDesktop()) {
+            AbrirDetalhesProjetoProjetoCommand cmdDetalhes = new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()) {
                 @Override
                 public void execute() {
                     String tituloJanela = "Detalhes do Projeto: " + projeto.getNome();
@@ -100,6 +101,7 @@ public final class PrincipalPresenter implements Observer {
                     }
                 }
             };
+            cmdDetalhes.setProjetoId(projeto.getId());
             cmdDetalhes.setProjetoNome(projeto.getNome());
             NoArvoreComposite noProjeto = construtorDeArvoreNavegacaoService.criarNo(projeto.getNome(), "projeto", cmdDetalhes);
 
@@ -122,7 +124,7 @@ public final class PrincipalPresenter implements Observer {
             JPopupMenu menu = new JPopupMenu();
             JMenuItem excluirProjetoItem = new JMenuItem("Excluir Projeto");
             excluirProjetoItem.addActionListener(e -> {
-                ProjetoCommand cmdExcluir = new ExcluirProjetoProjetoCommand(repository, projeto.getNome());
+                ProjetoCommand cmdExcluir = new ExcluirProjetoProjetoCommand(projetoSingleton, projeto);
                 cmdExcluir.execute();
             });
             menu.add(excluirProjetoItem);
@@ -160,13 +162,12 @@ public final class PrincipalPresenter implements Observer {
         }
     }
 
+    public List<Projeto> carregarProjetosDatabase() {
+        return new ArrayList<Projeto>();
+    }
 
     public Map<String, ProjetoCommand> getComandos() {
         return comandos;
-    }
-
-    public ProjetoRepositoryMock getRepository() {
-        return repository;
     }
 
     public PrincipalView getView() {

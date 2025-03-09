@@ -5,6 +5,7 @@ import br.projeto.presenter.helpers.WindowManager;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.repository.UsuarioRepository;
 import br.projeto.repository.interfaces.IUsuarioRepository;
+import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.LoginView;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public class LoginPresenter {
             if (autenticarUsuario(nomeUsuario, senha)) {
                 // Lógica de redirecionamento após login bem-sucedido
                 SwingUtilities.invokeLater(() -> {
-                    PrincipalPresenter presenter = new PrincipalPresenter(new ProjetoRepositoryMock());
+                    PrincipalPresenter presenter = new PrincipalPresenter();
                     WindowManager.getInstance().initialize(presenter);
                 });
                 view.dispose(); // Fecha a tela de login
