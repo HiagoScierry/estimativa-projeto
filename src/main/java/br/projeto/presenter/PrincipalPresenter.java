@@ -163,7 +163,7 @@ public final class PrincipalPresenter implements Observer {
     }
 
     public List<Projeto> carregarProjetosDatabase() {
-        return new ArrayList<Projeto>();
+        return projetoSingleton.getProjetos();
     }
 
     public Map<String, ProjetoCommand> getComandos() {

@@ -5,6 +5,7 @@
 package br.projeto.dao.sqlite;
 
 import br.projeto.config.database.SQLiteConnection;
+import br.projeto.dao.DaoUtil;
 import br.projeto.dao.interfaces.IProjetoDAO;
 import br.projeto.model.CustoAdicional;
 import br.projeto.model.Funcionalidade;
@@ -25,25 +26,25 @@ import java.util.logging.Logger;
 
 public class ProjetoSQLiteDao implements IProjetoDAO {
     private Connection connection;
+    private DaoUtil daoUtil;
 
     public ProjetoSQLiteDao() throws Exception {
         this.connection = SQLiteConnection.getConexao();
+        this.daoUtil = DaoUtil.getInstance();
     }
 
     @Override
     public void inserir(Projeto projeto) {
-        String sql = "INSERT INTO Projeto (nome, criadorId, dataCriacao, status, compartilhado, compartilhadoPorId, nivelUIId, percentualImpostos, percentualLucro) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Projeto (nome, dataCriacao, status, compartilhado, nivelUIId, percentualImpostos, percentualLucro) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, projeto.getNome());
-            stmt.setInt(2, projeto.getCriador().getId()); 
-            stmt.setString(3, projeto.getDataCriacao());
-            stmt.setString(4, projeto.getStatus());
-            stmt.setBoolean(5, projeto.isCompartilhado());
-            stmt.setInt(6, projeto.getCompartilhadoPor() != null ? projeto.getCompartilhadoPor().getId() : 0);
-            stmt.setInt(7, projeto.getNivelUI() != null ? projeto.getNivelUI().getId() : 0); 
-            stmt.setDouble(8, projeto.getPercentualImpostos());
-            stmt.setDouble(9, projeto.getPercentualLucro());
+            stmt.setString(2, projeto.getDataCriacao());
+            stmt.setString(3, projeto.getStatus());
+            stmt.setBoolean(4, projeto.isCompartilhado());
+            stmt.setInt(5, projeto.getNivelUI() != null ? projeto.getNivelUI().getId() : 0);
+            stmt.setDouble(6, projeto.getPercentualImpostos());
+            stmt.setDouble(7, projeto.getPercentualLucro());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -96,11 +97,9 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    criador,
                     rs.getString("dataCriacao"),
                     rs.getString("status"),
                     rs.getBoolean("compartilhado"),
-                    compartilhadoPor,
                     perfis,
                     funcionalidadesWebBackend,
                     funcionalidadesIOS,
@@ -127,27 +126,22 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Usuario criador = new UsuarioSQLiteDao().buscarPorId(rs.getInt("criadorId"));
-                Usuario compartilhadoPor = new UsuarioSQLiteDao().buscarPorId(rs.getInt("compartilhadoPorId"));
-                NivelUI nivelUI = new NivelUISQLiteDao().buscarPorId(rs.getInt("nivelUIId"));
+                NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
 
+                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
 
-                List<Perfil> perfis = new ProjetoPerfilSQLiteDao().listarPerfisPorProjeto(rs.getInt("id"));
+                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
+                List<Funcionalidade> funcionalidadesIOS =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
+                List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
 
-                List<Funcionalidade> funcionalidadesWebBackend = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
-                List<Funcionalidade> funcionalidadesIOS = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
-                List<Funcionalidade> funcionalidadesAndroid = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
-
-                List<CustoAdicional> custosAdicionais = new ProjetoCustoAdicionalSQLiteDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
 
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    criador,
                     rs.getString("dataCriacao"),
                     rs.getString("status"),
                     rs.getBoolean("compartilhado"),
-                    compartilhadoPor,
                     perfis,
                     funcionalidadesWebBackend,
                     funcionalidadesIOS,
@@ -168,13 +162,17 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
     @Override
     public List<Projeto> listarPorUsuario(int usuarioId) {
         List<Projeto> projetos = new ArrayList<>();
-        String sql = "SELECT * FROM Projeto WHERE criadorId = ?";
+        String sql = "SELECT *\n" +
+                "FROM Projeto p\n" +
+                "JOIN ProjetoUsuarioCompartilhado puc ON p.id = puc.projetoId AND puc.isCriador = 1\n" +
+                "JOIN Usuario u ON puc.usuarioId = u.id\n" +
+                "WHERE u.id = ?;";
+
+
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, usuarioId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Usuario criador = new UsuarioSQLiteDao().buscarPorId(rs.getInt("criadorId"));
-                Usuario compartilhadoPor = new UsuarioSQLiteDao().buscarPorId(rs.getInt("compartilhadoPorId"));
                 NivelUI nivelUI = new NivelUISQLiteDao().buscarPorId(rs.getInt("nivelUIId"));
 
                 List<Perfil> perfis = new ProjetoPerfilSQLiteDao().listarPerfisPorProjeto(rs.getInt("id"));
@@ -188,11 +186,9 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    criador,
                     rs.getString("dataCriacao"),
                     rs.getString("status"),
                     rs.getBoolean("compartilhado"),
-                    compartilhadoPor,
                     perfis,
                     funcionalidadesWebBackend,
                     funcionalidadesIOS,
@@ -212,18 +208,16 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
 
     @Override
     public void atualizar(Projeto projeto) {
-        String sql = "UPDATE Projeto SET nome = ?, criadorId = ?, dataCriacao = ?, status = ?, compartilhado = ?, compartilhadoPorId = ?, nivelUIId = ?, percentualImpostos = ?, percentualLucro = ? WHERE id = ?";
+        String sql = "UPDATE Projeto SET nome = ?, dataCriacao = ?, status = ?, compartilhado = ?, nivelUIId = ?, percentualImpostos = ?, percentualLucro = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, projeto.getNome());
-            stmt.setInt(2, projeto.getCriador().getId());
-            stmt.setString(3, projeto.getDataCriacao());
-            stmt.setString(4, projeto.getStatus());
-            stmt.setBoolean(5, projeto.isCompartilhado());
-            stmt.setInt(6, projeto.getCompartilhadoPor() != null ? projeto.getCompartilhadoPor().getId() : 0);
-            stmt.setInt(7, projeto.getNivelUI() != null ? projeto.getNivelUI().getId() : 0);
-            stmt.setDouble(8, projeto.getPercentualImpostos());
-            stmt.setDouble(9, projeto.getPercentualLucro());
-            stmt.setInt(10, projeto.getId());
+            stmt.setString(2, projeto.getDataCriacao());
+            stmt.setString(3, projeto.getStatus());
+            stmt.setBoolean(4, projeto.isCompartilhado());
+            stmt.setInt(5, projeto.getNivelUI() != null ? projeto.getNivelUI().getId() : 0);
+            stmt.setDouble(6, projeto.getPercentualImpostos());
+            stmt.setDouble(7, projeto.getPercentualLucro());
+            stmt.setInt(8, projeto.getId());
             stmt.executeUpdate();
 
             new ProjetoPerfilSQLiteDao().atualizarPerfisProjeto(projeto.getId(), projeto.getPerfis());

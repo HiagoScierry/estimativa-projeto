@@ -13,27 +13,27 @@ public class CriarProjetoMock {
     }
 
     public Optional<Projeto> criarProjetoAleatorio() {
-        List<Projeto> projetosExistentes = repository.getProjetos();
-
-        if (projetosExistentes.isEmpty()) {
-            return Optional.empty();
-        }
-
-        Random random = new Random();
-        Projeto projetoBase = projetosExistentes.get(random.nextInt(projetosExistentes.size()));
-
-        List<String> tipos = combinarTipos(projetosExistentes, random);
-        if (tipos.size() < 1 || tipos.size() > 2) {
-            return Optional.empty();
-        }
-
-        String nome = gerarNomeDoProjeto(tipos);
-        String criador = projetoBase.getCriador().getNome();
-        String dataCriacao = gerarDataAleatoria();
-        String status = random.nextBoolean() ? "Estimado" : "Em andamento";
-        boolean compartilhado = random.nextBoolean();
-        String compartilhadoPor = compartilhado ? projetoBase.getCriador().getNome() : null;
-        Map<String, Integer> funcionalidades = combinarFuncionalidades(projetosExistentes, random);
+//        List<Projeto> projetosExistentes = repository.getProjetos();
+//
+//        if (projetosExistentes.isEmpty()) {
+//            return Optional.empty();
+//        }
+//
+//        Random random = new Random();
+//        Projeto projetoBase = projetosExistentes.get(random.nextInt(projetosExistentes.size()));
+//
+//        List<String> tipos = combinarTipos(projetosExistentes, random);
+//        if (tipos.size() < 1 || tipos.size() > 2) {
+//            return Optional.empty();
+//        }
+//
+//        String nome = gerarNomeDoProjeto(tipos);
+//        String criador = projetoBase.getCriador().getNome();
+//        String dataCriacao = gerarDataAleatoria();
+//        String status = random.nextBoolean() ? "Estimado" : "Em andamento";
+//        boolean compartilhado = random.nextBoolean();
+//        String compartilhadoPor = compartilhado ? projetoBase.getCriador().getNome() : null;
+//        Map<String, Integer> funcionalidades = combinarFuncionalidades(projetosExistentes, random);
 
         return Optional.empty();
     }

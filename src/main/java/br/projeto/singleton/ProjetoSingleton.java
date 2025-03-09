@@ -3,18 +3,22 @@ package br.projeto.singleton;
 import br.projeto.model.Projeto;
 import br.projeto.model.Subject;
 import br.projeto.presenter.Observer;
+import br.projeto.repository.ProjetoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjetoSingleton implements Subject {
-
+    private UsuarioSingleton usuarioSingleton;
+    private ProjetoRepository projetoRepository;
     private static ProjetoSingleton instance;
     private final List<Projeto> projetos;
     private final List<Observer> observers;
 
     private ProjetoSingleton() {
-        projetos = new ArrayList<Projeto>();
+        usuarioSingleton = UsuarioSingleton.getInstance();
+        projetoRepository = new ProjetoRepository();
+        projetos = carregarProjetosRepository();
         observers = new ArrayList<>();
     }
 
@@ -44,6 +48,19 @@ public class ProjetoSingleton implements Subject {
         projetos.add(projeto);
         // PRECISA ADICIONAR O NOVO PROJETO NO BANCO DE DADOS
         notifyObservers();
+    }
+
+    private List<Projeto> carregarProjetosRepository(){
+        int usuarioId = usuarioSingleton.getUsuario().getId();
+        List<Projeto> lista = this.projetoRepository.listarPorUsuario(usuarioId);
+
+        for (Projeto projeto : lista){
+            System.out.println("ID: " + projeto.getId() + "NOME : " + projeto.getNome());
+
+        }
+
+        return lista;
+
     }
 
     public List<Projeto> getProjetos() {

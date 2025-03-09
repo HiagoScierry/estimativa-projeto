@@ -7,12 +7,10 @@ import java.util.Map;
 public class Projeto {
     private int id;
     private String nome;
-    private Usuario criador; 
     private String dataCriacao;
     private String status;
     private boolean compartilhado;
-    private Usuario compartilhadoPor;
-    private List<Perfil> perfis; 
+    private List<Perfil> perfis;
     private List<Funcionalidade> funcionalidadesWebBackend; 
     private List<Funcionalidade> funcionalidadesIOS;
     private List<Funcionalidade> funcionalidadesAndroid;
@@ -21,17 +19,15 @@ public class Projeto {
     private double percentualImpostos;
     private double percentualLucro;
 
-    public Projeto(int id, String nome, Usuario criador, String dataCriacao, String status, boolean compartilhado,
-                   Usuario compartilhadoPor, List<Perfil> perfis, List<Funcionalidade> funcionalidadesWebBackend,
+    public Projeto(int id, String nome, String dataCriacao, String status, boolean compartilhado,
+                   List<Perfil> perfis, List<Funcionalidade> funcionalidadesWebBackend,
                    List<Funcionalidade> funcionalidadesIOS, List<Funcionalidade> funcionalidadesAndroid, 
                    List<CustoAdicional> custosAdicionais, NivelUI nivelUI, double percentualImpostos, double percentualLucro) {
         this.id = id;
         this.nome = nome;
-        this.criador = criador;
         this.dataCriacao = dataCriacao;
         this.status = status;
         this.compartilhado = compartilhado;
-        this.compartilhadoPor = compartilhadoPor;
         this.perfis = perfis;
         this.funcionalidadesWebBackend = funcionalidadesWebBackend;
         this.funcionalidadesIOS = funcionalidadesIOS;
@@ -49,9 +45,6 @@ public class Projeto {
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 
-    public Usuario getCriador() { return criador; }
-    public void setCriador(Usuario criador) { this.criador = criador; }
-
     public String getDataCriacao() { return dataCriacao; }
     public void setDataCriacao(String dataCriacao) { this.dataCriacao = dataCriacao; }
 
@@ -60,9 +53,6 @@ public class Projeto {
 
     public boolean isCompartilhado() { return compartilhado; }
     public void setCompartilhado(boolean compartilhado) { this.compartilhado = compartilhado; }
-
-    public Usuario getCompartilhadoPor() { return compartilhadoPor; }
-    public void setCompartilhadoPor(Usuario compartilhadoPor) { this.compartilhadoPor = compartilhadoPor; }
 
     public List<Perfil> getPerfis() { return perfis; }
     public void setPerfis(List<Perfil> perfis) { this.perfis = perfis; }
