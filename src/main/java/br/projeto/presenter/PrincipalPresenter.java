@@ -7,6 +7,7 @@ import br.projeto.presenter.window_command.*;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.ConstrutorDeArvoreNavegacaoService;
 import br.projeto.service.NoArvoreComposite;
+import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.GlobalWindowManager;
 import br.projeto.view.PrincipalView;
 
@@ -54,9 +55,9 @@ public final class PrincipalPresenter implements Observer {
         comandos.put("Visualizar estimativa", new VisualizarEstimativaProjetoCommand(view.getDesktop(), "Visualizar estimativa"));
         comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(view.getDesktop(), "Compartilhar"));
         comandos.put("Exportar projeto de estimativa", new MostrarMensagemProjetoCommand("Exportar ainda não implementado"));
-        comandos.put("Novo projeto", new CriarProjetoProjetoCommand(repository)); //AQUI TAMBÉM FOI ALTERADO PARA APARECER A JTREE DE PROJETO 
-        comandos.put("Excluir projeto", new ExcluirProjetoProjetoCommand(repository));
-        comandos.put("Abrir detalhes", new AbrirDetalhesProjetoProjetoCommand(repository, view.getDesktop()));
+        comandos.put("Novo projeto", new CriarProjetoProjetoCommand(view.getDesktop(), "Novo Projeto"));
+        comandos.put("Excluir projeto", new ExcluirProjetoProjetoCommand(projetoSingleton));
+        comandos.put("Abrir detalhes", new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()));
         return comandos;
     }
 

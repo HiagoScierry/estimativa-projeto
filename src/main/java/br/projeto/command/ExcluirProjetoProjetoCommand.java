@@ -1,46 +1,50 @@
 package br.projeto.command;
 
+import br.projeto.model.Projeto;
 import br.projeto.repository.ProjetoRepositoryMock;
+import br.projeto.singleton.ProjetoSingleton;
 
 import javax.swing.*;
 
 public class ExcluirProjetoProjetoCommand implements ProjetoCommand {
-    private final ProjetoRepositoryMock repository;
-    private String projetoNome;
+    private ProjetoSingleton projetoSingleton;
+    private Projeto projeto;
 
-    public ExcluirProjetoProjetoCommand(ProjetoRepositoryMock repository) {
-        this.repository = repository;
+    public ExcluirProjetoProjetoCommand(ProjetoSingleton projetoSingleton) {
+        this.projetoSingleton = projetoSingleton;
     }
 
-    public ExcluirProjetoProjetoCommand(ProjetoRepositoryMock repository, String projetoNome) {
-        this.repository = repository;
-        this.projetoNome = projetoNome;
+    public ExcluirProjetoProjetoCommand(ProjetoSingleton projetoSingleton, Projeto projeto) {
+        this.projetoSingleton = projetoSingleton;
+        this.projeto = projeto;
     }
 
-    public void setProjetoNome(String projetoNome) {
-        this.projetoNome = projetoNome;
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
     }
+
 
     @Override
     public void execute() {
-        if (projetoNome == null || projetoNome.isEmpty()) {
-            new MostrarMensagemProjetoCommand("Nome do projeto não definido.").execute();
+        if (projeto == null) {
+            new MostrarMensagemProjetoCommand("Projeto não definido.").execute();
             return;
         }
 
         int confirmacao = JOptionPane.showConfirmDialog(
                 null,
-                "Deseja realmente excluir o projeto \"" + projetoNome + "\"?",
+                "Deseja realmente excluir o projeto \"" + projeto.getNome() + "\"?",
                 "Confirmar Exclusão",
                 JOptionPane.YES_NO_OPTION
         );
 
         if (confirmacao == JOptionPane.YES_OPTION) {
-            boolean removido = repository.removerProjetoPorNome(projetoNome);
+            boolean removido = projetoSingleton.removerProjetoPorId(projeto.getId());
             if (removido) {
-                new MostrarMensagemProjetoCommand("Projeto \"" + projetoNome + "\" removido com sucesso!").execute();
+                new MostrarMensagemProjetoCommand("Projeto \"" + projeto.getNome() + "\" removido com sucesso!").execute();
             } else {
-                new MostrarMensagemProjetoCommand("Erro ao remover o projeto \"" + projetoNome + "\".").execute();
+                new MostrarMensagemProjetoCommand("Erro ao remover o projeto \"" + projeto.getNome() + "\".").execute();
             }
         }
     }

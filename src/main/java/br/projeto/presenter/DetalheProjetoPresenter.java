@@ -3,6 +3,7 @@ package br.projeto.presenter;
 import br.projeto.model.Projeto;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.EstimaProjetoService;
+import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.DetalheProjetoView;
 
 import java.util.List;
@@ -11,21 +12,21 @@ import java.util.stream.Collectors;
 public class DetalheProjetoPresenter implements Observer {
     private final DetalheProjetoView view;
     private final EstimaProjetoService estimaService;
-    private final ProjetoRepositoryMock repository;
-    private final String projetoNome;
+    private final ProjetoSingleton projetoSingleton;
+    private final int projetoId;
 
-    public DetalheProjetoPresenter(DetalheProjetoView view, ProjetoRepositoryMock repository, String projetoNome) {
+    public DetalheProjetoPresenter(DetalheProjetoView view, ProjetoSingleton projetoSingleton, int projetoId) {
         this.view = view;
-        this.repository = repository;
-        this.projetoNome = projetoNome;
+        this.projetoSingleton = projetoSingleton;
+        this.projetoId = projetoId;
         this.estimaService = new EstimaProjetoService();
 
-        this.repository.addObserver(this);
+        this.projetoSingleton.addObserver(this);
         carregarDetalhesProjeto();
     }
 
     private void carregarDetalhesProjeto() {
-        Projeto projeto = repository.getProjetoPorNome(projetoNome);
+        Projeto projeto = projetoSingleton.getProjetoPorId(projetoId);
         if (projeto != null) {
             carregarCabecalho(projeto);
             carregarDetalhes(projeto);

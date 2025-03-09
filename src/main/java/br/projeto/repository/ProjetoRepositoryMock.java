@@ -55,13 +55,7 @@ public class ProjetoRepositoryMock implements Subject {
         notifyObservers();
     }
 
-    public boolean removerProjetoPorNome(String nome) {
-        boolean removido = projetos.removeIf(projeto -> projeto.getNome().equals(nome));
-        if (removido) {
-            notifyObservers();
-        }
-        return removido;
-    }
+
 
     @Override
     public void addObserver(Observer observer) {

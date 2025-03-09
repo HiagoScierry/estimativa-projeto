@@ -3,6 +3,7 @@ package br.projeto.presenter;
 import br.projeto.model.Projeto;
 import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.EstimaProjetoService;
+import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.DashBoardProjetoView;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -13,19 +14,19 @@ import java.util.stream.Collectors;
 public class DashBoardProjetoPresenter implements Observer {
     private final DashBoardProjetoView view;
     private final EstimaProjetoService estimaService;
-    private final ProjetoRepositoryMock repository;
+    private final ProjetoSingleton projetoSingleton;
 
-    public DashBoardProjetoPresenter(DashBoardProjetoView view, ProjetoRepositoryMock repository) {
+    public DashBoardProjetoPresenter(DashBoardProjetoView view, ProjetoSingleton projetoSingleton) {
         this.view = view;
-        this.repository = repository;
+        this.projetoSingleton = projetoSingleton;
         this.estimaService = new EstimaProjetoService();
 
-        this.repository.addObserver(this);
+        this.projetoSingleton.addObserver(this);
         carregarDashboard();
     }
 
     private void carregarDashboard() {
-        List<Projeto> projetos = repository.getProjetos();
+        List<Projeto> projetos = projetoSingleton.getProjetos();
 
         int totalProjetos = projetos.size();
         int diasTotais = projetos.stream()
@@ -54,6 +55,7 @@ public class DashBoardProjetoPresenter implements Observer {
 
     private DefaultPieDataset gerarDatasetProjetos(List<Projeto> projetos) {
         DefaultPieDataset dataset = new DefaultPieDataset();
+        // A FAZER !!!
 //        Map<String, Long> tipos = projetos.stream()
 //                .flatMap(projeto -> projeto.getPerfis().stream())
 //                .collect(Collectors.groupingBy(tipo -> tipo, Collectors.counting()));
