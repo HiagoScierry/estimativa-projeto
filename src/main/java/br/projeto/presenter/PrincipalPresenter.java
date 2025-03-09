@@ -4,7 +4,6 @@ import br.projeto.command.*;
 import br.projeto.model.Projeto;
 import br.projeto.presenter.helpers.WindowManager;
 import br.projeto.presenter.window_command.*;
-import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.ConstrutorDeArvoreNavegacaoService;
 import br.projeto.service.NoArvoreComposite;
 import br.projeto.singleton.ProjetoSingleton;

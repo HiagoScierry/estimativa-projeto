@@ -1,7 +1,6 @@
 package br.projeto.command;
 
 import br.projeto.model.Projeto;
-import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.singleton.ProjetoSingleton;
 
 import javax.swing.*;

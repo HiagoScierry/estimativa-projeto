@@ -1,7 +1,6 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
-import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.EstimaProjetoService;
 import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.DetalheProjetoView;

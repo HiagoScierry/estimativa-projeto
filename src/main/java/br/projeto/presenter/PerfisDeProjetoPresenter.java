@@ -5,7 +5,6 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
-import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.view.PerfisDeProjetoView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,14 +18,11 @@ import java.util.List;
 
 public class PerfisDeProjetoPresenter implements Observer {
     private final PerfisDeProjetoView view;
-    private final ProjetoRepositoryMock repository;
 
     public PerfisDeProjetoPresenter() {
         this.view = new PerfisDeProjetoView();
-        this.repository = new ProjetoRepositoryMock();
-        
-        this.repository.addObserver(this);
-        
+
+
         configurarEventos();
         atualizarTabelaPerfisDeProjeto();
     }
@@ -73,8 +69,5 @@ public class PerfisDeProjetoPresenter implements Observer {
         return view;
     }
 
-    public ProjetoRepositoryMock getRepository() {
-        return repository;
-    }
 }
 

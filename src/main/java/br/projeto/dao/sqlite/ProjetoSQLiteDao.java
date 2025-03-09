@@ -164,7 +164,7 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
         List<Projeto> projetos = new ArrayList<>();
         String sql = "SELECT *\n" +
                 "FROM Projeto p\n" +
-                "JOIN ProjetoUsuarioCompartilhado puc ON p.id = puc.projetoId AND puc.isCriador = 1\n" +
+                "JOIN ProjetoUsuarioCompartilhado puc ON p.id = puc.projetoId\n" +
                 "JOIN Usuario u ON puc.usuarioId = u.id\n" +
                 "WHERE u.id = ?;";
 
