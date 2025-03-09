@@ -46,6 +46,7 @@ public class ProjetoSingleton implements Subject {
 
     public void adicionarProjeto(Projeto projeto){
         projetos.add(projeto);
+        projetoRepository.adicionarProjeto(projeto);
         // PRECISA ADICIONAR O NOVO PROJETO NO BANCO DE DADOS
         notifyObservers();
     }

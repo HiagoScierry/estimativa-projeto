@@ -3,7 +3,6 @@ package br.projeto;
 import br.projeto.dao.DaoUtil;
 import br.projeto.dao.factory.DaoSQLiteFactory;
 import br.projeto.presenter.LoginPresenter;
-import br.projeto.repository.ProjetoRepositoryMock;
 import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.JOptionPane;
 

@@ -5,8 +5,8 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
+import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.CompartilharProjetoView;
-import br.projeto.repository.ProjetoRepositoryMock;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -19,14 +19,14 @@ import javax.swing.JOptionPane;
 
 public class CompartilharProjetoPresenter implements Observer{
     private final CompartilharProjetoView view;
-    private final ProjetoRepositoryMock repository;
+    private final ProjetoSingleton projetoSingleton;
 
     public CompartilharProjetoPresenter() {
         this.view = new CompartilharProjetoView();
-        this.repository = new ProjetoRepositoryMock();
+        this.projetoSingleton = ProjetoSingleton.getInstance();
         configurarEventos();
         
-        this.repository.addObserver(this);
+        this.projetoSingleton.addObserver(this);
     }
 
     private void configurarEventos() {
@@ -57,8 +57,5 @@ public class CompartilharProjetoPresenter implements Observer{
         return view;
     }
 
-    public ProjetoRepositoryMock getRepository() {
-        return repository;
-    }
 }
 

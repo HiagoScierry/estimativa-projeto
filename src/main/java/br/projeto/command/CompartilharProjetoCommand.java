@@ -6,8 +6,6 @@ package br.projeto.command;
 
 import br.projeto.presenter.CompartilharProjetoPresenter;
 import br.projeto.presenter.helpers.WindowManager;
-import br.projeto.repository.ProjetoRepositoryMock;
-import br.projeto.view.CompartilharProjetoView;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 

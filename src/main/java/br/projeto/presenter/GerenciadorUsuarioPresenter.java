@@ -6,7 +6,6 @@ package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
 import br.projeto.model.Usuario;
-import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.repository.UsuarioRepository;
 import br.projeto.repository.interfaces.IUsuarioRepository;
 import br.projeto.singleton.UsuarioSingleton;

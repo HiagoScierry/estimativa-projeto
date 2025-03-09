@@ -5,7 +5,7 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
-import br.projeto.repository.ProjetoRepositoryMock;
+import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.VisualizarEstimativaView;
 import java.util.List;
 
@@ -16,13 +16,13 @@ import java.util.List;
 
 public class VisualizarEstimativaPresenter implements Observer {
     private final VisualizarEstimativaView view;
-    private final ProjetoRepositoryMock repository;
+    private final ProjetoSingleton projetoSingleton;
 
     public VisualizarEstimativaPresenter() {
         this.view = new VisualizarEstimativaView();
-        this.repository = new ProjetoRepositoryMock();
+        this.projetoSingleton = ProjetoSingleton.getInstance();
 
-        this.repository.addObserver(this);
+        this.projetoSingleton.addObserver(this);
 
         configurarEventos();
         atualizarTabelas();
@@ -60,8 +60,5 @@ public class VisualizarEstimativaPresenter implements Observer {
         return view;
     }
 
-    public ProjetoRepositoryMock getRepository() {
-        return repository;
-    }
 }
 

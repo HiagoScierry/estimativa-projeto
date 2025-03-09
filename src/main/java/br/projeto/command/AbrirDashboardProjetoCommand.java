@@ -2,7 +2,6 @@ package br.projeto.command;
 
 import br.projeto.presenter.DashBoardProjetoPresenter;
 import br.projeto.presenter.helpers.WindowManager;
-import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.DashBoardProjetoView;
 

@@ -5,7 +5,7 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
-import br.projeto.repository.ProjetoRepositoryMock;
+import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.ElaborarEstimativaView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,13 +18,13 @@ import java.util.List;
 
 public class ElaborarEstimativaPresenter implements Observer {
     private final ElaborarEstimativaView view;
-    private final ProjetoRepositoryMock repository;
+    private final ProjetoSingleton projetoSingleton;
 
     public ElaborarEstimativaPresenter() {
         this.view = new ElaborarEstimativaView();
-        this.repository = new ProjetoRepositoryMock();
+        this.projetoSingleton = ProjetoSingleton.getInstance();
         configurarEventos();
-        this.repository.addObserver(this);
+        this.projetoSingleton.addObserver(this);
     }
 
     private void configurarEventos() {
@@ -49,8 +49,5 @@ public class ElaborarEstimativaPresenter implements Observer {
         return view;
     }
 
-    public ProjetoRepositoryMock getRepository() {
-        return repository;
-    }
 }
 

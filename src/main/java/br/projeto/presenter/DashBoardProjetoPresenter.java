@@ -1,15 +1,12 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
-import br.projeto.repository.ProjetoRepositoryMock;
 import br.projeto.service.EstimaProjetoService;
 import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.DashBoardProjetoView;
 import org.jfree.data.general.DefaultPieDataset;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class DashBoardProjetoPresenter implements Observer {
     private final DashBoardProjetoView view;
