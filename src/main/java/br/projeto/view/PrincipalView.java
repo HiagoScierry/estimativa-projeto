@@ -7,6 +7,8 @@ public final class PrincipalView extends JFrame {
     private JDesktopPane desktop;
     private JTree tree;
     private JScrollPane treeScrollPane;
+    private JLabel lblNomeUsuario;
+    
 
     public PrincipalView() {
         setTitle("Sistema de Estimativa de Projetos");
@@ -25,6 +27,13 @@ public final class PrincipalView extends JFrame {
         divisoriaPainel.setOneTouchExpandable(true);
 
         add(divisoriaPainel, BorderLayout.CENTER);
+        
+        lblNomeUsuario = new JLabel("Nome do Usuário");
+        lblNomeUsuario.setFont(new Font("Arial", Font.PLAIN, 18));
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.add(lblNomeUsuario);
+        add(bottomPanel, BorderLayout.SOUTH);
     }
 
     public void setMainComponents(JToolBar toolBar) {
@@ -47,6 +56,8 @@ public final class PrincipalView extends JFrame {
     public JScrollPane getTreeScrollPane() {
         return treeScrollPane;
     }
-
-
+    
+    public JLabel getLblNomeUsuario(){
+        return lblNomeUsuario;
+    }
 }

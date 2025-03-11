@@ -19,6 +19,7 @@ public class CriarBarraBotaoService {
         adicionarBotao(toolBar, "Dashboard", "principal", "Principal");
         adicionarBotao(toolBar, "Novo Projeto", "projeto", "Novo projeto");
         adicionarBotao(toolBar, "Usuário", "usuario", "Usuário");
+        adicionarBotao(toolBar, "Configurações", "engrenagem", "Configurações");
 
         return toolBar;
     }

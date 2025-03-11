@@ -28,4 +28,8 @@ public class ConfiguracaoPresenter{
     private void configuraLogAdapter(String formato) {
         LogSingleton.getInstancia().setTipoLog(formato);
     }
+    
+    public ConfiguracaoView getView(){
+        return view;
+    }
 }    

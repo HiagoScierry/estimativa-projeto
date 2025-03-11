@@ -7,6 +7,7 @@ import br.projeto.presenter.window_command.*;
 import br.projeto.service.ConstrutorDeArvoreNavegacaoService;
 import br.projeto.service.NoArvoreComposite;
 import br.projeto.singleton.ProjetoSingleton;
+import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.GlobalWindowManager;
 import br.projeto.view.PrincipalView;
 
@@ -20,12 +21,15 @@ public final class PrincipalPresenter implements Observer {
     private final ConstrutorDeArvoreNavegacaoService construtorDeArvoreNavegacaoService;
     private final Map<String, ProjetoCommand> comandos;
     private final List<WindowCommand> windowCommands = new ArrayList<>();
+    private UsuarioSingleton usuarioLogado;
 
     public PrincipalPresenter() {
         this.view = new PrincipalView();
         this.projetoSingleton = ProjetoSingleton.getInstance();
         this.projetoSingleton.addObserver(this);
-
+        this.usuarioLogado = UsuarioSingleton.getInstance();
+        
+        view.getLblNomeUsuario().setText(usuarioLogado.getUsuario().getNome());
 
         this.construtorDeArvoreNavegacaoService = new ConstrutorDeArvoreNavegacaoService();
 
@@ -56,6 +60,7 @@ public final class PrincipalPresenter implements Observer {
         comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(view.getDesktop(), "Compartilhar"));
         comandos.put("Exportar projeto de estimativa", new MostrarMensagemProjetoCommand("Exportar ainda não implementado"));
         comandos.put("Novo projeto", new CriarProjetoProjetoCommand(projetoSingleton));
+        comandos.put("Configurações", new AbrirConfiguracaoProjetoCommand(view.getDesktop(), "Configurações"));
         comandos.put("Excluir projeto", new ExcluirProjetoProjetoCommand(projetoSingleton));
         comandos.put("Abrir detalhes", new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()));
         return comandos;
