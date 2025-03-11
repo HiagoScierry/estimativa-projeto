@@ -7,7 +7,6 @@ package br.projeto.dao.sqlite;
 import br.projeto.config.database.SQLiteConnection;
 import br.projeto.dao.interfaces.INivelUIDAO;
 import br.projeto.model.NivelUI;
-import java.util.List;
 
 /**
  *

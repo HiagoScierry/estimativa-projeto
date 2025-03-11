@@ -53,21 +53,21 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             }
 
             for (Perfil perfil : projeto.getPerfis()) {
-                new ProjetoPerfilSQLiteDao().associarPerfilaProjeto(projeto.getId(), perfil.getId());
+                daoUtil.getProjetoPerfilDao().associarPerfilaProjeto(projeto.getId(), perfil.getId());
             }
 
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
-                new ProjetoFuncionalidadeSQLiteDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
-                new ProjetoFuncionalidadeSQLiteDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
-                new ProjetoFuncionalidadeSQLiteDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
 
             for (CustoAdicional custo : projeto.getCustosAdicionais()) {
-                new ProjetoCustoAdicionalSQLiteDao().associarProjetoCustoAdicional(projeto.getId(), custo.getId());
+                daoUtil.getProjetoCustoAdicionalDao().associarProjetoCustoAdicional(projeto.getId(), custo.getId());
             }
 
         } catch (Exception e) {
@@ -82,17 +82,17 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Usuario criador = new UsuarioSQLiteDao().buscarPorId(rs.getInt("criadorId"));
-                Usuario compartilhadoPor = new UsuarioSQLiteDao().buscarPorId(rs.getInt("compartilhadoPorId"));
-                NivelUI nivelUI = new NivelUISQLiteDao().buscarPorId(rs.getInt("nivelUIId"));
+                Usuario criador = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("criadorId"));
+                Usuario compartilhadoPor = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("compartilhadoPorId"));
+                NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
 
-                List<Perfil> perfis = new ProjetoPerfilSQLiteDao().listarPerfisPorProjeto(id);
+                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(id);
 
-                List<Funcionalidade> funcionalidadesWebBackend = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(id, "WEB/BACKEND");
-                List<Funcionalidade> funcionalidadesIOS = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(id, "IOS");
-                List<Funcionalidade> funcionalidadesAndroid = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(id, "ANDROID");
+                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(id, "WEB/BACKEND");
+                List<Funcionalidade> funcionalidadesIOS = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(id, "IOS");
+                List<Funcionalidade> funcionalidadesAndroid = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(id, "ANDROID");
 
-                List<CustoAdicional> custosAdicionais = new ProjetoCustoAdicionalSQLiteDao().listarCustosAdicionaisPorProjeto(id);
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(id);
 
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
@@ -173,15 +173,15 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             stmt.setInt(1, usuarioId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                NivelUI nivelUI = new NivelUISQLiteDao().buscarPorId(rs.getInt("nivelUIId"));
+                NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
 
-                List<Perfil> perfis = new ProjetoPerfilSQLiteDao().listarPerfisPorProjeto(rs.getInt("id"));
+                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
 
-                List<Funcionalidade> funcionalidadesWebBackend = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
-                List<Funcionalidade> funcionalidadesIOS = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
-                List<Funcionalidade> funcionalidadesAndroid = new ProjetoFuncionalidadeSQLiteDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
+                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
+                List<Funcionalidade> funcionalidadesIOS = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
+                List<Funcionalidade> funcionalidadesAndroid = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
 
-                List<CustoAdicional> custosAdicionais = new ProjetoCustoAdicionalSQLiteDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
 
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
@@ -220,9 +220,9 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             stmt.setInt(8, projeto.getId());
             stmt.executeUpdate();
 
-            new ProjetoPerfilSQLiteDao().atualizarPerfisProjeto(projeto.getId(), projeto.getPerfis());
-            new ProjetoFuncionalidadeSQLiteDao().atualizarFuncionalidadesProjeto(projeto.getId(), projeto);
-            new ProjetoCustoAdicionalSQLiteDao().atualizarCustosAdicionaisProjeto(projeto.getId(), projeto.getCustosAdicionais());
+            daoUtil.getProjetoPerfilDao().atualizarPerfisProjeto(projeto.getId(), projeto.getPerfis());
+            daoUtil.getProjetoFuncionalidadeDao().atualizarFuncionalidadesProjeto(projeto.getId(), projeto);
+            daoUtil.getProjetoCustoAdicionalDao().atualizarCustosAdicionaisProjeto(projeto.getId(), projeto.getCustosAdicionais());
 
         } catch (Exception e) {
             System.out.println("Erro ao atualizar projeto: " + e.getMessage());
