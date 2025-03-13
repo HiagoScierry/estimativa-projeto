@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.projeto.dao.sqlite;
 
 import br.projeto.config.database.SQLiteConnection;
@@ -22,9 +18,11 @@ import java.util.List;
 public class PerfilSQLiteDao implements IPerfilDAO {
 
     private Connection connection;
+    private FuncinamentoSQLiteDao funcionalidadeDao;
 
     public PerfilSQLiteDao() throws Exception {
         this.connection = SQLiteConnection.getConexao();
+        this.funcionalidadeDao = new FuncinamentoSQLiteDao();
     }
 
     @Override
@@ -36,7 +34,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.executeUpdate();
             
             int perfilId = getPerfilIdByNome(perfil.getNome());
-            inserirFuncionalidades(perfil.getFuncionalidades(), perfilId);
+            funcionalidadeDao.inserirFuncionalidades(perfil.getFuncionalidades(), perfilId);
         } catch (SQLException e) {
             System.out.println("Erro ao inserir perfil: " + e.getMessage());
         }
@@ -49,7 +47,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                List<Funcionalidade> funcionalidades = buscarFuncionalidadesPorPerfilId(id);
+                List<Funcionalidade> funcionalidades = funcionalidadeDao.buscarFuncionalidadesPorPerfilId(id);
                 return new Perfil(
                     rs.getInt("id"),
                     rs.getString("nome"),
@@ -70,7 +68,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                List<Funcionalidade> funcionalidades = buscarFuncionalidadesPorPerfilId(rs.getInt("id"));
+                List<Funcionalidade> funcionalidades = funcionalidadeDao.buscarFuncionalidadesPorPerfilId(rs.getInt("id"));
                 perfis.add(new Perfil(
                     rs.getInt("id"),
                     rs.getString("nome"),
@@ -93,7 +91,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setInt(3, perfil.getId());
             stmt.executeUpdate();
 
-            atualizarFuncionalidades(perfil.getFuncionalidades(), perfil.getId());
+            funcionalidadeDao.atualizarFuncionalidades(perfil.getFuncionalidades(), perfil.getId());
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar perfil: " + e.getMessage());
         }
@@ -106,58 +104,9 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
-            excluirFuncionalidadesPorPerfilId(id);
+            funcionalidadeDao.excluirFuncionalidadesPorPerfilId(id);
         } catch (SQLException e) {
             System.out.println("Erro ao excluir perfil: " + e.getMessage());
-        }
-    }
-
-    private void inserirFuncionalidades(List<Funcionalidade> funcionalidades, int perfilId) {
-        String sql = "INSERT INTO Funcionalidade (perfil_id, nome) VALUES (?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            for (Funcionalidade funcionalidade : funcionalidades) {
-                stmt.setInt(1, perfilId);
-                stmt.setString(2, funcionalidade.getNome());
-                stmt.executeUpdate();
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir funcionalidades: " + e.getMessage());
-        }
-    }
-
-    private List<Funcionalidade> buscarFuncionalidadesPorPerfilId(int perfilId) {
-        String sql = "SELECT * FROM Funcionalidade WHERE perfil_id = ?";
-        List<Funcionalidade> funcionalidades = new ArrayList<>();
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, perfilId);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                funcionalidades.add(new Funcionalidade(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getInt("horasEstimadas"),
-                    rs.getString("plataforma")
-                ));
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar funcionalidades por perfil ID: " + e.getMessage());
-        }
-        return funcionalidades;
-    }
-
-
-    private void atualizarFuncionalidades(List<Funcionalidade> funcionalidades, int perfilId) {
-        excluirFuncionalidadesPorPerfilId(perfilId);
-        inserirFuncionalidades(funcionalidades, perfilId);
-    }
-
-    private void excluirFuncionalidadesPorPerfilId(int perfilId) {
-        String sql = "DELETE FROM Funcionalidade WHERE perfil_id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, perfilId);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Erro ao excluir funcionalidades por perfil ID: " + e.getMessage());
         }
     }
 
