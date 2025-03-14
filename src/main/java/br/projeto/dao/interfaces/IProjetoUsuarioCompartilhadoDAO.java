@@ -16,4 +16,5 @@ public interface IProjetoUsuarioCompartilhadoDAO {
     List<Integer> listarProjetosPorUsuario(int usuarioId);
     void removerCompartilhamento(int projetoId, int usuarioId);
     boolean isCriador(int projetoId, int usuarioId);
+    boolean verificarSeProjetoJaCompartilhado(int projetoId, int usuarioId);
 }

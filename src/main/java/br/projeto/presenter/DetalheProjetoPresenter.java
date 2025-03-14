@@ -6,7 +6,6 @@ import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.DetalheProjetoView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DetalheProjetoPresenter implements Observer {
     private final DetalheProjetoView view;
@@ -26,6 +25,7 @@ public class DetalheProjetoPresenter implements Observer {
 
     private void carregarDetalhesProjeto() {
         Projeto projeto = projetoSingleton.getProjetoPorId(projetoId);
+        projetoSingleton.setIdProjetoAtual(projetoId);
         if (projeto != null) {
             carregarCabecalho(projeto);
             carregarDetalhes(projeto);

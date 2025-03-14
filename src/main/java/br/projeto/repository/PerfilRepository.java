@@ -22,18 +22,8 @@ public class PerfilRepository implements IPerfilRepository {
     }
 
     @Override
-    public void removerPerfil(int id) {
-        perfilDAO.excluir(id);
-    }
-
-    @Override
     public Perfil buscarPorId(int id) {
         return perfilDAO.buscarPorId(id);
-    }
-
-    @Override
-    public void atualizarPerfil(Perfil perfil) {
-        perfilDAO.atualizar(perfil);
     }
 
     @Override

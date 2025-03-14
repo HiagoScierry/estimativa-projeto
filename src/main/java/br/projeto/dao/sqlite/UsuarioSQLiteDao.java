@@ -38,25 +38,26 @@ public class UsuarioSQLiteDao implements IUsuarioDAO{
             System.out.println("Erro ao criar usuario");
         }
     }
-
+    
     @Override
-    public Usuario buscarPorId(int id) {
+    public Optional<Usuario> buscarPorId(int id) {
         String sql = "SELECT * FROM Usuario WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Usuario(
+                Usuario usuario = new Usuario(
                     rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getString("email"),
                     rs.getString("senha")
                 );
+                return Optional.of(usuario);
             }
-        } catch (Exception e){
-            System.out.println("Erro ao encontrar usuario");
+        } catch (Exception e) {
+            System.out.println("Erro ao encontrar usuario: " + e.getMessage());
         }
-        return null;
+        return Optional.empty();
     }
     
     
@@ -123,5 +124,4 @@ public class UsuarioSQLiteDao implements IUsuarioDAO{
         }
         return null;
     }
-
 }
