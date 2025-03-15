@@ -4,6 +4,7 @@ import br.projeto.model.Projeto;
 import br.projeto.model.Subject;
 import br.projeto.presenter.Observer;
 import br.projeto.repository.ProjetoRepository;
+import br.projeto.repository.ProjetoUsuarioCompartilhadoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class ProjetoSingleton implements Subject {
     private UsuarioSingleton usuarioSingleton;
     private ProjetoRepository projetoRepository;
+    private ProjetoUsuarioCompartilhadoRepository projetoUsuarioCompartilhadoRepository;
     private int idProjetoAtual;
     private static ProjetoSingleton instance;
     private final List<Projeto> projetos;
@@ -19,6 +21,7 @@ public class ProjetoSingleton implements Subject {
     private ProjetoSingleton() {
         usuarioSingleton = UsuarioSingleton.getInstance();
         projetoRepository = new ProjetoRepository();
+        projetoUsuarioCompartilhadoRepository = new ProjetoUsuarioCompartilhadoRepository();
         projetos = carregarProjetosRepository();
         observers = new ArrayList<>();
 
@@ -49,7 +52,7 @@ public class ProjetoSingleton implements Subject {
     public void adicionarProjeto(Projeto projeto){
         projetos.add(projeto);
         projetoRepository.adicionarProjeto(projeto);
-        // PRECISA ADICIONAR O NOVO PROJETO NO BANCO DE DADOS
+//        projetoUsuarioCompartilhadoRepository.compartilharProjeto(projeto.getId(), usuarioSingleton.getUsuario().getId(), true);
         notifyObservers();
     }
 
