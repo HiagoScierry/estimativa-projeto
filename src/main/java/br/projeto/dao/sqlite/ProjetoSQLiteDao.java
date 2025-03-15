@@ -21,6 +21,7 @@ import br.projeto.model.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,8 +83,8 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Usuario criador = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("criadorId"));
-                Usuario compartilhadoPor = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("compartilhadoPorId"));
+                Optional<Usuario> criador = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("criadorId"));
+                Optional<Usuario> compartilhadoPor = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("compartilhadoPorId"));
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
 
                 List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(id);

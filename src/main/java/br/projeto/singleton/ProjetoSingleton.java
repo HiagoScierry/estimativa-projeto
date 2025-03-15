@@ -11,6 +11,7 @@ import java.util.List;
 public class ProjetoSingleton implements Subject {
     private UsuarioSingleton usuarioSingleton;
     private ProjetoRepository projetoRepository;
+    private int idProjetoAtual;
     private static ProjetoSingleton instance;
     private final List<Projeto> projetos;
     private final List<Observer> observers;
@@ -20,6 +21,7 @@ public class ProjetoSingleton implements Subject {
         projetoRepository = new ProjetoRepository();
         projetos = carregarProjetosRepository();
         observers = new ArrayList<>();
+
     }
 
     public static ProjetoSingleton getInstance() {
@@ -56,7 +58,7 @@ public class ProjetoSingleton implements Subject {
         List<Projeto> lista = this.projetoRepository.listarPorUsuario(usuarioId);
 
         for (Projeto projeto : lista){
-            System.out.println("ID: " + projeto.getId() + "NOME : " + projeto.getNome());
+            System.out.println("ID: " + projeto.getId() + " NOME: " + projeto.getNome());
 
         }
 
@@ -90,5 +92,14 @@ public class ProjetoSingleton implements Subject {
         for (Observer observer : observers) {
             observer.update(projetos);
         }
+    }
+    
+    public void setIdProjetoAtual(int idProjeto){
+        System.out.println("id que chegou na singleton: " + idProjeto+"\n");
+        this.idProjetoAtual = idProjeto;
+    }
+    
+    public int getIdProjetoAtual(){
+        return idProjetoAtual;
     }
 }

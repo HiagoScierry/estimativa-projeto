@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public interface IUsuarioDAO {
     void inserir(Usuario usuario);
-    Usuario buscarPorId(int id);
+    Optional<Usuario> buscarPorId(int id);
     Optional<Usuario> buscarPorEmail(String email);
     List<Usuario> listarTodos();
     Optional<Usuario> autenticar(String email, String senha);

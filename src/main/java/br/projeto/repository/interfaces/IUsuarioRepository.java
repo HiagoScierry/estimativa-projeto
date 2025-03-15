@@ -15,8 +15,8 @@ import java.util.Optional;
  */
 public interface IUsuarioRepository {
     Optional<Usuario> autenticar(String email, String senha);
-    public void cadatrarUsuario(Usuario usuario);
+    void cadatrarUsuario(Usuario usuario);
     Optional<Usuario> buscarPorEmail(String email);
     List<Usuario> buscarTodos();
-        
+    Optional<Usuario> buscarPorId(int id);
 }

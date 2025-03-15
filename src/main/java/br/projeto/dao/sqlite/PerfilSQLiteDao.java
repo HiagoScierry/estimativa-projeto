@@ -1,3 +1,4 @@
+
 package br.projeto.dao.sqlite;
 
 import br.projeto.config.database.SQLiteConnection;

@@ -41,5 +41,9 @@ public class ProjetoUsuarioCompartilhadoRepository {
     public boolean verificarSeEhCriador(int projetoId, int usuarioId) {
         return projetoUsuarioCompartilhadoDAO.isCriador(projetoId, usuarioId);
     }
+    
+    public boolean verificarSeProjetoJaCompartilhado(int projetoId, int usuarioId) {
+        return projetoUsuarioCompartilhadoDAO.verificarSeProjetoJaCompartilhado(projetoId, usuarioId);
+    }    
 }
 

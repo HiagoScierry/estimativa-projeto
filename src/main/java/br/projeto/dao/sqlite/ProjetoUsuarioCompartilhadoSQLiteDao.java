@@ -101,4 +101,20 @@ public class ProjetoUsuarioCompartilhadoSQLiteDao implements IProjetoUsuarioComp
         }
         return false;
     }
+    
+    @Override
+    public boolean verificarSeProjetoJaCompartilhado(int projetoId, int usuarioId) {
+        String sql = "SELECT COUNT(*) FROM ProjetoUsuarioCompartilhado WHERE projetoId = ? AND usuarioId = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, projetoId);
+            stmt.setInt(2, usuarioId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar se projeto já foi compartilhado: " + e.getMessage());
+        }
+        return false;
+    }
 }

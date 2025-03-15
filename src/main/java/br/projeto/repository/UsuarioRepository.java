@@ -31,6 +31,7 @@ public class UsuarioRepository implements IUsuarioRepository{
         return usuarioDAO.autenticar(email, senha);
     }
     
+    @Override
     public void cadatrarUsuario(Usuario usuario){
         usuarioDAO.inserir(usuario);
     }
@@ -44,5 +45,9 @@ public class UsuarioRepository implements IUsuarioRepository{
     public List<Usuario> buscarTodos() {
         return usuarioDAO.listarTodos();
     }
-
+    
+    @Override
+    public Optional<Usuario> buscarPorId(int id){
+        return usuarioDAO.buscarPorId(id);
+    }
 }
