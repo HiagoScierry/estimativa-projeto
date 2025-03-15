@@ -23,23 +23,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Cauã
  */
-public class CompartilharProjetoPresenter {
+public class CompartilharProjetoPresenter{
     private final CompartilharProjetoView view;
     private final ProjetoSingleton projetoSingleton;
     private final UsuarioSingleton usuarioLogado;
     private final ProjetoUsuarioCompartilhadoRepository projetoCompartilhadoRepository;
     private final IUsuarioRepository usuarioRepository;
-    final int projetoId;
 
-    public CompartilharProjetoPresenter(ProjetoSingleton projetoSingleton, int projetoId) {
+    public CompartilharProjetoPresenter(ProjetoSingleton projetoSingleton) {
         this.view = new CompartilharProjetoView();
         this.projetoSingleton = projetoSingleton;
         this.usuarioLogado = UsuarioSingleton.getInstance();
         this.projetoCompartilhadoRepository = new ProjetoUsuarioCompartilhadoRepository();
         this.usuarioRepository = new UsuarioRepository();   
-        this.projetoId = projetoId;
-        
-        projetoSingleton.setIdProjetoAtual(projetoId);
+
         configurarEventos();
         atualizarTabelaUsuarios();
     }
@@ -54,6 +51,7 @@ public class CompartilharProjetoPresenter {
     }
 
     private void atualizarTabelaUsuarios() {
+        
         List<Usuario> usuarios = usuarioRepository.buscarTodos();
 
         String emailUsuarioLogado = usuarioLogado.getUsuario().getEmail();
@@ -71,8 +69,7 @@ public class CompartilharProjetoPresenter {
     }
 
     private void compartilharProjeto() {
-        Projeto projetoAtual = projetoSingleton.getProjetoPorId(projetoId);
-        System.out.println("Executando CompartilharProjetoPresenter para o projeto ID: " + projetoId); //debug
+        Projeto projetoAtual = projetoSingleton.getProjetoPorId(projetoSingleton.getIdProjetoAtual());
 
         if (projetoAtual == null) {
             JOptionPane.showMessageDialog(

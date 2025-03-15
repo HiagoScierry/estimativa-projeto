@@ -25,7 +25,7 @@ public class DetalheProjetoPresenter implements Observer {
 
     private void carregarDetalhesProjeto() {
         Projeto projeto = projetoSingleton.getProjetoPorId(projetoId);
-        projetoSingleton.setIdProjetoAtual(projetoId);
+
         if (projeto != null) {
             carregarCabecalho(projeto);
             carregarDetalhes(projeto);

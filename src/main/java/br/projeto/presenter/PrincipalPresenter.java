@@ -58,13 +58,14 @@ public final class PrincipalPresenter implements Observer {
 
 
     private Map<String, ProjetoCommand> inicializarComandos() {
+        
         Map<String, ProjetoCommand> comandos = new HashMap<>();
         comandos.put("Principal", new AbrirDashboardProjetoCommand(view.getDesktop(), projetoSingleton));
         comandos.put("Usuário", new AbrirGerenciadorUsuarioCommand(view.getDesktop(), "Usuário"));
         comandos.put("Ver perfis de projeto", new AbrirPerfisDeProjetoCommand(view.getDesktop(), "Ver Perfis de Projetos"));
         comandos.put("Elaborar estimativa", new CriarEstimativaProjetoCommand(view.getDesktop(), "Elaborar estimativa"));
         comandos.put("Visualizar estimativa", new VisualizarEstimativaProjetoCommand(view.getDesktop(), "Visualizar estimativa"));
-        comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(view.getDesktop(), "Compartilhar"));
+        //comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(projetoSingleton, view.getDesktop()));
         comandos.put("Exportar projeto de estimativa", new MostrarMensagemProjetoCommand("Exportar ainda não implementado"));
         comandos.put("Novo projeto", new CriarProjetoProjetoCommand(projetoSingleton));
         comandos.put("Configurações", new AbrirConfiguracaoProjetoCommand(view.getDesktop(), "Configurações"));
@@ -100,6 +101,7 @@ public final class PrincipalPresenter implements Observer {
         int totalProjetos = 1;
 
         for (final Projeto projeto : listaProjetos) {
+            CompartilharProjetoCommand cmdCompartilhar = new CompartilharProjetoCommand(projetoSingleton, view.getDesktop());
             AbrirDetalhesProjetoProjetoCommand cmdDetalhes = new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()) {
                 @Override
                 public void execute() {
@@ -116,9 +118,6 @@ public final class PrincipalPresenter implements Observer {
             };
             cmdDetalhes.setProjetoId(projeto.getId());
             cmdDetalhes.setProjetoNome(projeto.getNome());
-
-            //parte da gambiada (essas duas linhas)
-            CompartilharProjetoCommand cmdCompartilhar = new CompartilharProjetoCommand(view.getDesktop(), "Compartilhar Projeto");
             cmdCompartilhar.setProjetoId(projeto.getId());
             
             boolean ehCriador = projetoCompartilhadoRepo.verificarSeEhCriador(projeto.getId(), usuarioLogado.getUsuario().getId());
