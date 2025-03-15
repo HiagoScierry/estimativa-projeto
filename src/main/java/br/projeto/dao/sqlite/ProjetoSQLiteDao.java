@@ -13,6 +13,7 @@ import br.projeto.model.NivelUI;
 import br.projeto.model.Perfil;
 import br.projeto.model.Projeto;
 import br.projeto.model.Usuario;
+import br.projeto.singleton.UsuarioSingleton;
 
 /**
  *
@@ -53,6 +54,11 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                 projeto.setId(rs.getInt(1));
             }
 
+            daoUtil.getProjetoUsuarioCompartilhadoDao().compartilharProjetoComUsuario(
+                    projeto.getId(),
+                    UsuarioSingleton.getInstance().getUsuario().getId(),
+                    true);
+
             for (Perfil perfil : projeto.getPerfis()) {
                 daoUtil.getProjetoPerfilDao().associarPerfilaProjeto(projeto.getId(), perfil.getId());
             }
@@ -70,6 +76,8 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             for (CustoAdicional custo : projeto.getCustosAdicionais()) {
                 daoUtil.getProjetoCustoAdicionalDao().associarProjetoCustoAdicional(projeto.getId(), custo.getId());
             }
+
+
 
         } catch (Exception e) {
             System.out.println("Erro ao inserir o projeto: " + e.getMessage());

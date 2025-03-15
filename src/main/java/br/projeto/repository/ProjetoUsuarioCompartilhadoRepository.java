@@ -44,6 +44,7 @@ public class ProjetoUsuarioCompartilhadoRepository {
     
     public boolean verificarSeProjetoJaCompartilhado(int projetoId, int usuarioId) {
         return projetoUsuarioCompartilhadoDAO.verificarSeProjetoJaCompartilhado(projetoId, usuarioId);
-    }    
+    }
+
 }
 
