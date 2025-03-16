@@ -1,23 +1,36 @@
 package br.projeto.presenter;
 
+import br.projeto.model.Funcionalidade;
 import br.projeto.model.Projeto;
-import br.projeto.service.EstimaProjetoService;
-import br.projeto.singleton.ProjetoSingleton;
+import br.projeto.model.Usuario;
 import br.projeto.view.DetalheProjetoView;
-
+import br.projeto.service.EstimaProjetoService;
+import br.projeto.repository.ProjetoUsuarioCompartilhadoRepository;
+import br.projeto.repository.UsuarioRepository;
+import br.projeto.singleton.ProjetoSingleton;
+import br.projeto.singleton.UsuarioSingleton;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class DetalheProjetoPresenter implements Observer {
     private final DetalheProjetoView view;
     private final EstimaProjetoService estimaService;
     private final ProjetoSingleton projetoSingleton;
     private final int projetoId;
+    private final UsuarioSingleton usuarioSingleton;
+    private final ProjetoUsuarioCompartilhadoRepository projetoUsuarioCompartilhadoRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public DetalheProjetoPresenter(DetalheProjetoView view, ProjetoSingleton projetoSingleton, int projetoId) {
         this.view = view;
         this.projetoSingleton = projetoSingleton;
         this.projetoId = projetoId;
         this.estimaService = new EstimaProjetoService();
+        this.usuarioSingleton = UsuarioSingleton.getInstance();
+        this.projetoUsuarioCompartilhadoRepository = new ProjetoUsuarioCompartilhadoRepository();
+        this.usuarioRepository = new UsuarioRepository();
 
         this.projetoSingleton.addObserver(this);
         carregarDetalhesProjeto();
@@ -33,49 +46,89 @@ public class DetalheProjetoPresenter implements Observer {
     }
 
     private void carregarCabecalho(Projeto projeto) {
-//        String tiposConcatenados = projeto.getPerfis().stream()
-//                .collect(Collectors.joining(", "));
-//
-//        view.atualizarCabecalho(
-//                projeto.getNome(),
-//                projeto.getCriador(),
-//                projeto.getDataCriacao(),
-//                tiposConcatenados,
-//                projeto.getStatus()
-//        );
+        String nomeCriador = usuarioSingleton.getUsuario().getNome();
+        if (projetoUsuarioCompartilhadoRepository.verificarSeEhCriador(usuarioSingleton.getUsuario().getId(), projeto.getId())) {
+            nomeCriador = usuarioSingleton.getUsuario().getNome();
+        } else {
+            List<Integer> usuariosDoProjeto = projetoUsuarioCompartilhadoRepository.obterUsuariosDoProjeto(projeto.getId());
+
+            if (!usuariosDoProjeto.isEmpty()) {
+                int idDono = usuariosDoProjeto.get(0);
+                Optional<Usuario> usuarioDonoOpt = usuarioRepository.buscarPorId(idDono);
+                nomeCriador = usuarioDonoOpt.isPresent() ? usuarioDonoOpt.get().getNome() : "Desconhecido";
+            } else {
+                nomeCriador = "Desconhecido";
+            }
+        }
+        
+        StringBuilder plataformasBuilder = new StringBuilder();
+        
+        if (!projeto.getFuncionalidadesAndroid().isEmpty()) {
+            plataformasBuilder.append("Android ");
+        } 
+        else if (!projeto.getFuncionalidadesWebBackend().isEmpty()) {
+            plataformasBuilder.append("Web/Backend ");
+        } 
+        else if (!projeto.getFuncionalidadesIOS().isEmpty()) {
+            plataformasBuilder.append("iOS");
+        }
+
+        String PlataformasFinal = plataformasBuilder.toString();
+
+        view.atualizarCabecalho(
+            projeto.getNome(),
+            nomeCriador,
+            projeto.getDataCriacao(),
+            PlataformasFinal,
+            projeto.getStatus()
+        );
     }
 
     private void carregarDetalhes(Projeto projeto) {
-//        Object[][] dadosTabela = projeto.getFuncionalidadesEscolhidas()
-//                .entrySet()
-//                .stream()
-//                .map(entry -> {
-//                    String nomeFuncionalidade = entry.getKey();
-//                    int dias = entry.getValue();
-//                    double valor = estimaService.calcularValorUnitario(projeto.getPerfis().get(0), dias);
-//                    return new Object[]{nomeFuncionalidade, dias, String.format("R$ %.2f", valor)};
-//                })
-//                .toArray(Object[][]::new);
-//
-//        double valorTotal = calcularValorTotal(projeto);
-//        view.atualizarTabela(dadosTabela, valorTotal);
+        Map<Integer, Object[]> funcionalidades = new HashMap<>();
+
+        for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
+            funcionalidades.put(funcionalidade.getId(), new Object[]{"WEB/BACKEND", funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+        }
+        for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
+            funcionalidades.put(funcionalidade.getId(), new Object[]{"IOS", funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+        }
+        for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
+            funcionalidades.put(funcionalidade.getId(), new Object[]{"ANDROID", funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+        }
+
+        Object[][] dadosTabela = new Object[funcionalidades.size()][3];
+        int i = 0;
+
+        for (Map.Entry<Integer, Object[]> entry : funcionalidades.entrySet()) {
+            int id = entry.getKey();
+            String tipoProjeto = (String) entry.getValue()[0];
+            String nome = (String) entry.getValue()[1];
+            int horasEstimadas = (Integer) entry.getValue()[2];
+
+            double valorUnitario = estimaService.calcularValorUnitario(tipoProjeto, horasEstimadas);
+
+            dadosTabela[i][0] = nome;
+            dadosTabela[i][1] = horasEstimadas;
+            dadosTabela[i][2] = valorUnitario;
+            i++;
+        }
+
+    /*  Preciso usar isso de alguma maneira  
+        calcularCustosAdicionais(double custoHardware, double custoSoftware, double custoRiscos, double custoGarantia, double fundoReserva, double outrosCustos)
+
+        calcularImpostos(double subtotal, double percentualImpostos)
+    
+        calcularLucro(double subtotalComImpostos, double percentualLucro)
+
+        calcularPrecoFinal(double subtotalComImpostos, double lucro)
+        public double calcularPrecoFinal(double subtotalComImpostos, double lucro)*/
+    
+        view.atualizarTabela(dadosTabela, projeto.calcularPrecoFinal(50.0));
     }
-
-    private double calcularValorTotal(Projeto projeto) {
-//        return projeto.getFuncionalidadesEscolhidas()
-//                .entrySet()
-//                .stream()
-//                .mapToDouble(entry -> {
-//                    int dias = entry.getValue();
-//                    return estimaService.calcularValorUnitario(projeto.getPerfis().get(0), dias);
-//                })
-//                .sum();
-
-        return 0.0;
-    }
-
+    
     @Override
     public void update(List<Projeto> projetos) {
-        carregarDetalhesProjeto();
+         carregarDetalhesProjeto();
     }
 }
