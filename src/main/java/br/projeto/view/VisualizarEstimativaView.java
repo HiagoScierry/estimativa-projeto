@@ -25,6 +25,7 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane4 = new javax.swing.JScrollPane();
         tblValoresFinais = new javax.swing.JTable();
@@ -37,7 +38,7 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
         txtPlataformas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         tblValoresFinais.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblValoresFinais.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -83,7 +84,17 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
             tblValoresFinais.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1072, 485, 564, 182));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 542;
+        gridBagConstraints.ipady = 156;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(18, 10, 40, 48);
+        getContentPane().add(jScrollPane4, gridBagConstraints);
 
         tblTaxasExtras.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblTaxasExtras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -133,11 +144,27 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
             tblTaxasExtras.getColumnModel().getColumn(1).setPreferredWidth(20);
         }
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1072, 141, 564, 326));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 542;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(14, 10, 0, 48);
+        getContentPane().add(jScrollPane3, gridBagConstraints);
 
         lblVisualizarEstimativa.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblVisualizarEstimativa.setText("VISUALIZAR ESTIMATIVA DE PROJETO");
-        getContentPane().add(lblVisualizarEstimativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 31, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(31, 228, 0, 0);
+        getContentPane().add(lblVisualizarEstimativa, gridBagConstraints);
 
         tblFuncionalidadesProjeto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblFuncionalidadesProjeto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -184,15 +211,39 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
             tblFuncionalidadesProjeto.getColumnModel().getColumn(2).setPreferredWidth(20);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 141, 977, 526));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 955;
+        gridBagConstraints.ipady = 500;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(14, 50, 40, 0);
+        getContentPane().add(jScrollPane1, gridBagConstraints);
 
         lblPlataformas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblPlataformas.setText("Plataformas:");
-        getContentPane().add(lblPlataformas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 98, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(35, 50, 0, 0);
+        getContentPane().add(lblPlataformas, gridBagConstraints);
 
         txtPlataformas.setEditable(false);
         txtPlataformas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        getContentPane().add(txtPlataformas, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 95, 238, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 170;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(32, 13, 0, 0);
+        getContentPane().add(txtPlataformas, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
