@@ -6,7 +6,6 @@ import br.projeto.model.Projeto;
 import java.util.Map;
 
 public class EstimaProjetoService {
-    private static final int HORAS_TRABALHADAS_POR_DIA = 8;
     private static final double VALOR_DIARIA_DESENVOLVIMENTO = 450.0;
     private static final double VALOR_DIARIA_GERENCIA = 300.0;
     private static final double VALOR_DIARIA_UI_UX = 550.0;
@@ -33,11 +32,11 @@ public class EstimaProjetoService {
     }
 
     public int calcularDiasFuncionalidades(Map<String, Integer> funcionalidadesEscolhidas) {
-        int totalHoras = 0;
-        for (Integer horas : funcionalidadesEscolhidas.values()) {
-            totalHoras += horas;
+        int totalDias = 0;
+        for (Integer dias : funcionalidadesEscolhidas.values()) {
+            totalDias += dias;
         }
-        return (int) Math.ceil((double) totalHoras / HORAS_TRABALHADAS_POR_DIA);
+        return totalDias;
     }
 
     public double calcularCustosAdicionais(double custoHardware, double custoSoftware, double custoRiscos, double custoGarantia, double fundoReserva, double outrosCustos) {
@@ -58,5 +57,17 @@ public class EstimaProjetoService {
 
     public double calcularMediaPorMes(double precoFinal, double meses) {
         return precoFinal / meses;
+    }
+
+    public double getValorDiariaDesenvolvimento(){
+        return VALOR_DIARIA_DESENVOLVIMENTO;
+    }
+
+    public double getValorDiariaGerenciamento(){
+        return VALOR_DIARIA_GERENCIA;
+    }
+
+    public double getValorDiariaUiUx(){
+        return VALOR_DIARIA_UI_UX;
     }
 }
