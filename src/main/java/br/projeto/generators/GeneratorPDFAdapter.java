@@ -2,12 +2,12 @@ package br.projeto.generators;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
+import br.projeto.model.*;
 
 public class GeneratorPDFAdapter extends AGeneratorAdapter {
 
@@ -16,7 +16,7 @@ public class GeneratorPDFAdapter extends AGeneratorAdapter {
     }
 
     @Override
-    public void generator(String nome, ArrayList<String[]> conteudo) {
+    public void generator(String nome, Projeto projeto) {
         Document documentPDF = new Document();
 
         try {
@@ -24,17 +24,31 @@ public class GeneratorPDFAdapter extends AGeneratorAdapter {
 
             documentPDF.open();
 
-            // Adicionar o conteúdo
-            for (String[] linha : conteudo) {
-                StringBuilder linhaFormatada = new StringBuilder();
-                for (int i = 0; i < linha.length; i++) {
-                    linhaFormatada.append(linha[i]);
-                    if (i < linha.length - 1) {
-                        linhaFormatada.append(" ");
-                    }
-                }
-                documentPDF.add(new Paragraph(linhaFormatada.toString()));
+            documentPDF.add(new Paragraph("Nome: " + projeto.getNome()));
+            documentPDF.add(new Paragraph("Data de Criação: " + projeto.getDataCriacao()));
+            documentPDF.add(new Paragraph("Percentual de Impostos: " + projeto.getPercentualImpostos()));
+            documentPDF.add(new Paragraph("Percentual de Lucro: " + projeto.getPercentualLucro()));
+
+            documentPDF.add(new Paragraph("Funcionalidades Web/Backend:"));
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
+                documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
             }
+            
+            documentPDF.add(new Paragraph("Funcionalidades iOS:"));
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
+                documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
+            }
+
+            documentPDF.add(new Paragraph("Funcionalidades Android:"));
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
+                documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
+            }
+            
+            documentPDF.add(new Paragraph("Custos Adicionais:"));
+            for (CustoAdicional custo : projeto.getCustosAdicionais()) {
+                documentPDF.add(new Paragraph("- " + custo.getDescricao() + " (Valor: " + custo.getValor() + ")"));
+            }
+
 
         } catch (DocumentException e) {
             e.printStackTrace();

@@ -25,7 +25,6 @@ public class CompartilharProjetoCommand implements ProjetoCommand {
         if (projetoId == null) {
             throw new IllegalStateException("O Id do projeto não foi definido para este comando.");
         }
-        System.out.println("Executando CompartilharProjetoCommand para o projeto ID: " + projetoId); // Debug
         projetoSingleton.setIdProjetoAtual(projetoId);
 
         String tituloJanela = "Compartilhar";
