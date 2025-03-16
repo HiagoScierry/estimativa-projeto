@@ -21,10 +21,10 @@ public class EstimaProjetoService {
 
     public double calcularValorUnitario(String tipoProjeto, int dias) {
         switch (tipoProjeto) {
-            case "Web/Back-end":
-            case "Android":
+            case "WEB/BACKEND":
+            case "ANDROID":
                 return dias * VALOR_DIARIA_DESENVOLVIMENTO;
-            case "iOS":
+            case "IOS":
                 return dias * VALOR_DIARIA_UI_UX;
             default:
                 throw new IllegalArgumentException("Tipo de projeto desconhecido: " + tipoProjeto);

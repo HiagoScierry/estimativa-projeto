@@ -66,7 +66,7 @@ public final class PrincipalPresenter implements Observer {
         comandos.put("Elaborar estimativa", new CriarEstimativaProjetoCommand(view.getDesktop(), "Elaborar estimativa"));
         comandos.put("Visualizar estimativa", new VisualizarEstimativaProjetoCommand(view.getDesktop(), "Visualizar estimativa"));
         //comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(projetoSingleton, view.getDesktop()));
-        comandos.put("Exportar projeto de estimativa", new MostrarMensagemProjetoCommand("Exportar ainda não implementado"));
+        //comandos.put("Exportar projeto de estimativa", new ExportarProjetoCommand(projetoSingleton));
         comandos.put("Novo projeto", new CriarProjetoProjetoCommand(projetoSingleton));
         comandos.put("Configurações", new AbrirConfiguracaoProjetoCommand(view.getDesktop(), "Configurações"));
         comandos.put("Excluir projeto", new ExcluirProjetoProjetoCommand(projetoSingleton));
@@ -101,6 +101,7 @@ public final class PrincipalPresenter implements Observer {
         int totalProjetos = 1;
 
         for (final Projeto projeto : listaProjetos) {
+            ExportarProjetoCommand cmdExportar = new ExportarProjetoCommand(projetoSingleton);
             CompartilharProjetoCommand cmdCompartilhar = new CompartilharProjetoCommand(projetoSingleton, view.getDesktop());
             AbrirDetalhesProjetoProjetoCommand cmdDetalhes = new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()) {
                 @Override
@@ -116,6 +117,8 @@ public final class PrincipalPresenter implements Observer {
                     }
                 }
             };
+            
+            cmdExportar.setProjetoId(projeto.getId());
             cmdDetalhes.setProjetoId(projeto.getId());
             cmdDetalhes.setProjetoNome(projeto.getNome());
             cmdCompartilhar.setProjetoId(projeto.getId());
@@ -142,7 +145,8 @@ public final class PrincipalPresenter implements Observer {
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", comandos.get("Visualizar estimativa")));
                 //noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", comandos.get("Compartilhar projeto de estimativa")));
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", cmdCompartilhar)); //gambiarra
-                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Exportar projeto de estimativa", "action", comandos.get("Exportar projeto de estimativa")));
+                //noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Exportar projeto de estimativa", "action", comandos.get("Exportar projeto de estimativa")));
+                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Exportar projeto de estimativa", "action", cmdExportar));
             } else {
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", comandos.get("Visualizar estimativa")));
             }

@@ -1,6 +1,6 @@
 package br.projeto.generators;
 
-import java.util.ArrayList;
+import br.projeto.model.Projeto;
 
 public abstract class AGeneratorAdapter {
     protected String caminho;
@@ -9,5 +9,5 @@ public abstract class AGeneratorAdapter {
         this.caminho = caminho;
     }
 
-    public abstract void generator(String nome, ArrayList<String[]> conteudo);
+    public abstract void generator(String nome, Projeto projeto);
 }

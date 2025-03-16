@@ -45,11 +45,11 @@ public class ProjetoFuncionalidadeSQLiteDao implements IProjetoFuncionalidadeDAO
         String sql = "SELECT f.id, f.nome, f.horasEstimadas, f.plataforma "
                    + "FROM Funcionalidade f "
                    + "JOIN ProjetoFuncionalidade pf ON f.id = pf.funcionalidadeId "
-                   + "WHERE pf.projetoId = ? AND f.tipo = ?";
+                   + "WHERE pf.projetoId = ? AND f.plataforma = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, projetoId);
-            stmt.setString(2, tipo);
+            stmt.setString(2, tipo); 
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

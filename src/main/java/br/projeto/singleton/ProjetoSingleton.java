@@ -98,7 +98,6 @@ public class ProjetoSingleton implements Subject {
     }
     
     public void setIdProjetoAtual(int idProjeto){
-        System.out.println("id que chegou na singleton: " + idProjeto+"\n");
         this.idProjetoAtual = idProjeto;
     }
     
