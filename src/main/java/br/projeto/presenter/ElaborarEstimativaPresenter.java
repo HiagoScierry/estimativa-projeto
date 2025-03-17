@@ -42,6 +42,7 @@ public class ElaborarEstimativaPresenter implements Observer {
         this.projetoRepository = new ProjetoRepository();
         configurarEventos();
         this.projetoSingleton.addObserver(this);
+
     }
 
     private void configurarEventos() {
@@ -77,11 +78,11 @@ public class ElaborarEstimativaPresenter implements Observer {
         view.getTblPrecosPorDiaTrabalho().setValueAt("15%", 9, 2);
         view.getTblPrecosPorDiaTrabalho().setValueAt("15%", 10, 2);
 
-
     }
-
     public void setProjetoId(int projetoId) {
         this.projetoId = projetoId;
+        view.getTxtNomeProjeto().setText(this.projetoRepository.buscarPorId(projetoId).getNome());
+
     }
 
     private void condicaoLinhasParentes(MouseEvent e, int linhaAlterada) {
@@ -382,8 +383,13 @@ public class ElaborarEstimativaPresenter implements Observer {
         projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
         projeto.setCustosAdicionais(custoAdicionals);
         projeto.setEstimativa(estimativa);
+        projeto.setStatus("Estimado");
 
-        projetoRepository.atualizarProjeto(projeto);
+        projeto.setNome(view.getTxtNomeProjeto().getText());
+
+        projetoSingleton.atualizarProjeto(projeto);
+
+        JOptionPane.showMessageDialog(view, "Estimativa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
 

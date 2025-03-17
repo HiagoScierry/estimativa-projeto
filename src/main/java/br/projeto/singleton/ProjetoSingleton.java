@@ -52,7 +52,11 @@ public class ProjetoSingleton implements Subject {
     public void adicionarProjeto(Projeto projeto){
         projetos.add(projeto);
         projetoRepository.adicionarProjeto(projeto);
-//        projetoUsuarioCompartilhadoRepository.compartilharProjeto(projeto.getId(), usuarioSingleton.getUsuario().getId(), true);
+        notifyObservers();
+    }
+
+    public void atualizarProjeto(Projeto projeto){
+        projetoRepository.atualizarProjeto(projeto);
         notifyObservers();
     }
 
