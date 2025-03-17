@@ -20,6 +20,7 @@ public class FecharJanelasRelacionadasCommand implements WindowCommand {
     public void execute() {
         List<String> nomesProjetos = new ArrayList<>();
         for (Projeto projeto : listaProjetos) {
+            System.out.println(projeto.getNome());
             nomesProjetos.add(projeto.getNome());
         }
 
@@ -27,6 +28,7 @@ public class FecharJanelasRelacionadasCommand implements WindowCommand {
         for (JInternalFrame quadroInterno : quadrosInternos) {
             if (quadroInterno.getTitle().startsWith("Detalhes do Projeto: ")) {
                 String nomeProjeto = quadroInterno.getTitle().replace("Detalhes do Projeto: ", "");
+                System.out.println(nomeProjeto);
                 if (!nomesProjetos.contains(nomeProjeto)) {
                     quadroInterno.dispose();
                 }

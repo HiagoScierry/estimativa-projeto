@@ -57,6 +57,7 @@ public class ProjetoSingleton implements Subject {
 
     public void atualizarProjeto(Projeto projeto){
         projetoRepository.atualizarProjeto(projeto);
+        setProjetos(carregarProjetosRepository());
         notifyObservers();
     }
 
@@ -96,6 +97,8 @@ public class ProjetoSingleton implements Subject {
 
     @Override
     public void notifyObservers() {
+
+
         for (Observer observer : observers) {
             observer.update(projetos);
         }
