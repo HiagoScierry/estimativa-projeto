@@ -20,25 +20,7 @@ public class Projeto {
     private double percentualImpostos;
     private double percentualLucro;
 
-    public Projeto(int id, String nome, String dataCriacao, String status, boolean compartilhado,
-                   List<Perfil> perfis, List<Funcionalidade> funcionalidadesWebBackend,
-                   List<Funcionalidade> funcionalidadesIOS, List<Funcionalidade> funcionalidadesAndroid, 
-                   List<CustoAdicional> custosAdicionais, NivelUI nivelUI, Estimativa estimativa, double percentualImpostos, double percentualLucro) {
-        this.id = id;
-        this.nome = nome;
-        this.dataCriacao = dataCriacao;
-        this.status = status;
-        this.compartilhado = compartilhado;
-        this.perfis = perfis;
-        this.funcionalidadesWebBackend = funcionalidadesWebBackend;
-        this.funcionalidadesIOS = funcionalidadesIOS;
-        this.funcionalidadesAndroid = funcionalidadesAndroid;
-        this.custosAdicionais = custosAdicionais;
-        this.nivelUI = nivelUI;
-        this.estimativa = estimativa;
-        this.percentualImpostos = percentualImpostos;
-        this.percentualLucro = percentualLucro;
-    }
+    public Projeto() {}
 
     // Getters e Setters
     public int getId() { return id; }

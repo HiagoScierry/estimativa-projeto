@@ -2,6 +2,7 @@
 package br.projeto.dao.h2;
 
 import br.projeto.config.database.h2.H2Connection;
+import br.projeto.dao.DaoUtil;
 import br.projeto.dao.interfaces.IPerfilDAO;
 import br.projeto.model.Funcionalidade;
 import br.projeto.model.Perfil;
@@ -19,11 +20,11 @@ import java.util.List;
 public class PerfilH2Dao implements IPerfilDAO {
 
     private Connection connection;
-    private FuncinamentoH2Dao funcionalidadeDao;
+    private DaoUtil daoUtil;
 
     public PerfilH2Dao() throws Exception {
         this.connection = H2Connection.getConexao();
-        this.funcionalidadeDao = new FuncinamentoH2Dao();
+        this.daoUtil = DaoUtil.getInstance();
     }
 
     @Override
@@ -35,7 +36,6 @@ public class PerfilH2Dao implements IPerfilDAO {
             stmt.executeUpdate();
 
             int perfilId = getPerfilIdByNome(perfil.getNome());
-            funcionalidadeDao.inserirFuncionalidades(perfil.getFuncionalidades(), perfilId);
         } catch (SQLException e) {
             System.out.println("Erro ao inserir perfil: " + e.getMessage());
         }

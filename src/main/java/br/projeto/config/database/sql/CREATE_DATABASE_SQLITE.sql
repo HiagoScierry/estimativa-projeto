@@ -34,14 +34,6 @@ CREATE TABLE IF NOT EXISTS NivelUI (
     percentual REAL NOT NULL
 );
 
---Tabela Estimativa 
-CREATE TABLE IF NOT EXISTS Estimativa (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    custoTotal REAL NOT NULL,
-    tempoTotal INTEGER NOT NULL,
-    precoFinal REAL NOT NULL
-);
-
 -- Tabela Projeto
 CREATE TABLE IF NOT EXISTS Projeto (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,7 +50,7 @@ CREATE TABLE IF NOT EXISTS Projeto (
 );
 
 --Tabela Estimativa
-CREATE TABLE Estimativa (
+CREATE TABLE IF NOT EXISTS Estimativa (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     projetoId INTEGER NOT NULL,
     custoTotal REAL NOT NULL,

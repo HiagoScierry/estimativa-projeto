@@ -92,35 +92,31 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Optional<Usuario> criador = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("criadorId"));
-                Optional<Usuario> compartilhadoPor = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("compartilhadoPorId"));
+                Projeto projeto = new Projeto();
+
+                projeto.setId(rs.getInt("id"));
+                projeto.setNome(rs.getString("nome"));
+                projeto.setDataCriacao(rs.getString("dataCriacao"));
+                projeto.setStatus(rs.getString("status"));
+                projeto.setCompartilhado(rs.getBoolean("compartilhado"));
+
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                projeto.setNivelUI(nivelUI);
                 Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
+                projeto.setEstimativa(estimativa);
+                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
+                projeto.setPerfis(perfis);
+                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
+                List<Funcionalidade> funcionalidadesIOS =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
+                List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
 
-                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(id);
+                projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
+                projeto.setFuncionalidadesIOS(funcionalidadesIOS);
+                projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
 
-                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(id, "WEB/BACKEND");
-                List<Funcionalidade> funcionalidadesIOS = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(id, "IOS");
-                List<Funcionalidade> funcionalidadesAndroid = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(id, "ANDROID");
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                projeto.setCustosAdicionais(custosAdicionais);
 
-                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(id);
-
-                Projeto projeto = new Projeto(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("dataCriacao"),
-                    rs.getString("status"),
-                    rs.getBoolean("compartilhado"),
-                    perfis,
-                    funcionalidadesWebBackend,
-                    funcionalidadesIOS,
-                    funcionalidadesAndroid,
-                    custosAdicionais,
-                    nivelUI,
-                    estimativa,
-                    rs.getDouble("percentualImpostos"),
-                    rs.getDouble("percentualLucro")
-                );
                 return projeto;
             }
         } catch (SQLException e) {
@@ -138,33 +134,32 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                Projeto projeto = new Projeto();
+
+                projeto.setId(rs.getInt("id"));
+                projeto.setNome(rs.getString("nome"));
+                projeto.setDataCriacao(rs.getString("dataCriacao"));
+                projeto.setStatus(rs.getString("status"));
+                projeto.setCompartilhado(rs.getBoolean("compartilhado"));
+
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                projeto.setNivelUI(nivelUI);
                 Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
-
+                projeto.setEstimativa(estimativa);
                 List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
-
+                projeto.setPerfis(perfis);
                 List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
                 List<Funcionalidade> funcionalidadesIOS =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
                 List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
 
-                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
+                projeto.setFuncionalidadesIOS(funcionalidadesIOS);
+                projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
 
-                Projeto projeto = new Projeto(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("dataCriacao"),
-                    rs.getString("status"),
-                    rs.getBoolean("compartilhado"),
-                    perfis,
-                    funcionalidadesWebBackend,
-                    funcionalidadesIOS,
-                    funcionalidadesAndroid,
-                    custosAdicionais,
-                    nivelUI,
-                    estimativa,
-                    rs.getDouble("percentualImpostos"),
-                    rs.getDouble("percentualLucro")
-                );
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                projeto.setCustosAdicionais(custosAdicionais);
+
+
                 projetos.add(projeto);
             }
         } catch (Exception e) {
@@ -187,33 +182,32 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             stmt.setInt(1, usuarioId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                Projeto projeto = new Projeto();
+
+                projeto.setId(rs.getInt("id"));
+                projeto.setNome(rs.getString("nome"));
+                projeto.setDataCriacao(rs.getString("dataCriacao"));
+                projeto.setStatus(rs.getString("status"));
+                projeto.setCompartilhado(rs.getBoolean("compartilhado"));
+
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                projeto.setNivelUI(nivelUI);
                 Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
-
+                projeto.setEstimativa(estimativa);
                 List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
-
+                projeto.setPerfis(perfis);
                 List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
-                List<Funcionalidade> funcionalidadesIOS = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
-                List<Funcionalidade> funcionalidadesAndroid = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
+                List<Funcionalidade> funcionalidadesIOS =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
+                List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
+
+                projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
+                projeto.setFuncionalidadesIOS(funcionalidadesIOS);
+                projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
 
                 List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                projeto.setCustosAdicionais(custosAdicionais);
 
-                Projeto projeto = new Projeto(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("dataCriacao"),
-                    rs.getString("status"),
-                    rs.getBoolean("compartilhado"),
-                    perfis,
-                    funcionalidadesWebBackend,
-                    funcionalidadesIOS,
-                    funcionalidadesAndroid,
-                    custosAdicionais,
-                    nivelUI,
-                    estimativa,
-                    rs.getDouble("percentualImpostos"),
-                    rs.getDouble("percentualLucro")
-                );
+
                 projetos.add(projeto);
             }
         } catch (Exception e) {

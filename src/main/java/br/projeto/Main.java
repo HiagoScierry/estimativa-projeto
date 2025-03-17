@@ -21,7 +21,7 @@ public class Main {
 
 
         String bancoDados = dotenv.get("BANCO_DE_DADOS");
-        if ("SQLite".equals(bancoDados)) {
+        if ("SQLITE".equals(bancoDados)) {
             try {
                 DaoUtil.configureInstance(new DaoSQLiteFactory());
             } catch (Exception ex) {
