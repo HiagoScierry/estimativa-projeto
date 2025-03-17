@@ -284,65 +284,96 @@ public class ElaborarEstimativaPresenter implements Observer {
         List<CustoAdicional> custoAdicionals = new ArrayList<CustoAdicional>();
         NivelUI nivelUI = new NivelUI(0, "", 0.0);
 
+        int rowCount = view.getTblEstimativaProjeto().getRowCount();
+        int columnCount = view.getTblEstimativaProjeto().getColumnCount();
 
-        for (int i = 0; i < view.getTblEstimativaProjeto().getRowCount(); i++) {
-            String funcionalidadeNome = view.getTblEstimativaProjeto().getValueAt(i, 1).toString();
-            boolean rowMarked = view.getTblEstimativaProjeto().getValueAt(i, 0).equals(true);
+        for (int i = 0; i < rowCount; i++) {
+            String funcionalidadeNome = "";
+            if (columnCount > 1) {
+                funcionalidadeNome = view.getTblEstimativaProjeto().getValueAt(i, 1).toString();
+            }
+            boolean rowMarked = view.getTblEstimativaProjeto().getValueAt(i, 0) != null ? true : false;
             Funcionalidade funcionalidade = new Funcionalidade(0, funcionalidadeNome, 0, "");
 
-            if(i > 2 && i < 6){
+            if (i > 2 && i < 6 && columnCount > 5 && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
                 nivelUI.setNome(view.getTblEstimativaProjeto().getValueAt(i, 1).toString());
-                nivelUI.setPercentual((Double) view.getTblEstimativaProjeto().getValueAt(i, 5));
+                System.out.println(view.getTblEstimativaProjeto().getValueAt(i, 5).toString());
+                nivelUI.setPercentual(Double.parseDouble(view.getTblEstimativaProjeto().getValueAt(i, 5).toString().trim()));
             }
 
-
-            if(i > 5){
-                if(rowMarked && webBackend) {
-                    funcionalidade.setHorasEstimadas((Integer) view.getTblEstimativaProjeto().getValueAt(i, 2));
+            if (i > 5) {
+                // Web Backend
+                if (rowMarked && webBackend && columnCount > 2) {
+                    String valorWeb = view.getTblEstimativaProjeto().getValueAt(i, 2).toString().trim();
+                    if (valorWeb.contains("-")) {
+                        funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                    } else {
+                        try {
+                            funcionalidade.setHorasEstimadas(Integer.parseInt(valorWeb));
+                        } catch (NumberFormatException e) {
+                            funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                        }
+                    }
                     funcionalidade.setPlataforma("Web Backend");
                     funcionalidadesWebBackend.add(funcionalidade);
                 }
 
-                if (rowMarked && ios) {
-                    funcionalidade.setHorasEstimadas((Integer) view.getTblEstimativaProjeto().getValueAt(i, 3));
+                // iOS
+                if (rowMarked && ios && columnCount > 3) {
+                    String valorIOS = view.getTblEstimativaProjeto().getValueAt(i, 3).toString().trim();
+                    if (valorIOS.contains("-")) {
+                        funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                    } else {
+                        try {
+                            funcionalidade.setHorasEstimadas(Integer.parseInt(valorIOS));
+                        } catch (NumberFormatException e) {
+                            funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                        }
+                    }
                     funcionalidade.setPlataforma("IOS");
                     funcionalidadesIOS.add(funcionalidade);
-
                 }
 
-                if (rowMarked && android) {
-                    funcionalidade.setHorasEstimadas((Integer) view.getTblEstimativaProjeto().getValueAt(i, 4));
+                // Android
+                if (rowMarked && android && columnCount > 4) {
+                    String valorAndroid = view.getTblEstimativaProjeto().getValueAt(i, 4).toString().trim();
+                    if (valorAndroid.contains("-")) {
+                        funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                    } else {
+                        try {
+                            funcionalidade.setHorasEstimadas(Integer.parseInt(valorAndroid));
+                        } catch (NumberFormatException e) {
+                            funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                        }
+                    }
                     funcionalidade.setPlataforma("Android");
                     funcionalidadesAndroid.add(funcionalidade);
                 }
             }
         }
 
-
+        // Processando custos adicionais
         for (int i = 3; i < view.getTblPrecosPorDiaTrabalho().getRowCount() - 2; i++) {
             CustoAdicional custoAdicional = new CustoAdicional(0, (String) view.getTblPrecosPorDiaTrabalho().getValueAt(i, 1), (Double) view.getTblPrecosPorDiaTrabalho().getValueAt(i, 2));
             custoAdicionals.add(custoAdicional);
         }
 
-        double imposto = Double.parseDouble(view.getTblValoresFinais().getValueAt(9, 2).toString().replace("%",""));
-        double lucro = Double.parseDouble(view.getTblValoresFinais().getValueAt(10, 2).toString().replace("%", ""));
+        // Processando valores de impostos e lucro
+        double imposto = Double.parseDouble(view.getTblPrecosPorDiaTrabalho().getValueAt(9, 2).toString().replace("%", ""));
+        double lucro = Double.parseDouble(view.getTblPrecosPorDiaTrabalho().getValueAt(10, 2).toString().replace("%", ""));
 
-        projeto.setPercentualImpostos(imposto/100);
-        projeto.setPercentualLucro(lucro/100);
+        projeto.setPercentualImpostos(imposto / 100);
+        projeto.setPercentualLucro(lucro / 100);
 
         projeto.setNivelUI(nivelUI);
         projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
         projeto.setFuncionalidadesIOS(funcionalidadesIOS);
         projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
 
-
-
         projetoRepository.atualizarProjeto(projeto);
-
     }
 
 
-    
     @Override
     public void update(List<Projeto> projetos){}
     
