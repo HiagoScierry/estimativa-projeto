@@ -63,7 +63,7 @@ public class DetalheProjetoPresenter implements Observer {
         }
         
         StringBuilder plataformasBuilder = new StringBuilder();
-        
+
         if (!projeto.getFuncionalidadesAndroid().isEmpty()) {
             plataformasBuilder.append("Android ");
         } 
@@ -76,13 +76,13 @@ public class DetalheProjetoPresenter implements Observer {
             plataformasBuilder.append("iOS");
         }
 
-        String PlataformasFinal = plataformasBuilder.toString();
+        String plataformasFinal = plataformasBuilder.toString();
         
         view.atualizarCabecalho(
             projeto.getNome(),
             nomeCriador,
             projeto.getDataCriacao(),
-            PlataformasFinal,
+            plataformasFinal,
             projeto.getStatus()
         );
     }
@@ -90,14 +90,16 @@ public class DetalheProjetoPresenter implements Observer {
     private void carregarDetalhes(Projeto projeto) {
         Map<Integer, Object[]> funcionalidades = new HashMap<>();
 
+        // Adicionar funcionalidade na lista com o prefixo da plataforma antes do nome
+
         for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
-            funcionalidades.put(funcionalidade.getId(), new Object[]{"WEB/BACKEND", funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+            funcionalidades.put(funcionalidade.getId(), new Object[]{"WEB/BACKEND", funcionalidade.getPlataforma()+ " : " + funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
         }
         for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
-            funcionalidades.put(funcionalidade.getId(), new Object[]{"IOS", funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+            funcionalidades.put(funcionalidade.getId(), new Object[]{"IOS", funcionalidade.getPlataforma()+ " : " + funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
         }
         for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
-            funcionalidades.put(funcionalidade.getId(), new Object[]{"ANDROID", funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+            funcionalidades.put(funcionalidade.getId(), new Object[]{"ANDROID", funcionalidade.getPlataforma()+ " : " + funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
         }
 
         Object[][] dadosTabela = new Object[funcionalidades.size()][3];

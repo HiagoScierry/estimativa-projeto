@@ -154,7 +154,12 @@ public final class PrincipalPresenter implements Observer {
             adicionarMenuContextual(projeto, noProjeto);
 
             if (ehCriador) {
-                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Elaborar estimativa", "action", cmdElaborarEstimativa));
+
+                if(projeto.getEstimativa() == null){
+                    noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Elaborar estimativa", "action", cmdElaborarEstimativa));
+                }
+
+
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", cmdVisualizar));
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", cmdCompartilhar));
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Exportar projeto de estimativa", "action", cmdExportar));

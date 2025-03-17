@@ -38,11 +38,8 @@ public class CriarProjetoProjetoCommand implements ProjetoCommand {
         projeto.setFuncionalidadesIOS(funcionalidades);
         projeto.setFuncionalidadesWebBackend(funcionalidades);
         projeto.setNivelUI(nivelUI);
-        projeto.setEstimativa(estimativa);
         projeto.setPerfis(perfis);
         projeto.setCustosAdicionais(custoAdicional);
-
-
 
         projetoSingleton.adicionarProjeto(projeto);
 

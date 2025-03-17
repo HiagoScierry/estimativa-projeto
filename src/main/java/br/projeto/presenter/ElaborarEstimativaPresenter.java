@@ -306,7 +306,7 @@ public class ElaborarEstimativaPresenter implements Observer {
 
             if (i > 5) {
                 // Web Backend
-                if (rowMarked && webBackend && view.getTblEstimativaProjeto().getValueAt(i, 2) != null) {
+                if (rowMarked && webBackend) {
                     String valorWeb = view.getTblEstimativaProjeto().getValueAt(i, 2).toString().trim();
                     if (valorWeb.contains("-")) {
                         funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
@@ -322,7 +322,7 @@ public class ElaborarEstimativaPresenter implements Observer {
                 }
 
                 // iOS
-                if (rowMarked && ios && view.getTblEstimativaProjeto().getValueAt(i, 3) != null) {
+                if (rowMarked && ios) {
                     String valorIOS = view.getTblEstimativaProjeto().getValueAt(i, 3).toString().trim();
                     if (valorIOS.contains("-")) {
                         funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
@@ -338,7 +338,7 @@ public class ElaborarEstimativaPresenter implements Observer {
                 }
 
                 // Android
-                if (rowMarked && android && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
+                if (rowMarked && android) {
                     String valorAndroid = view.getTblEstimativaProjeto().getValueAt(i, 4).toString().trim();
                     if (valorAndroid.contains("-")) {
                         funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
