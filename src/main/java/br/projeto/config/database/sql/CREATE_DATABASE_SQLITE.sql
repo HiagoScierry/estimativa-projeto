@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Perfil (
 -- Tabela Funcionalidade
 CREATE TABLE IF NOT EXISTS Funcionalidade (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL UNIQUE,
+    nome TEXT NOT NULL,
     horasEstimadas INTEGER NOT NULL,
     plataforma TEXT NOT NULL CHECK (plataforma IN ('WEB/BACKEND', 'IOS', 'ANDROID'))
 );
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS CustoAdicional (
 -- Tabela NivelUI
 CREATE TABLE IF NOT EXISTS NivelUI (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL UNIQUE,
+    nome TEXT NOT NULL,
     percentual REAL NOT NULL
 );
 
@@ -52,11 +52,9 @@ CREATE TABLE IF NOT EXISTS Projeto (
 --Tabela Estimativa
 CREATE TABLE IF NOT EXISTS Estimativa (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    projetoId INTEGER NOT NULL,
     custoTotal REAL NOT NULL,
     tempoTotal INTEGER NOT NULL,
-    precoFinal REAL NOT NULL,
-    FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE
+    precoFinal REAL NOT NULL
 );
 
 -- Tabela ProjetoUsuarioCompartilhado (Relação muitos-para-muitos entre Projeto e Usuario)

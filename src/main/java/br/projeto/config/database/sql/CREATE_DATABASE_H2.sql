@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Perfil (
 -- Tabela Funcionalidade
 CREATE TABLE IF NOT EXISTS Funcionalidade (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL UNIQUE,
+    nome VARCHAR(255) NOT NULL ,
     horasEstimadas INT NOT NULL,
     plataforma VARCHAR(255) NOT NULL CHECK (plataforma IN ('WEB/BACKEND', 'IOS', 'ANDROID'))
 );
@@ -30,18 +30,16 @@ CREATE TABLE IF NOT EXISTS CustoAdicional (
 -- Tabela NivelUI
 CREATE TABLE IF NOT EXISTS NivelUI (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL UNIQUE,
+    nome VARCHAR(255) NOT NULL,
     percentual DECIMAL(5, 2) NOT NULL
 );
 
 -- Tabela Estimativa
 CREATE TABLE IF NOT EXISTS Estimativa (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    projetoId INT NOT NULL,
     custoTotal DECIMAL(10, 2) NOT NULL,
     tempoTotal INT NOT NULL,
-    precoFinal DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE
+    precoFinal DECIMAL(10, 2) NOT NULL
 );
 
 -- Tabela Projeto

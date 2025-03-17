@@ -31,8 +31,12 @@ public class EstimativaSQLiteDao implements IEstimativaDAO {
             stmt.setDouble(1, estimativa.getCustoTotal());
             stmt.setInt(2, estimativa.getTempoTotal());
             stmt.setDouble(3, estimativa.getPrecoFinal());
-
             stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                estimativa.setId(rs.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

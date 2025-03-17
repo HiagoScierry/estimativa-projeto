@@ -31,6 +31,13 @@ public class NivelUISQLiteDao implements INivelUIDAO {
             stmt.setString(1, nivelUI.getNome());
             stmt.setDouble(2, nivelUI.getPercentual());
             stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                nivelUI.setId(rs.getInt(1));
+            }
+
         } catch (SQLException e) {
             System.out.println("Erro ao inserir NivelUI: " + e.getMessage());
         }

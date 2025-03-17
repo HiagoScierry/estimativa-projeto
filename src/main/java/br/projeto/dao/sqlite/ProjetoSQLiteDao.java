@@ -58,25 +58,27 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                     UsuarioSingleton.getInstance().getUsuario().getId(),
                     true);
 
-            for (Perfil perfil : projeto.getPerfis()) {
-                daoUtil.getProjetoPerfilDao().associarPerfilaProjeto(projeto.getId(), perfil.getId());
-            }
+            // for (Perfil perfil : projeto.getPerfis()) {
+            //     daoUtil.getProjetoPerfilDao().associarPerfilaProjeto(projeto.getId(), perfil.getId());
+            // }
 
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
                 daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
                 daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
                 daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
 
             for (CustoAdicional custo : projeto.getCustosAdicionais()) {
+                daoUtil.getCustoAdicionalDao().inserir(custo);
                 daoUtil.getProjetoCustoAdicionalDao().associarProjetoCustoAdicional(projeto.getId(), custo.getId());
             }
-
-
 
         } catch (Exception e) {
             System.out.println("Erro ao inserir o projeto: " + e.getMessage());
@@ -216,8 +218,11 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
 
     @Override
     public void atualizar(Projeto projeto) {
-        String sql = "UPDATE Projeto SET nome = ?, dataCriacao = ?, status = ?, compartilhado = ?, nivelUIId = ?, percentualImpostos = ?, percentualLucro = ? WHERE id = ?";
+        String sql = "UPDATE Projeto SET nome = ?, dataCriacao = ?, status = ?, compartilhado = ?, nivelUIId = ?, percentualImpostos = ?, percentualLucro = ?, estimativaId = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            daoUtil.getNivelUIDao().inserir(projeto.getNivelUI());
+            daoUtil.getEstimativaDao().inserir(projeto.getEstimativa());
+
             stmt.setString(1, projeto.getNome());
             stmt.setString(2, projeto.getDataCriacao());
             stmt.setString(3, projeto.getStatus());
@@ -225,12 +230,30 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             stmt.setInt(5, projeto.getNivelUI() != null ? projeto.getNivelUI().getId() : 0);
             stmt.setDouble(6, projeto.getPercentualImpostos());
             stmt.setDouble(7, projeto.getPercentualLucro());
-            stmt.setInt(8, projeto.getId());
+            stmt.setInt(8, projeto.getEstimativa().getId());
+            stmt.setInt(9, projeto.getId());
             stmt.executeUpdate();
 
-            daoUtil.getProjetoPerfilDao().atualizarPerfisProjeto(projeto.getId(), projeto.getPerfis());
-            daoUtil.getProjetoFuncionalidadeDao().atualizarFuncionalidadesProjeto(projeto.getId(), projeto);
-            daoUtil.getProjetoCustoAdicionalDao().atualizarCustosAdicionaisProjeto(projeto.getId(), projeto.getCustosAdicionais());
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+            }
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+            }
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+            }
+
+            for (CustoAdicional custo : projeto.getCustosAdicionais()) {
+                daoUtil.getCustoAdicionalDao().inserir(custo);
+                daoUtil.getProjetoCustoAdicionalDao().associarProjetoCustoAdicional(projeto.getId(), custo.getId());
+            }
+
+
+
 
         } catch (Exception e) {
             System.out.println("Erro ao atualizar projeto: " + e.getMessage());

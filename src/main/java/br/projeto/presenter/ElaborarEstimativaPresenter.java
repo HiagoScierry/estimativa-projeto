@@ -5,6 +5,7 @@
 package br.projeto.presenter;
 
 import br.projeto.model.CustoAdicional;
+import br.projeto.model.Estimativa;
 import br.projeto.model.Funcionalidade;
 import br.projeto.model.NivelUI;
 import br.projeto.model.Projeto;
@@ -283,6 +284,7 @@ public class ElaborarEstimativaPresenter implements Observer {
         List<Funcionalidade> funcionalidadesAndroid = new ArrayList<Funcionalidade>();
         List<CustoAdicional> custoAdicionals = new ArrayList<CustoAdicional>();
         NivelUI nivelUI = new NivelUI(0, "", 0.0);
+        Estimativa estimativa = new Estimativa(0, 0, 0 ,0);
 
         int rowCount = view.getTblEstimativaProjeto().getRowCount();
         int columnCount = view.getTblEstimativaProjeto().getColumnCount();
@@ -295,7 +297,7 @@ public class ElaborarEstimativaPresenter implements Observer {
             boolean rowMarked = view.getTblEstimativaProjeto().getValueAt(i, 0) != null ? true : false;
             Funcionalidade funcionalidade = new Funcionalidade(0, funcionalidadeNome, 0, "");
 
-            if (i > 2 && i < 6 && columnCount > 5 && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
+            if (i > 2 && i < 6 && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
                 nivelUI.setNome(view.getTblEstimativaProjeto().getValueAt(i, 1).toString());
                 System.out.println(view.getTblEstimativaProjeto().getValueAt(i, 5).toString());
                 nivelUI.setPercentual(Double.parseDouble(view.getTblEstimativaProjeto().getValueAt(i, 5).toString().trim()));
@@ -303,7 +305,7 @@ public class ElaborarEstimativaPresenter implements Observer {
 
             if (i > 5) {
                 // Web Backend
-                if (rowMarked && webBackend && columnCount > 2) {
+                if (rowMarked && webBackend && view.getTblEstimativaProjeto().getValueAt(i, 2) != null) {
                     String valorWeb = view.getTblEstimativaProjeto().getValueAt(i, 2).toString().trim();
                     if (valorWeb.contains("-")) {
                         funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
@@ -314,12 +316,12 @@ public class ElaborarEstimativaPresenter implements Observer {
                             funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
                         }
                     }
-                    funcionalidade.setPlataforma("Web Backend");
+                    funcionalidade.setPlataforma("WEB/BACKEND");
                     funcionalidadesWebBackend.add(funcionalidade);
                 }
 
                 // iOS
-                if (rowMarked && ios && columnCount > 3) {
+                if (rowMarked && ios && view.getTblEstimativaProjeto().getValueAt(i, 3) != null) {
                     String valorIOS = view.getTblEstimativaProjeto().getValueAt(i, 3).toString().trim();
                     if (valorIOS.contains("-")) {
                         funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
@@ -335,7 +337,7 @@ public class ElaborarEstimativaPresenter implements Observer {
                 }
 
                 // Android
-                if (rowMarked && android && columnCount > 4) {
+                if (rowMarked && android && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
                     String valorAndroid = view.getTblEstimativaProjeto().getValueAt(i, 4).toString().trim();
                     if (valorAndroid.contains("-")) {
                         funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
@@ -346,7 +348,7 @@ public class ElaborarEstimativaPresenter implements Observer {
                             funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
                         }
                     }
-                    funcionalidade.setPlataforma("Android");
+                    funcionalidade.setPlataforma("ANDROID");
                     funcionalidadesAndroid.add(funcionalidade);
                 }
             }
@@ -354,9 +356,19 @@ public class ElaborarEstimativaPresenter implements Observer {
 
         // Processando custos adicionais
         for (int i = 3; i < view.getTblPrecosPorDiaTrabalho().getRowCount() - 2; i++) {
-            CustoAdicional custoAdicional = new CustoAdicional(0, (String) view.getTblPrecosPorDiaTrabalho().getValueAt(i, 1), (Double) view.getTblPrecosPorDiaTrabalho().getValueAt(i, 2));
+            System.out.println(view.getTblPrecosPorDiaTrabalho().getValueAt(i, 1));
+            CustoAdicional custoAdicional = new CustoAdicional(
+                    0,
+                    view.getTblPrecosPorDiaTrabalho().getValueAt(i, 1).toString().trim(),
+                    Double.parseDouble(view.getTblPrecosPorDiaTrabalho().getValueAt(i, 2).toString().trim())
+            );
             custoAdicionals.add(custoAdicional);
         }
+
+
+        estimativa.setPrecoFinal(Double.parseDouble(view.getTblValoresFinais().getValueAt(7, 1).toString().trim()));
+        estimativa.setCustoTotal(Double.parseDouble(view.getTblValoresFinais().getValueAt(0, 1).toString().trim()));
+        estimativa.setTempoTotal(Integer.parseInt(view.getTblValoresFinais().getValueAt(5, 1).toString().trim()));
 
         // Processando valores de impostos e lucro
         double imposto = Double.parseDouble(view.getTblPrecosPorDiaTrabalho().getValueAt(9, 2).toString().replace("%", ""));
@@ -364,11 +376,12 @@ public class ElaborarEstimativaPresenter implements Observer {
 
         projeto.setPercentualImpostos(imposto / 100);
         projeto.setPercentualLucro(lucro / 100);
-
         projeto.setNivelUI(nivelUI);
         projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
         projeto.setFuncionalidadesIOS(funcionalidadesIOS);
         projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
+        projeto.setCustosAdicionais(custoAdicionals);
+        projeto.setEstimativa(estimativa);
 
         projetoRepository.atualizarProjeto(projeto);
     }

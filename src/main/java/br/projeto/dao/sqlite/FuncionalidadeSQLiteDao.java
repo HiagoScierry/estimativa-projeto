@@ -32,6 +32,12 @@ public class FuncionalidadeSQLiteDao implements IFuncionalidadeDAO {
             stmt.setInt(2, funcionalidade.getHorasEstimadas());
             stmt.setString(3, funcionalidade.getPlataforma());
             stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                funcionalidade.setId(rs.getInt(1));
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao inserir funcionalidade: " + e.getMessage());
         }

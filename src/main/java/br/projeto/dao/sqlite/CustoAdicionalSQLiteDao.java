@@ -29,6 +29,12 @@ public class CustoAdicionalSQLiteDao implements ICustoAdicionalDAO {
             stmt.setString(1, custo.getDescricao());
             stmt.setDouble(2, custo.getValor());
             stmt.executeUpdate();
+
+            //preciso pegar o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                custo.setId(rs.getInt(1));
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao inserir custo adicional: " + e.getMessage());
         }
