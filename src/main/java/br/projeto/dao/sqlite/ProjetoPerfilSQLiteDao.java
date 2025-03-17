@@ -1,10 +1,11 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package br.projeto.dao.sqlite;
 
-import br.projeto.config.database.SQLiteConnection;
+import br.projeto.config.database.sqlite.SQLiteConnection;
 import br.projeto.dao.interfaces.IProjetoPerfilDAO;
 import br.projeto.model.Funcionalidade;
 import br.projeto.model.Perfil;

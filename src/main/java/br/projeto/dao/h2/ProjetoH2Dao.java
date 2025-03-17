@@ -4,15 +4,10 @@
  */
 package br.projeto.dao.h2;
 
-import br.projeto.config.database.H2Connection;
+import br.projeto.config.database.h2.H2Connection;
 import br.projeto.dao.DaoUtil;
 import br.projeto.dao.interfaces.IProjetoDAO;
-import br.projeto.model.CustoAdicional;
-import br.projeto.model.Funcionalidade;
-import br.projeto.model.NivelUI;
-import br.projeto.model.Perfil;
-import br.projeto.model.Projeto;
-import br.projeto.model.Usuario;
+import br.projeto.model.*;
 import br.projeto.singleton.UsuarioSingleton;
 
 /**
@@ -102,6 +97,7 @@ public class ProjetoH2Dao implements IProjetoDAO {
                 List<Funcionalidade> funcionalidadesAndroid = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(id, "ANDROID");
 
                 List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(id);
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
 
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
@@ -115,6 +111,7 @@ public class ProjetoH2Dao implements IProjetoDAO {
                     funcionalidadesAndroid,
                     custosAdicionais,
                     nivelUI,
+                    estimativa,
                     rs.getDouble("percentualImpostos"),
                     rs.getDouble("percentualLucro")
                 );
@@ -144,7 +141,7 @@ public class ProjetoH2Dao implements IProjetoDAO {
                 List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
 
                 List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
-
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
                     rs.getString("nome"),
@@ -157,6 +154,7 @@ public class ProjetoH2Dao implements IProjetoDAO {
                     funcionalidadesAndroid,
                     custosAdicionais,
                     nivelUI,
+                    estimativa,
                     rs.getDouble("percentualImpostos"),
                     rs.getDouble("percentualLucro")
                 );
@@ -191,6 +189,7 @@ public class ProjetoH2Dao implements IProjetoDAO {
                 List<Funcionalidade> funcionalidadesAndroid = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
 
                 List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
 
                 Projeto projeto = new Projeto(
                     rs.getInt("id"),
@@ -204,6 +203,7 @@ public class ProjetoH2Dao implements IProjetoDAO {
                     funcionalidadesAndroid,
                     custosAdicionais,
                     nivelUI,
+                    estimativa,
                     rs.getDouble("percentualImpostos"),
                     rs.getDouble("percentualLucro")
                 );

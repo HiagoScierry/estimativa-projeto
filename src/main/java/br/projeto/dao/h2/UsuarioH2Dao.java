@@ -4,7 +4,7 @@
  */
 package br.projeto.dao.h2;
 
-import br.projeto.config.database.H2Connection;
+import br.projeto.config.database.h2.H2Connection;
 import br.projeto.dao.interfaces.IUsuarioDAO;
 import br.projeto.model.Usuario;
 import java.sql.Connection;

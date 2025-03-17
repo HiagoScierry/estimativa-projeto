@@ -4,7 +4,7 @@
  */
 package br.projeto.dao.h2;
 
-import br.projeto.config.database.H2Connection;
+import br.projeto.config.database.h2.H2Connection;
 import br.projeto.dao.interfaces.IProjetoPerfilDAO;
 import br.projeto.model.Funcionalidade;
 import br.projeto.model.Perfil;

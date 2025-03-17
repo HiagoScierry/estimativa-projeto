@@ -1,11 +1,13 @@
 package br.projeto;
 
+import br.projeto.config.database.h2.H2Server;
 import br.projeto.dao.DaoUtil;
 import br.projeto.dao.factory.DaoH2Factory;
 import br.projeto.dao.factory.DaoSQLiteFactory;
 import br.projeto.presenter.LoginPresenter;
 import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.JOptionPane;
+
 
 public class Main {
 
@@ -35,6 +37,7 @@ public class Main {
 
         if ("H2".equals(bancoDados)) {
             try {
+                H2Server.start();
                 DaoUtil.configureInstance(new DaoH2Factory());
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());

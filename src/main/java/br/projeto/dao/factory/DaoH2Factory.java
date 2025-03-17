@@ -1,7 +1,7 @@
 package br.projeto.dao.factory;
 
-import br.projeto.config.database.H2Connection;
 import br.projeto.dao.interfaces.*;
+import br.projeto.config.database.h2.H2Connection;
 import br.projeto.dao.h2.*;
 
 import java.nio.charset.StandardCharsets;
@@ -15,7 +15,7 @@ public class DaoH2Factory implements IDAOFactory {
     public DaoH2Factory() throws Exception {
         try (Connection connection = H2Connection.getConexao(); Statement stmt = connection.createStatement()) {
 
-            String sqlScript = new String(Files.readAllBytes(Paths.get("src/main/java/br/projeto/config/database/CREATE_DATABASE.sql")), StandardCharsets.UTF_8);
+            String sqlScript = new String(Files.readAllBytes(Paths.get("src/main/java/br/projeto/config/database/sql/CREATE_DATABASE_H2.sql")), StandardCharsets.UTF_8);
             String[] commands = sqlScript.split(";");
 
             connection.setAutoCommit(false); // Desativa o auto-commit
@@ -28,7 +28,7 @@ public class DaoH2Factory implements IDAOFactory {
             }
 
             connection.commit(); // Commit da transação
-            System.out.println("Banco de dados SQLite criado com sucesso!");
+            System.out.println("Banco de dados H2 criado com sucesso!");
 
         } catch (SQLException e) {
             System.err.println("Erro ao criar o banco de dados: " + e.getMessage());

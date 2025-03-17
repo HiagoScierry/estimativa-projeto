@@ -4,7 +4,7 @@
  */
 package br.projeto.dao.sqlite;
 
-import br.projeto.config.database.SQLiteConnection;
+import br.projeto.config.database.sqlite.SQLiteConnection;
 import br.projeto.dao.interfaces.IFuncionalidadeDAO;
 import br.projeto.model.Funcionalidade;
 import java.sql.Connection;

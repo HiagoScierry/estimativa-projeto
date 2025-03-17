@@ -4,7 +4,7 @@
  */
 package br.projeto.dao.factory;
 
-import br.projeto.config.database.SQLiteConnection;
+import br.projeto.config.database.sqlite.SQLiteConnection;
 import br.projeto.dao.interfaces.ICustoAdicionalDAO;
 import br.projeto.dao.interfaces.IEstimativaDAO;
 import br.projeto.dao.interfaces.IFuncionalidadeDAO;
@@ -43,7 +43,7 @@ public class DaoSQLiteFactory implements IDAOFactory {
     public DaoSQLiteFactory() throws Exception {
         try (Connection connection = SQLiteConnection.getConexao(); Statement stmt = connection.createStatement()) {
 
-            String sqlScript = new String(Files.readAllBytes(Paths.get("src/main/java/br/projeto/config/database/CREATE_DATABASE.sql")), StandardCharsets.UTF_8);
+            String sqlScript = new String(Files.readAllBytes(Paths.get("src/main/java/br/projeto/config/database/sql/CREATE_DATABASE_SQLITE.sql")), StandardCharsets.UTF_8);
             String[] commands = sqlScript.split(";");
 
             connection.setAutoCommit(false); // Desativa o auto-commit
