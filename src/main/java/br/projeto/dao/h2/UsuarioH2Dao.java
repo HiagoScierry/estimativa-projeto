@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.projeto.dao.sqlite;
+package br.projeto.dao.h2;
 
-import br.projeto.config.database.SQLiteConnection;
+import br.projeto.config.database.H2Connection;
 import br.projeto.dao.interfaces.IUsuarioDAO;
 import br.projeto.model.Usuario;
 import java.sql.Connection;
@@ -18,12 +18,12 @@ import java.util.Optional;
  *
  * @author hiago
  */
-public class UsuarioSQLiteDao implements IUsuarioDAO{
+public class UsuarioH2Dao implements IUsuarioDAO{
 
     private Connection connection;
-    
-    public UsuarioSQLiteDao() throws Exception {
-        this.connection = SQLiteConnection.getConexao();
+
+    public UsuarioH2Dao() throws Exception {
+        this.connection = H2Connection.getConexao();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UsuarioSQLiteDao implements IUsuarioDAO{
             System.out.println("Erro ao criar usuario");
         }
     }
-    
+
     @Override
     public Optional<Usuario> buscarPorId(int id) {
         String sql = "SELECT * FROM Usuario WHERE id = ?";
@@ -61,8 +61,8 @@ public class UsuarioSQLiteDao implements IUsuarioDAO{
         }
         return Optional.empty();
     }
-    
-    
+
+
     @Override
     public List<Usuario> listarTodos() {
         String sql = "SELECT * FROM Usuario";

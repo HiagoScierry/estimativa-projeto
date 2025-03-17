@@ -57,6 +57,16 @@ CREATE TABLE IF NOT EXISTS Projeto (
     FOREIGN KEY (estimativaId) REFERENCES Estimativa(id) ON DELETE CASCADE
 );
 
+--Tabela Estimativa
+CREATE TABLE Estimativa (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    projetoId INTEGER NOT NULL,
+    custoTotal REAL NOT NULL,
+    tempoTotal INTEGER NOT NULL,
+    precoFinal REAL NOT NULL,
+    FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE
+);
+
 -- TabelaProjetoUsuarioCompartilhado (Relação muitos-para-muitos entre Projeto e Usuario)
 CREATE TABLE IF NOT EXISTS ProjetoUsuarioCompartilhado(
     projetoId INTEGER NOT NULL,
