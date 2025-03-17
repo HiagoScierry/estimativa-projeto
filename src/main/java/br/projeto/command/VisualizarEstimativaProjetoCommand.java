@@ -43,7 +43,6 @@ public class VisualizarEstimativaProjetoCommand implements ProjetoCommand{
                  
             if (projetoSingleton.getProjetoPorId(projetoId) == null ||
                 projetoSingleton.getProjetoPorId(projetoId).getEstimativa() == null) {
-                System.out.println(projetoSingleton.getProjetoPorId(projetoId).getEstimativa());
                 JOptionPane.showMessageDialog(null, "Estimativa indisponível! Não é possível acessar esta página.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

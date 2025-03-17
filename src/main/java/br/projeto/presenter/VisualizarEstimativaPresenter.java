@@ -62,7 +62,6 @@ public class VisualizarEstimativaPresenter implements Observer {
 
         
         String PlataformasFinal = plataformasBuilder.toString().trim();
-        System.out.println(PlataformasFinal);
         view.getTxtPlataformas().setText(PlataformasFinal);
     }
     private void recuperarDadosTabelaFuncionalidades(Projeto projeto) {
