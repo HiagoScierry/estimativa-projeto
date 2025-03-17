@@ -85,24 +85,34 @@ public class ElaborarEstimativaPresenter implements Observer {
 
     private void condicaoLinhasParentes(MouseEvent e, int linhaAlterada) {
         JTable table = (JTable) e.getSource();
+        int totalColunas = table.getColumnCount(); // Número total de colunas
 
         if (linhaAlterada < 6) {
             int start = (linhaAlterada < 3) ? 0 : 3;
             int end = (linhaAlterada < 3) ? 2 : 5;
 
             for (int i = start; i <= end; i++) {
+                // Marca a linha alterada no checkbox (coluna 0)
                 table.setValueAt(linhaAlterada == i, i, 0);
-                if (linhaAlterada == i) {
-                    String valor = (String) table.getValueAt(i, 5);
-                    table.setValueAt(valor, i, 5);  // Mantém o valor atual
-                } else {
-                    table.setValueAt("", i, 5);  // Limpa as células não alteradas na coluna 5
-                    table.setValueAt("", i, 6);
-                }
 
+                if (linhaAlterada == i) {
+                    // Obtém o valor da coluna 5 e garante que seja um número ou null
+                    Object valorCelula = table.getValueAt(i, 5);
+                    Number valor = (valorCelula instanceof Number) ? (Number) valorCelula : null;
+                    table.setValueAt(valor, i, 5); // Mantém o valor na linha alterada
+                } else {
+                    // Limpa a coluna 5 das linhas não alteradas usando null em vez de ""
+                    table.setValueAt(null, i, 5);
+
+                    // Se a coluna 6 existir, também limpa
+                    if (totalColunas > 6) {
+                        table.setValueAt(null, i, 6);
+                    }
+                }
             }
         }
     }
+
 
     private void calculoTaxaExtraImpostosDias(){
         double taxasExtras = 0;
@@ -174,23 +184,29 @@ public class ElaborarEstimativaPresenter implements Observer {
                 }
 
                 table.setValueAt(soma, row, 5);
-//                condicaoLinhasParentes(e, row);
+                condicaoLinhasParentes(e, row);
 
 
                 //CALCULAR FUNCIONALIDADE COM AS HORAS
                 double valorFuncionalidade = 0.0;
                 int dias = table.getValueAt(row, 5).toString().trim() == "" ? 0 : Integer.parseInt(table.getValueAt(row, 5).toString().trim());
 
-                valorFuncionalidade += dias/3 * this.estimaProjetoService.getValorDiariaUiUx();
-                valorFuncionalidade += dias/3 * this.estimaProjetoService.getValorDiariaDesenvolvimento();
-                valorFuncionalidade += dias/3 * this.estimaProjetoService.getValorDiariaGerenciamento();
+                if(webBackend || android){
+                    valorFuncionalidade += estimaProjetoService.calcularValorUnitario("WEB/BACKEND", dias);
+                }
+
+                if(ios){
+                    valorFuncionalidade += estimaProjetoService.calcularValorUnitario("IOS", dias);
+                }
+
 
                 table.setValueAt(Math.ceil(valorFuncionalidade), row, 6);
 
-                calculoTotal();
 
                 ((AbstractTableModel) table.getModel()).fireTableCellUpdated(row, 5);
                 ((AbstractTableModel) table.getModel()).fireTableCellUpdated(row, 6);
+
+                calculoTotal();
             }
         }
     }
