@@ -100,6 +100,20 @@ public class ElaborarEstimativaPresenter implements Observer {
                     Object valorCelula = table.getValueAt(i, 5);
                     Number valor = (valorCelula instanceof Number) ? (Number) valorCelula : null;
                     table.setValueAt(valor, i, 5); // Mantém o valor na linha alterada
+
+                    // se a linha alterada for menor que 3 , devo buscar a soma de dias das linhas 0 a 2 e multiplicar pela porcentagem que recebi da linha alterada
+
+                    if (linhaAlterada >= 3 && linhaAlterada < 6) {
+                        int soma = 0;
+                        for (int j = 0; j < 3; j++) {
+                            soma += table.getValueAt(j, 5) != null ? Integer.parseInt(table.getValueAt(j, 5).toString().trim()) : 0;
+                        }
+
+                        double percentual = Double.parseDouble(table.getValueAt(linhaAlterada, 5).toString().replace("%", "")) / 100.0;
+                        soma = (int) (soma * percentual);
+                        table.setValueAt(soma, linhaAlterada, 5);
+                        ((AbstractTableModel) table.getModel()).fireTableCellUpdated(i, 5);
+                    }
                 } else {
                     // Limpa a coluna 5 das linhas não alteradas usando null em vez de ""
                     table.setValueAt(null, i, 5);
@@ -114,15 +128,60 @@ public class ElaborarEstimativaPresenter implements Observer {
     }
 
 
-    private void calculoTaxaExtraImpostosDias(){
-        double taxasExtras = 0;
-        double valorImporto = 0;
-        double lucro = 0;
+    private void calculoTaxaExtraImpostosDias() {
+        JTable tabelaPrecoPorDia = view.getTblPrecosPorDiaTrabalho(); // Substitua pelo nome real da sua JTable
+        JTable tabelaResultados = view.getTblValoresFinais(); // Substitua pelo nome real da segunda JTable
+        JTable tabelaEstimativa = view.getTblEstimativaProjeto(); // Substitua pelo nome real da terceira JTable
+
+        double valorTotalFuncionalidades = 0;
         int dias = 0;
-        double preçoFinal = 0;
+
+        for (int i = 0; i < tabelaEstimativa.getRowCount(); i++) {
+            valorTotalFuncionalidades += tabelaEstimativa.getValueAt(i, 6) != null ? Double.parseDouble(tabelaEstimativa.getValueAt(i, 6).toString().trim()) : 0;
+            dias += tabelaEstimativa.getValueAt(i, 5) != null ? Integer.parseInt(tabelaEstimativa.getValueAt(i, 5).toString().trim()) : 0;
+        }
+
+        double custoHardware = Double.parseDouble(tabelaPrecoPorDia.getValueAt(3, 2).toString().trim());
+        double custoSoftware = Double.parseDouble(tabelaPrecoPorDia.getValueAt(4, 2).toString().trim());
+        double custoRiscos = Double.parseDouble(tabelaPrecoPorDia.getValueAt(5, 2).toString().trim());
+        double custoGarantia = Double.parseDouble(tabelaPrecoPorDia.getValueAt(6, 2).toString().trim());
+        double fundoReserva = Double.parseDouble(tabelaPrecoPorDia.getValueAt(7, 2).toString().trim());
+        double outrosCustos = Double.parseDouble(tabelaPrecoPorDia.getValueAt(8, 2).toString().trim());
+        double percentualImposto = Double.parseDouble(tabelaPrecoPorDia.getValueAt(9, 2).toString().replace("%", "")) / 100.0;
+        double percentualLucro = Double.parseDouble(tabelaPrecoPorDia.getValueAt(10, 2).toString().replace("%", "")) / 100.0;
+
+        // Cálculo do valor base
 
 
+        double taxaExtras = custoHardware + custoSoftware + custoRiscos + custoGarantia + fundoReserva + outrosCustos;
 
+        double valorImposto = (valorTotalFuncionalidades) * percentualImposto;
+        double valorMaisTaxas = valorTotalFuncionalidades + taxaExtras;
+        double valorMiasImposto = valorTotalFuncionalidades + valorImposto;
+
+        double lucro = valorTotalFuncionalidades * percentualLucro;
+
+        double precoFinalCliente = valorImposto + lucro + valorMaisTaxas;
+
+        int meses = dias / 30;
+
+        double mediaPorMes = precoFinalCliente / meses;
+
+        // Inserindo os resultados na segunda JTable
+        tabelaResultados.setValueAt(valorTotalFuncionalidades, 0, 1);
+        tabelaResultados.setValueAt(valorMaisTaxas, 1, 1);
+        tabelaResultados.setValueAt(valorImposto, 2, 1);
+        tabelaResultados.setValueAt(valorMiasImposto, 3, 1);
+        tabelaResultados.setValueAt(lucro, 4, 1);
+        tabelaResultados.setValueAt(dias, 5, 1);
+        tabelaResultados.setValueAt(meses, 6, 1);
+        tabelaResultados.setValueAt(precoFinalCliente, 7, 1);
+        tabelaResultados.setValueAt(mediaPorMes, 8, 1);
+
+        for (int i = 0; i < tabelaResultados.getRowCount(); i++) {
+            ((AbstractTableModel) tabelaResultados.getModel()).fireTableCellUpdated(i, 1);
+
+        }
     }
 
     private void calculoTotal() {
@@ -138,6 +197,7 @@ public class ElaborarEstimativaPresenter implements Observer {
         ((AbstractTableModel) view.getTblValoresFinais().getModel()).fireTableCellUpdated(0,1);
 
         calculoTaxaExtraImpostosDias();
+
     }
 
     private void calcularLinhas(MouseEvent e) {
