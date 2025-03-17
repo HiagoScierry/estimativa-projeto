@@ -65,8 +65,8 @@ public final class PrincipalPresenter implements Observer {
         comandos.put("Ver perfis de projeto", new AbrirPerfisDeProjetoCommand(view.getDesktop(), "Ver Perfis de Projetos"));
         comandos.put("Elaborar estimativa", new CriarEstimativaProjetoCommand(view.getDesktop(), "Elaborar estimativa"));
         comandos.put("Visualizar estimativa", new VisualizarEstimativaProjetoCommand(view.getDesktop(), "Visualizar estimativa"));
-        //comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(projetoSingleton, view.getDesktop()));
-        //comandos.put("Exportar projeto de estimativa", new ExportarProjetoCommand(projetoSingleton));
+        comandos.put("Compartilhar projeto de estimativa", new CompartilharProjetoCommand(projetoSingleton, view.getDesktop()));
+        comandos.put("Exportar projeto de estimativa", new ExportarProjetoCommand(projetoSingleton));
         comandos.put("Novo projeto", new CriarProjetoProjetoCommand(projetoSingleton));
         comandos.put("Configurações", new AbrirConfiguracaoProjetoCommand(view.getDesktop(), "Configurações"));
         comandos.put("Excluir projeto", new ExcluirProjetoProjetoCommand(projetoSingleton));
@@ -102,6 +102,7 @@ public final class PrincipalPresenter implements Observer {
 
         for (final Projeto projeto : listaProjetos) {
             CriarEstimativaProjetoCommand cmdElaborarEstimativa = new CriarEstimativaProjetoCommand(view.getDesktop(), "Elaborar estimativa");
+            VisualizarEstimativaProjetoCommand cmdVisualizar = new VisualizarEstimativaProjetoCommand(view.getDesktop(), "Visualizar estimativa");
             ExportarProjetoCommand cmdExportar = new ExportarProjetoCommand(projetoSingleton);
             CompartilharProjetoCommand cmdCompartilhar = new CompartilharProjetoCommand(projetoSingleton, view.getDesktop());
             AbrirDetalhesProjetoProjetoCommand cmdDetalhes = new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()) {
@@ -124,30 +125,38 @@ public final class PrincipalPresenter implements Observer {
             cmdDetalhes.setProjetoId(projeto.getId());
             cmdDetalhes.setProjetoNome(projeto.getNome());
             cmdCompartilhar.setProjetoId(projeto.getId());
+            cmdVisualizar.setProjetoId(projeto.getId());
             
-            boolean ehCriador = projetoCompartilhadoRepo.verificarSeEhCriador(projeto.getId(), usuarioLogado.getUsuario().getId());
-            String nomeProjeto = projeto.getNome();
+           boolean ehCriador = projetoCompartilhadoRepo.verificarSeEhCriador(projeto.getId(), usuarioLogado.getUsuario().getId());
+           String nomeProjeto = projeto.getNome();
 
-            if (!ehCriador) {
-                List<Integer> usuariosDoProjeto = projetoCompartilhadoRepo.obterUsuariosDoProjeto(projeto.getId());
+           if (!ehCriador) {
+               List<Integer> usuariosDoProjeto = projetoCompartilhadoRepo.obterUsuariosDoProjeto(projeto.getId());
 
-                if (!usuariosDoProjeto.isEmpty()) {
-                    int idDono = usuariosDoProjeto.get(0);
-                    Optional<Usuario> usuarioDonoOpt = usuarioRepo.buscarPorId(idDono);
-                    String nomeDono = usuarioDonoOpt.isPresent() ? usuarioDonoOpt.get().getNome() : "Desconhecido";
-                    nomeProjeto = "Compartilhado por " + nomeDono;
-                }
-            }
+               if (!usuariosDoProjeto.isEmpty()) {
+                   String nomeDono = "Desconhecido";
+
+                   for (int idUsuario : usuariosDoProjeto) {
+                       if (projetoCompartilhadoRepo.verificarSeEhCriador(projeto.getId(), idUsuario)) {
+                           Optional<Usuario> usuarioDonoOpt = usuarioRepo.buscarPorId(idUsuario);
+                           if (usuarioDonoOpt.isPresent()) {
+                               nomeDono = usuarioDonoOpt.get().getNome();
+                               break;
+                           }
+                       }
+                   }
+
+                   nomeProjeto = "Compartilhado por " + nomeDono;
+               }
+           }
             
             NoArvoreComposite noProjeto = construtorDeArvoreNavegacaoService.criarNo(nomeProjeto, "projeto", cmdDetalhes);
             adicionarMenuContextual(projeto, noProjeto);
 
             if (ehCriador) {
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Elaborar estimativa", "action", cmdElaborarEstimativa));
-                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", comandos.get("Visualizar estimativa")));
-                //noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", comandos.get("Compartilhar projeto de estimativa")));
-                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", cmdCompartilhar)); //gambiarra
-                //noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Exportar projeto de estimativa", "action", comandos.get("Exportar projeto de estimativa")));
+                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", cmdVisualizar));
+                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", cmdCompartilhar));
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Exportar projeto de estimativa", "action", cmdExportar));
             } else {
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", comandos.get("Visualizar estimativa")));

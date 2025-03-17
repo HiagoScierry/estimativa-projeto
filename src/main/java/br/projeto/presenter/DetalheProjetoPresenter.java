@@ -75,7 +75,7 @@ public class DetalheProjetoPresenter implements Observer {
         }
 
         String PlataformasFinal = plataformasBuilder.toString();
-
+        
         view.atualizarCabecalho(
             projeto.getNome(),
             nomeCriador,

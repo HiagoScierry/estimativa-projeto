@@ -6,8 +6,10 @@ package br.projeto.command;
 
 import br.projeto.presenter.VisualizarEstimativaPresenter;
 import br.projeto.presenter.helpers.WindowManager;
+import br.projeto.singleton.ProjetoSingleton;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,14 +17,20 @@ import javax.swing.JInternalFrame;
  */
 
 //Command criada de maneira genérica seguindo o modelo da classe 'AbrirInternalFrameGenericoProjetoCommand', sendo feita alterações somente para mostrar a JFrame correta
-//Acredito que a classe "MostrarMensagemCommand também possa ser excluida
 public class VisualizarEstimativaProjetoCommand implements ProjetoCommand{
     private final JDesktopPane desktop;
     private final String titulo;
+    private final ProjetoSingleton projetoSingleton;
+    private int projetoId;
 
     public VisualizarEstimativaProjetoCommand(JDesktopPane desktop, String titulo) {
         this.desktop = desktop;
         this.titulo = titulo;
+        this.projetoSingleton = ProjetoSingleton.getInstance();
+    }
+    
+    public void setProjetoId(int projetoId) {
+        this.projetoId = projetoId;
     }
 
     @Override
@@ -32,6 +40,13 @@ public class VisualizarEstimativaProjetoCommand implements ProjetoCommand{
         if (windowManager.isFrameAberto(titulo)) {
             windowManager.bringToFront(titulo);
         } else {
+            
+            if (projetoSingleton.getProjetoPorId(projetoId) == null ||
+                projetoSingleton.getProjetoPorId(projetoId).getEstimativa() == null) {
+
+                JOptionPane.showMessageDialog(null, "Estimativa indisponível! Não é possível acessar esta página.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             VisualizarEstimativaPresenter presenter = new VisualizarEstimativaPresenter();
             JInternalFrame frame = new JInternalFrame(titulo, true, true, true, true);
             frame.setContentPane(presenter.getView().getContentPane());

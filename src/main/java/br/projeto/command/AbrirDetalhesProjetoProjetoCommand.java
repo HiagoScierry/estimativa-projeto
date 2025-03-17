@@ -38,6 +38,13 @@ public class AbrirDetalhesProjetoProjetoCommand implements ProjetoCommand {
         if (windowManager.isFrameAberto(tituloJanela)) {
             windowManager.bringToFront(tituloJanela);
         } else {
+            
+            if (projetoSingleton.getProjetoPorId(projetoId) == null ||
+                projetoSingleton.getProjetoPorId(projetoId).getEstimativa() == null) {
+
+                JOptionPane.showMessageDialog(null, "Estimativa indisponível! Não é possível acessar esta página.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             DetalheProjetoView detalheView = new DetalheProjetoView();
             detalheView.setTitle(tituloJanela);
             new DetalheProjetoPresenter(detalheView, projetoSingleton, projetoId);
