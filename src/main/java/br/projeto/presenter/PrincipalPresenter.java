@@ -101,6 +101,7 @@ public final class PrincipalPresenter implements Observer {
         int totalProjetos = 1;
 
         for (final Projeto projeto : listaProjetos) {
+            CriarEstimativaProjetoCommand cmdElaborarEstimativa = new CriarEstimativaProjetoCommand(view.getDesktop(), "Elaborar estimativa");
             ExportarProjetoCommand cmdExportar = new ExportarProjetoCommand(projetoSingleton);
             CompartilharProjetoCommand cmdCompartilhar = new CompartilharProjetoCommand(projetoSingleton, view.getDesktop());
             AbrirDetalhesProjetoProjetoCommand cmdDetalhes = new AbrirDetalhesProjetoProjetoCommand(projetoSingleton, view.getDesktop()) {
@@ -117,7 +118,8 @@ public final class PrincipalPresenter implements Observer {
                     }
                 }
             };
-            
+
+            cmdElaborarEstimativa.setProjetoId(projeto.getId());
             cmdExportar.setProjetoId(projeto.getId());
             cmdDetalhes.setProjetoId(projeto.getId());
             cmdDetalhes.setProjetoNome(projeto.getNome());
@@ -141,7 +143,7 @@ public final class PrincipalPresenter implements Observer {
             adicionarMenuContextual(projeto, noProjeto);
 
             if (ehCriador) {
-                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Elaborar estimativa", "action", comandos.get("Elaborar estimativa")));
+                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Elaborar estimativa", "action", cmdElaborarEstimativa));
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", comandos.get("Visualizar estimativa")));
                 //noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", comandos.get("Compartilhar projeto de estimativa")));
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", cmdCompartilhar)); //gambiarra

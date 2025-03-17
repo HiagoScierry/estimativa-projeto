@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Projeto (
     status TEXT NOT NULL,
     compartilhado BOOLEAN NOT NULL,
     nivelUIId INTEGER NOT NULL,
-    estimativaId INTEGER NOT NULL,
+    estimativaId INTEGER,
     percentualImpostos REAL NOT NULL,
     percentualLucro REAL NOT NULL,
     FOREIGN KEY (nivelUIId) REFERENCES NivelUI(id) ON DELETE CASCADE,

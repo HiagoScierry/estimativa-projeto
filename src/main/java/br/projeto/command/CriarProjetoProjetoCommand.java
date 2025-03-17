@@ -31,6 +31,8 @@ public class CriarProjetoProjetoCommand implements ProjetoCommand {
         List<CustoAdicional> custoAdicional = new ArrayList<CustoAdicional>();
 
         Projeto projeto = new Projeto();
+        projeto.setDataCriacao(LocalDate.now().toString());
+        projeto.setStatus("Criado");
         projeto.setNome(titulo);
         projeto.setFuncionalidadesAndroid(funcionalidades);
         projeto.setFuncionalidadesIOS(funcionalidades);

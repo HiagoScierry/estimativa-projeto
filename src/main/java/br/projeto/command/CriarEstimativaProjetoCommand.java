@@ -6,6 +6,8 @@ package br.projeto.command;
 
 import br.projeto.presenter.ElaborarEstimativaPresenter;
 import br.projeto.presenter.helpers.WindowManager;
+import br.projeto.singleton.ProjetoSingleton;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
@@ -19,20 +21,34 @@ import javax.swing.JInternalFrame;
 public class CriarEstimativaProjetoCommand implements ProjetoCommand{
     private final JDesktopPane desktop;
     private final String titulo;
+    private Integer projetoId;
+    private ProjetoSingleton projetoSingleton;
 
     public CriarEstimativaProjetoCommand(JDesktopPane desktop, String titulo) {
         this.desktop = desktop;
         this.titulo = titulo;
+        this.projetoSingleton = ProjetoSingleton.getInstance();
+    }
+
+    public void setProjetoId(int projetoId) {
+        this.projetoId = projetoId;
     }
 
     @Override
     public void execute() {
+        if (projetoId == null) {
+            throw new IllegalStateException("O Id do projeto não foi definido para este comando.");
+        }
+
+        projetoSingleton.setIdProjetoAtual(projetoId);
+
         WindowManager windowManager = WindowManager.getInstance();
 
         if (windowManager.isFrameAberto(titulo)) {
             windowManager.bringToFront(titulo);
         } else {
             ElaborarEstimativaPresenter presenter = new ElaborarEstimativaPresenter();
+            presenter.setProjetoId(this.projetoId);
             JInternalFrame frame = new JInternalFrame(titulo, true, true, true, true);
             frame.setContentPane(presenter.getView().getContentPane());
             frame.pack();

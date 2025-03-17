@@ -32,7 +32,7 @@ public class ElaborarEstimativaPresenter implements Observer {
     private final ProjetoSingleton projetoSingleton;
     private EstimaProjetoService estimaProjetoService;
     private ProjetoRepository projetoRepository;
-    private String projetoId;
+    private int projetoId;
 
     public ElaborarEstimativaPresenter() {
         this.view = new ElaborarEstimativaView();
@@ -79,7 +79,7 @@ public class ElaborarEstimativaPresenter implements Observer {
 
     }
 
-    public void setProjetoId(String projetoId) {
+    public void setProjetoId(int projetoId) {
         this.projetoId = projetoId;
     }
 
@@ -196,7 +196,7 @@ public class ElaborarEstimativaPresenter implements Observer {
     }
 
     private void criarProjeto() {
-        Projeto projeto = projetoRepository.buscarPorId(Integer.parseInt(projetoId));
+        Projeto projeto = projetoRepository.buscarPorId(projetoId);
 
         boolean webBackend = view.getChcWeb().isSelected();
         boolean ios = view.getChcIOS().isSelected();
