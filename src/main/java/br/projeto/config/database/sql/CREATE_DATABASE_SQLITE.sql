@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS Projeto (
     estimativaId INTEGER NOT NULL,
     percentualImpostos REAL NOT NULL,
     percentualLucro REAL NOT NULL,
-    FOREIGN KEY (nivelUIId) REFERENCES NivelUI(id) ON DELETE RESTRICT
+    FOREIGN KEY (nivelUIId) REFERENCES NivelUI(id) ON DELETE CASCADE,
     FOREIGN KEY (estimativaId) REFERENCES Estimativa(id) ON DELETE CASCADE
 );
 
@@ -59,14 +59,14 @@ CREATE TABLE IF NOT EXISTS Estimativa (
     FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE
 );
 
--- TabelaProjetoUsuarioCompartilhado (Relação muitos-para-muitos entre Projeto e Usuario)
+-- Tabela ProjetoUsuarioCompartilhado (Relação muitos-para-muitos entre Projeto e Usuario)
 CREATE TABLE IF NOT EXISTS ProjetoUsuarioCompartilhado(
     projetoId INTEGER NOT NULL,
     usuarioId INTEGER NOT NULL,
     isCriador BOOLEAN NOT NULL,
     PRIMARY KEY(projetoId, usuarioId),
-    FOREIGN KEY (projetoId) REFERENCES Projeto(id),
-    FOREIGN KEY (usuarioId) REFERENCES Usuario(id)
+    FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE
 );
 
 -- Tabela ProjetoPerfil (Relação muitos-para-muitos entre Projeto e Perfil)
@@ -95,3 +95,5 @@ CREATE TABLE IF NOT EXISTS ProjetoCustoAdicional (
     FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE,
     FOREIGN KEY (custoAdicionalId) REFERENCES CustoAdicional(id) ON DELETE CASCADE
 );
+
+PRAGMA foreign_keys = ON;

@@ -34,12 +34,14 @@ CREATE TABLE IF NOT EXISTS NivelUI (
     percentual DECIMAL(5, 2) NOT NULL
 );
 
--- Tabela Estimativa 
+-- Tabela Estimativa
 CREATE TABLE IF NOT EXISTS Estimativa (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    projetoId INT NOT NULL,
     custoTotal DECIMAL(10, 2) NOT NULL,
     tempoTotal INT NOT NULL,
-    precoFinal DECIMAL(10, 2) NOT NULL
+    precoFinal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE
 );
 
 -- Tabela Projeto
@@ -53,18 +55,8 @@ CREATE TABLE IF NOT EXISTS Projeto (
     estimativaId INT NOT NULL,
     percentualImpostos DECIMAL(5, 2) NOT NULL,
     percentualLucro DECIMAL(5, 2) NOT NULL,
-    FOREIGN KEY (nivelUIId) REFERENCES NivelUI(id) ON DELETE RESTRICT,
+    FOREIGN KEY (nivelUIId) REFERENCES NivelUI(id) ON DELETE CASCADE,
     FOREIGN KEY (estimativaId) REFERENCES Estimativa(id) ON DELETE CASCADE
-);
-
--- Tabela Estimativa (duplicada no seu SQL original, removi a duplicação)
-CREATE TABLE IF NOT EXISTS Estimativa (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    projetoId INT NOT NULL,
-    custoTotal DECIMAL(10, 2) NOT NULL,
-    tempoTotal INT NOT NULL,
-    precoFinal DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE
 );
 
 -- Tabela ProjetoUsuarioCompartilhado (Relação muitos-para-muitos entre Projeto e Usuario)
@@ -73,8 +65,8 @@ CREATE TABLE IF NOT EXISTS ProjetoUsuarioCompartilhado (
     usuarioId INT NOT NULL,
     isCriador BOOLEAN NOT NULL,
     PRIMARY KEY(projetoId, usuarioId),
-    FOREIGN KEY (projetoId) REFERENCES Projeto(id),
-    FOREIGN KEY (usuarioId) REFERENCES Usuario(id)
+    FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE
 );
 
 -- Tabela ProjetoPerfil (Relação muitos-para-muitos entre Projeto e Perfil)
@@ -103,3 +95,5 @@ CREATE TABLE IF NOT EXISTS ProjetoCustoAdicional (
     FOREIGN KEY (projetoId) REFERENCES Projeto(id) ON DELETE CASCADE,
     FOREIGN KEY (custoAdicionalId) REFERENCES CustoAdicional(id) ON DELETE CASCADE
 );
+
+SET REFERENTIAL_INTEGRITY TRUE;
