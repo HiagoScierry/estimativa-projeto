@@ -19,11 +19,11 @@ import java.util.List;
 public class PerfilSQLiteDao implements IPerfilDAO {
 
     private Connection connection;
-    private FuncinamentoSQLiteDao funcionalidadeDao;
+    private FuncionalidadeSQLiteDao funcionalidadeDao;
 
     public PerfilSQLiteDao() throws Exception {
         this.connection = SQLiteConnection.getConexao();
-        this.funcionalidadeDao = new FuncinamentoSQLiteDao();
+        this.funcionalidadeDao = new FuncionalidadeSQLiteDao();
     }
 
     @Override
@@ -33,11 +33,16 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setString(1, perfil.getNome());
             stmt.setString(2, perfil.getNivelUI());
             stmt.executeUpdate();
-            
+
+            // Obtendo o ID do perfil recém-criado
             int perfilId = getPerfilIdByNome(perfil.getNome());
-            funcionalidadeDao.inserirFuncionalidades(perfil.getFuncionalidades(), perfilId);
+
+            // Inserindo todas as funcionalidades associadas ao perfil
+            for (Funcionalidade func : perfil.getFuncionalidades()) {
+                funcionalidadeDao.inserir(func);
+            }
         } catch (SQLException e) {
-            System.out.println("Erro ao inserir perfil: " + e.getMessage());
+            throw new RuntimeException("Erro ao inserir perfil: " + e.getMessage(), e);
         }
     }
 
@@ -48,7 +53,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                List<Funcionalidade> funcionalidades = funcionalidadeDao.buscarFuncionalidadesPorPerfilId(id);
+                List<Funcionalidade> funcionalidades = funcionalidadeDao.buscarPorId(id);
                 return new Perfil(
                     rs.getInt("id"),
                     rs.getString("nome"),
@@ -57,7 +62,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
                 );
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao buscar perfil por ID: " + e.getMessage());
+            throw new RuntimeException("Erro ao buscar perfil por ID: " + e.getMessage(), e);
         }
         return null;
     }
@@ -66,8 +71,8 @@ public class PerfilSQLiteDao implements IPerfilDAO {
     public List<Perfil> listarTodos() {
         String sql = "SELECT * FROM Perfil";
         List<Perfil> perfis = new ArrayList<>();
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            ResultSet rs = stmt.executeQuery();
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 List<Funcionalidade> funcionalidades = funcionalidadeDao.buscarFuncionalidadesPorPerfilId(rs.getInt("id"));
                 perfis.add(new Perfil(
@@ -78,7 +83,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
                 ));
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao listar todos os perfis: " + e.getMessage());
+            throw new RuntimeException("Erro ao listar perfis: " + e.getMessage(), e);
         }
         return perfis;
     }
@@ -94,7 +99,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
 
             funcionalidadeDao.atualizarFuncionalidades(perfil.getFuncionalidades(), perfil.getId());
         } catch (SQLException e) {
-            System.out.println("Erro ao atualizar perfil: " + e.getMessage());
+            throw new RuntimeException("Erro ao atualizar perfil: " + e.getMessage(), e);
         }
     }
 
@@ -107,7 +112,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
 
             funcionalidadeDao.excluirFuncionalidadesPorPerfilId(id);
         } catch (SQLException e) {
-            System.out.println("Erro ao excluir perfil: " + e.getMessage());
+            throw new RuntimeException("Erro ao excluir perfil: " + e.getMessage(), e);
         }
     }
 
@@ -120,7 +125,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
                 return rs.getInt("id");
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao obter ID do perfil pelo nome: " + e.getMessage());
+            throw new RuntimeException("Erro ao obter ID do perfil pelo nome: " + e.getMessage(), e);
         }
         return -1;
     }

@@ -13,7 +13,6 @@ import br.projeto.model.Funcionalidade;
 import br.projeto.model.NivelUI;
 import br.projeto.model.Perfil;
 import br.projeto.model.Projeto;
-import br.projeto.model.Usuario;
 import br.projeto.singleton.UsuarioSingleton;
 
 /**
@@ -23,7 +22,6 @@ import br.projeto.singleton.UsuarioSingleton;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
