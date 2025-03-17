@@ -390,6 +390,7 @@ public class ElaborarEstimativaPresenter implements Observer {
         projetoSingleton.atualizarProjeto(projeto);
 
         JOptionPane.showMessageDialog(view, "Estimativa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        view.dispose();
     }
 
 
