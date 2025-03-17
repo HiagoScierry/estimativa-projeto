@@ -30,7 +30,6 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -40,7 +39,11 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
         lblWeb = new javax.swing.JLabel();
         lblIOS = new javax.swing.JLabel();
         lblAndroid = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         chcWeb = new javax.swing.JCheckBox();
         chcIOS = new javax.swing.JCheckBox();
         chcAndroid = new javax.swing.JCheckBox();
@@ -55,7 +58,7 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblEstimativaProjeto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblEstimativaProjeto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -170,77 +173,37 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
             tblEstimativaProjeto.getColumnModel().getColumn(6).setPreferredWidth(18);
         }
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 54;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 1537;
-        gridBagConstraints.ipady = 405;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(30, 40, 0, 40);
-        getContentPane().add(jScrollPane1, gridBagConstraints);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1559, -1));
 
         lblWeb.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblWeb.setText("WEB E BACK-END");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 7, 15, 0);
-        getContentPane().add(lblWeb, gridBagConstraints);
+        getContentPane().add(lblWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
 
         lblIOS.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblIOS.setText("iOS");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 21, 0, 0);
-        getContentPane().add(lblIOS, gridBagConstraints);
+        getContentPane().add(lblIOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, -1));
 
         lblAndroid.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblAndroid.setText("ANDROID");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
-        getContentPane().add(lblAndroid, gridBagConstraints);
+        getContentPane().add(lblAndroid, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 20, -1, -1));
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 13, 52));
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 22, 52));
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = -3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jSeparator3, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 77, 0, 0);
-        getContentPane().add(chcWeb, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 25, 0, 0);
-        getContentPane().add(chcIOS, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 40, 0, 0);
-        getContentPane().add(chcAndroid, gridBagConstraints);
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, -1));
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 20, 31, 52));
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 20, 50, 52));
+        getContentPane().add(chcWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, -1, -1));
+        getContentPane().add(chcIOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, -1, -1));
+        getContentPane().add(chcAndroid, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 50, -1, -1));
 
         tblPrecosPorDiaTrabalho.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblPrecosPorDiaTrabalho.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -293,29 +256,11 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
             tblPrecosPorDiaTrabalho.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 488;
-        gridBagConstraints.ipady = 145;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.2;
-        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
-        getContentPane().add(jScrollPane3, gridBagConstraints);
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 1214, 179));
 
         btnCriarEstimativa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCriarEstimativa.setText("Criar Estimativa");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 0, 0, 0);
-        getContentPane().add(btnCriarEstimativa, gridBagConstraints);
+        getContentPane().add(btnCriarEstimativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 720, -1, -1));
 
         tblValoresFinais.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblValoresFinais.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -361,39 +306,14 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
             tblValoresFinais.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 15;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 400;
-        gridBagConstraints.ipady = 153;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(15, 18, 0, 40);
-        getContentPane().add(jScrollPane4, gridBagConstraints);
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 520, 340, 179));
 
         lblNomeProjeto.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblNomeProjeto.setText("Nome do Projeto:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 40, 0, 0);
-        getContentPane().add(lblNomeProjeto, gridBagConstraints);
+        getContentPane().add(lblNomeProjeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         txtNomeProjeto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 5;
-        gridBagConstraints.ipadx = 200;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
-        getContentPane().add(txtNomeProjeto, gridBagConstraints);
+        getContentPane().add(txtNomeProjeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 330, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -475,7 +395,11 @@ public class ElaborarEstimativaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblAndroid;
     private javax.swing.JLabel lblIOS;

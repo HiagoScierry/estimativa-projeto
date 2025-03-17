@@ -6,6 +6,7 @@ package br.projeto.dao.factory;
 
 import br.projeto.config.database.SQLiteConnection;
 import br.projeto.dao.interfaces.ICustoAdicionalDAO;
+import br.projeto.dao.interfaces.IEstimativaDAO;
 import br.projeto.dao.interfaces.IFuncionalidadeDAO;
 import br.projeto.dao.interfaces.INivelUIDAO;
 import br.projeto.dao.interfaces.IPerfilDAO;
@@ -16,6 +17,7 @@ import br.projeto.dao.interfaces.IProjetoPerfilDAO;
 import br.projeto.dao.interfaces.IProjetoUsuarioCompartilhadoDAO;
 import br.projeto.dao.interfaces.IUsuarioDAO;
 import br.projeto.dao.sqlite.CustoAdicionalSQLiteDao;
+import br.projeto.dao.sqlite.EstimativaSQLiteDao;
 import br.projeto.dao.sqlite.FuncionalidadeSQLiteDao;
 import br.projeto.dao.sqlite.NivelUISQLiteDao;
 import br.projeto.dao.sqlite.PerfilSQLiteDao;
@@ -110,5 +112,10 @@ public class DaoSQLiteFactory implements IDAOFactory {
     @Override
     public IProjetoUsuarioCompartilhadoDAO getProjetoUsuarioCompartilhadoDao() throws SQLException, Exception {
         return new ProjetoUsuarioCompartilhadoSQLiteDao();
+    }
+    
+    @Override
+    public IEstimativaDAO getEstimativaDAO() throws SQLException, Exception {
+        return new EstimativaSQLiteDao();
     }
 }

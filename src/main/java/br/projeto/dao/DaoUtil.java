@@ -2,6 +2,7 @@ package br.projeto.dao;
 
 import br.projeto.dao.factory.IDAOFactory;
 import br.projeto.dao.interfaces.ICustoAdicionalDAO;
+import br.projeto.dao.interfaces.IEstimativaDAO;
 import br.projeto.dao.interfaces.IFuncionalidadeDAO;
 import br.projeto.dao.interfaces.INivelUIDAO;
 import br.projeto.dao.interfaces.IPerfilDAO;
@@ -35,6 +36,7 @@ public class DaoUtil {
     private IUsuarioDAO usuarioDao;
     private INivelUIDAO nivelUIDao;
     private IProjetoUsuarioCompartilhadoDAO projetoUsuarioCompartilhadoDao;
+    private IEstimativaDAO estimativaDao;
 
     private DaoUtil() throws SQLException, Exception {
     }
@@ -50,6 +52,7 @@ public class DaoUtil {
         this.usuarioDao = daoFactory.getUsuarioDao();
         this.nivelUIDao = daoFactory.getNivelUIDao();
         this.projetoUsuarioCompartilhadoDao = daoFactory.getProjetoUsuarioCompartilhadoDao();
+        this.estimativaDao = daoFactory.getEstimativaDAO();
     }
 
     public static void configureInstance(IDAOFactory daoFactory) throws Exception {
@@ -102,5 +105,9 @@ public class DaoUtil {
     
     public IProjetoUsuarioCompartilhadoDAO getProjetoUsuarioCompartilhadoDao(){
         return projetoUsuarioCompartilhadoDao;
+    }
+    
+    public IEstimativaDAO getEstimativaDao(){
+        return estimativaDao;
     }
 }

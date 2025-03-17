@@ -34,6 +34,14 @@ CREATE TABLE IF NOT EXISTS NivelUI (
     percentual REAL NOT NULL
 );
 
+--Tabela Estimativa 
+CREATE TABLE IF NOT EXISTS Estimativa (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    custoTotal REAL NOT NULL,
+    tempoTotal INTEGER NOT NULL,
+    precoFinal REAL NOT NULL
+);
+
 -- Tabela Projeto
 CREATE TABLE IF NOT EXISTS Projeto (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,9 +50,11 @@ CREATE TABLE IF NOT EXISTS Projeto (
     status TEXT NOT NULL,
     compartilhado BOOLEAN NOT NULL,
     nivelUIId INTEGER NOT NULL,
+    estimativaId INTEGER NOT NULL,
     percentualImpostos REAL NOT NULL,
     percentualLucro REAL NOT NULL,
     FOREIGN KEY (nivelUIId) REFERENCES NivelUI(id) ON DELETE RESTRICT
+    FOREIGN KEY (estimativaId) REFERENCES Estimativa(id) ON DELETE CASCADE
 );
 
 -- TabelaProjetoUsuarioCompartilhado (Relação muitos-para-muitos entre Projeto e Usuario)
