@@ -4,6 +4,7 @@ import br.projeto.model.Usuario;
 import br.projeto.presenter.helpers.WindowManager;
 import br.projeto.repository.UsuarioRepository;
 import br.projeto.repository.interfaces.IUsuarioRepository;
+import br.projeto.singleton.LogSingleton;
 import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.LoginView;
 import java.util.Optional;
@@ -71,6 +72,14 @@ public class LoginPresenter {
         UsuarioSingleton usuarioSingleton = UsuarioSingleton.getInstance();
         usuarioSingleton.setUsuario(usuario.get());
         
+
+        LogSingleton.getInstancia().criarLog(
+            "INFO",
+            "AUTENTICAÇÃO USUARIO",
+            usuarioSingleton.getInstance().getUsuario().getNome() + "/" + usuarioSingleton.getInstance().getUsuario().getEmail(),
+                String.valueOf(usuarioSingleton.getInstance().getUsuario().getId()),
+            null);
+
         return true;
     }
 

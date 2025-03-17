@@ -5,7 +5,10 @@ import br.projeto.dao.DaoUtil;
 import br.projeto.dao.factory.DaoH2Factory;
 import br.projeto.dao.factory.DaoSQLiteFactory;
 import br.projeto.presenter.LoginPresenter;
+import br.projeto.singleton.LogSingleton;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.apache.commons.logging.Log;
+
 import javax.swing.JOptionPane;
 
 
@@ -19,6 +22,9 @@ public class Main {
     private static void configuracaoInicial() {
         Dotenv dotenv = Dotenv.load();
 
+        LogSingleton log = LogSingleton.getInstancia();
+        System.out.println(dotenv.get("LOG_TYPE"));
+        log.setTipoLog(dotenv.get("LOG_TYPE"));
 
         String bancoDados = dotenv.get("BANCO_DE_DADOS");
         if ("SQLITE".equals(bancoDados)) {

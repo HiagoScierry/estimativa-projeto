@@ -8,6 +8,7 @@ import br.projeto.model.Projeto;
 import br.projeto.model.Usuario;
 import br.projeto.repository.UsuarioRepository;
 import br.projeto.repository.interfaces.IUsuarioRepository;
+import br.projeto.singleton.LogSingleton;
 import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.GerenciadorUsuarioView;
 import java.util.List;
@@ -32,13 +33,21 @@ public class GerenciadorUsuarioPresenter {
     private void configurarEventos(){
         inserirDadosUsuarioLogado();
         atualizarTabelaUsuarios();
+        LogSingleton.getInstancia().criarLog(
+            "INFO",
+            "ABRIR TELA USUARIOS",
+            UsuarioSingleton.getInstance().getUsuario().getNome() + "/" + UsuarioSingleton.getInstance().getUsuario().getEmail(),
+            String.valueOf(UsuarioSingleton.getInstance().getUsuario().getId()),
+            null);
+
+
     }
 
     private void inserirDadosUsuarioLogado(){
         view.getTxtEmail().setText(usuarioLogado.getUsuario().getEmail());
         view.getTxtUsuario().setText(usuarioLogado.getUsuario().getNome());
     }
-    
+
     private void atualizarTabelaUsuarios() {
         IUsuarioRepository repository = new UsuarioRepository();
 

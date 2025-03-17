@@ -11,7 +11,9 @@ import br.projeto.model.NivelUI;
 import br.projeto.model.Projeto;
 import br.projeto.repository.ProjetoRepository;
 import br.projeto.service.EstimaProjetoService;
+import br.projeto.singleton.LogSingleton;
 import br.projeto.singleton.ProjetoSingleton;
+import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.ElaborarEstimativaView;
 import javax.swing.*;
 import javax.swing.event.AncestorEvent;
@@ -63,7 +65,7 @@ public class ElaborarEstimativaPresenter implements Observer {
         view.getTblPrecosPorDiaTrabalho().setValueAt(this.estimaProjetoService.getValorDiariaGerenciamento(), 1, 2);
         view.getTblPrecosPorDiaTrabalho().setValueAt(this.estimaProjetoService.getValorDiariaGerenciamento(), 1, 3);
         view.getTblPrecosPorDiaTrabalho().setValueAt(this.estimaProjetoService.getValorDiariaGerenciamento(), 1, 4);
-        
+
         view.getTblPrecosPorDiaTrabalho().setValueAt(this.estimaProjetoService.getValorDiariaDesenvolvimento(), 2, 2);
         view.getTblPrecosPorDiaTrabalho().setValueAt(this.estimaProjetoService.getValorDiariaDesenvolvimento(), 2, 3);
         view.getTblPrecosPorDiaTrabalho().setValueAt(this.estimaProjetoService.getValorDiariaDesenvolvimento(), 2, 4);
@@ -77,6 +79,15 @@ public class ElaborarEstimativaPresenter implements Observer {
         view.getTblPrecosPorDiaTrabalho().setValueAt(2000.00, 8, 2);
         view.getTblPrecosPorDiaTrabalho().setValueAt("15%", 9, 2);
         view.getTblPrecosPorDiaTrabalho().setValueAt("15%", 10, 2);
+
+        LogSingleton.getInstancia().criarLog(
+        "INFO",
+        "ABRIR TELA ELABORAR ESTIMATIVA",
+        UsuarioSingleton.getInstance().getUsuario().getNome() + "/" + UsuarioSingleton.getInstance().getUsuario().getEmail(),
+        String.valueOf(UsuarioSingleton.getInstance().getUsuario().getId()),
+        null
+        );
+
 
     }
     public void setProjetoId(int projetoId) {
@@ -389,6 +400,14 @@ public class ElaborarEstimativaPresenter implements Observer {
 
         projetoSingleton.atualizarProjeto(projeto);
 
+        LogSingleton.getInstancia().criarLog(
+            "INFO",
+            "CRIOU ESTIMATIVA",
+            UsuarioSingleton.getInstance().getUsuario().getNome() + "/" + UsuarioSingleton.getInstance().getUsuario().getEmail(),
+            String.valueOf(UsuarioSingleton.getInstance().getUsuario().getId()),
+            null
+            );
+
         JOptionPane.showMessageDialog(view, "Estimativa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         view.dispose();
     }
@@ -396,7 +415,7 @@ public class ElaborarEstimativaPresenter implements Observer {
 
     @Override
     public void update(List<Projeto> projetos){}
-    
+
     public ElaborarEstimativaView getView() {
         return view;
     }

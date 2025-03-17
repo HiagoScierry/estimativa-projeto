@@ -15,6 +15,7 @@ import model.log;
  */
 public class LogSingleton {
     private static LogSingleton instancia = null;
+    private String tipoLogName;
     private ILogAdapter tipoLog;
     
     private LogSingleton(){};
@@ -29,9 +30,16 @@ public class LogSingleton {
     public void setTipoLog(String tipo){
         if(tipo.equalsIgnoreCase("JSON")){
             tipoLog = new JSONLogAdapter();
-        } else if(tipo.equalsIgnoreCase("CSV")){
-            tipoLog = new CSVLogAdapter();
+            setTipoLogName(tipo);
+            return;
         }
+
+        if(tipo.equalsIgnoreCase("CSV")){
+            tipoLog = new CSVLogAdapter();
+            setTipoLogName(tipo);
+            return;
+        }
+
         throw new IllegalArgumentException("Formato inválido: " + tipo);
     }
     
@@ -47,5 +55,13 @@ public class LogSingleton {
         } else {
             this.tipoLog.escreverMensagemLogErro(logEntry, exception);
         }
+    }
+
+    public void setTipoLogName(String tipoLogName) {
+        this.tipoLogName = tipoLogName;
+    }
+
+    public String getTipoLogName() {
+        return tipoLogName;
     }
 }

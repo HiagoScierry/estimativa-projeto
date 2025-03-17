@@ -5,6 +5,7 @@
 package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
+import br.projeto.singleton.LogSingleton;
 import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.view.VisualizarEstimativaView;
 import java.util.List;

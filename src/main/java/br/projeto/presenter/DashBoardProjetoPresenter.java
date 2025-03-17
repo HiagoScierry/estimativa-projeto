@@ -2,7 +2,9 @@ package br.projeto.presenter;
 
 import br.projeto.model.Projeto;
 import br.projeto.service.EstimaProjetoService;
+import br.projeto.singleton.LogSingleton;
 import br.projeto.singleton.ProjetoSingleton;
+import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.DashBoardProjetoView;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -20,6 +22,14 @@ public class DashBoardProjetoPresenter implements Observer {
 
         this.projetoSingleton.addObserver(this);
         carregarDashboard();
+
+         LogSingleton.getInstancia().criarLog(
+            "INFO",
+            "ABRIR TELA DASHBOARD PROJETOS",
+            UsuarioSingleton.getInstance().getUsuario().getNome() + "/" + UsuarioSingleton.getInstance().getUsuario().getEmail(),
+                 String.valueOf(UsuarioSingleton.getInstance().getUsuario().getId()),
+            null
+        );
     }
 
     private void carregarDashboard() {

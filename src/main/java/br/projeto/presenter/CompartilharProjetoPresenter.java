@@ -9,6 +9,7 @@ import br.projeto.model.Usuario;
 import br.projeto.repository.ProjetoUsuarioCompartilhadoRepository;
 import br.projeto.repository.UsuarioRepository;
 import br.projeto.repository.interfaces.IUsuarioRepository;
+import br.projeto.singleton.LogSingleton;
 import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.CompartilharProjetoView;
@@ -23,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Cauã
  */
-public class CompartilharProjetoPresenter{
+public class CompartilharProjetoPresenter {
     private final CompartilharProjetoView view;
     private final ProjetoSingleton projetoSingleton;
     private final UsuarioSingleton usuarioLogado;
@@ -35,10 +36,18 @@ public class CompartilharProjetoPresenter{
         this.projetoSingleton = projetoSingleton;
         this.usuarioLogado = UsuarioSingleton.getInstance();
         this.projetoCompartilhadoRepository = new ProjetoUsuarioCompartilhadoRepository();
-        this.usuarioRepository = new UsuarioRepository();   
+        this.usuarioRepository = new UsuarioRepository();
 
         configurarEventos();
         atualizarTabelaUsuarios();
+
+        LogSingleton.getInstancia().criarLog(
+                "INFO",
+                "ABRIR TELA COMPARTILHAR PROJETO",
+                UsuarioSingleton.getInstance().getUsuario().getNome() + "/"
+                        + UsuarioSingleton.getInstance().getUsuario().getEmail(),
+                String.valueOf(UsuarioSingleton.getInstance().getUsuario().getId()),
+                null);
     }
 
     private void configurarEventos() {
@@ -51,7 +60,7 @@ public class CompartilharProjetoPresenter{
     }
 
     private void atualizarTabelaUsuarios() {
-        
+
         List<Usuario> usuarios = usuarioRepository.buscarTodos();
 
         String emailUsuarioLogado = usuarioLogado.getUsuario().getEmail();
@@ -63,7 +72,7 @@ public class CompartilharProjetoPresenter{
         tableModel.setRowCount(0);
 
         for (Usuario usuario : usuariosFiltrados) {
-            Object[] row = {false, usuario.getNome(), usuario.getEmail()};
+            Object[] row = { false, usuario.getNome(), usuario.getEmail() };
             tableModel.addRow(row);
         }
     }
@@ -73,9 +82,9 @@ public class CompartilharProjetoPresenter{
 
         if (projetoAtual == null) {
             JOptionPane.showMessageDialog(
-                view, 
-                "Nenhum projeto selecionado.", 
-                "Erro", 
+                view,
+                "Nenhum projeto selecionado.",
+                "Erro",
                 JOptionPane.ERROR_MESSAGE
             );
             return;
@@ -90,36 +99,44 @@ public class CompartilharProjetoPresenter{
             if (selecionado) {
                 usuarioSelecionado = true;
                 String emailUsuario = (String) model.getValueAt(i, 2);
-                
-            if (!usuarioSelecionado) {
-            JOptionPane.showMessageDialog(
-                view, 
-                "Selecione pelo menos um usuário para compartilhar!", 
-                "Aviso", 
-                JOptionPane.WARNING_MESSAGE
-            );
-            return;
-            }
-            
+
+                if (!usuarioSelecionado) {
+                    JOptionPane.showMessageDialog(
+                        view,
+                        "Selecione pelo menos um usuário para compartilhar!",
+                        "Aviso",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+
                 usuarioRepository.buscarPorEmail(emailUsuario).ifPresent(usuario -> {
                     if (projetoCompartilhadoRepository.verificarSeProjetoJaCompartilhado(projetoAtual.getId(), usuario.getId())) {
                         JOptionPane.showMessageDialog(
-                            view, 
-                            "O projeto já foi compartilhado com o usuário: " + usuario.getNome(), 
-                            "Aviso", 
+                            view,
+                            "O projeto já foi compartilhado com o usuário: " + usuario.getNome(),
+                            "Aviso",
                             JOptionPane.WARNING_MESSAGE
                         );
                         return;
                     } else {
                         projetoCompartilhadoRepository.compartilharProjeto(projetoAtual.getId(), usuario.getId(), false);
                         JOptionPane.showMessageDialog(
-                        view, 
-                        "Projeto compartilhado com sucesso!", 
-                        "Sucesso", 
+                        view,
+                        "Projeto compartilhado com sucesso!",
+                        "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE
                         );
                     }
                 });
+
+                LogSingleton.getInstancia().criarLog(
+                    "INFO",
+                    "COMPARTILHOU PROJETO COM USUARIOS " + emailUsuario,
+                    UsuarioSingleton.getInstance().getUsuario().getNome() + "/" + UsuarioSingleton.getInstance().getUsuario().getEmail(),
+                    String.valueOf(UsuarioSingleton.getInstance().getUsuario().getId()),
+                    null
+                );
             }
         }
 

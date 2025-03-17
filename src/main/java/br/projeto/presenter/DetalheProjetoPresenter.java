@@ -8,6 +8,7 @@ import br.projeto.view.DetalheProjetoView;
 import br.projeto.service.EstimaProjetoService;
 import br.projeto.repository.ProjetoUsuarioCompartilhadoRepository;
 import br.projeto.repository.UsuarioRepository;
+import br.projeto.singleton.LogSingleton;
 import br.projeto.singleton.ProjetoSingleton;
 import br.projeto.singleton.UsuarioSingleton;
 import java.util.HashMap;
@@ -44,6 +45,14 @@ public class DetalheProjetoPresenter implements Observer {
             carregarCabecalho(projeto);
             carregarDetalhes(projeto);
         }
+
+        LogSingleton.getInstancia().criarLog(
+            "INFO",
+            "ABRIR TELA DETALHE PROJETO",
+            UsuarioSingleton.getInstance().getUsuario().getNome() + "/" + UsuarioSingleton.getInstance().getUsuario().getEmail(),
+            String.valueOf(UsuarioSingleton.getInstance().getUsuario().getId()),
+            null
+        );
     }
 
     private void carregarCabecalho(Projeto projeto) {
@@ -61,23 +70,23 @@ public class DetalheProjetoPresenter implements Observer {
                 nomeCriador = "Desconhecido";
             }
         }
-        
+
         StringBuilder plataformasBuilder = new StringBuilder();
 
         if (!projeto.getFuncionalidadesAndroid().isEmpty()) {
             plataformasBuilder.append("Android ");
-        } 
+        }
 
         if (!projeto.getFuncionalidadesWebBackend().isEmpty()) {
             plataformasBuilder.append("Web/Backend ");
-        } 
+        }
 
         if (!projeto.getFuncionalidadesIOS().isEmpty()) {
             plataformasBuilder.append("iOS");
         }
 
         String plataformasFinal = plataformasBuilder.toString();
-        
+
         view.atualizarCabecalho(
             projeto.getNome(),
             nomeCriador,
@@ -118,11 +127,11 @@ public class DetalheProjetoPresenter implements Observer {
             dadosTabela[i][2] = valorUnitario;
             i++;
         }
-    
+
         Estimativa estimativa = projeto.getEstimativa();
         view.atualizarTabela(dadosTabela, estimativa.getPrecoFinal());
     }
-    
+
     @Override
     public void update(List<Projeto> projetos) {
          carregarDetalhesProjeto();
