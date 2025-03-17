@@ -67,10 +67,12 @@ public class DetalheProjetoPresenter implements Observer {
         if (!projeto.getFuncionalidadesAndroid().isEmpty()) {
             plataformasBuilder.append("Android ");
         } 
-        else if (!projeto.getFuncionalidadesWebBackend().isEmpty()) {
+
+        if (!projeto.getFuncionalidadesWebBackend().isEmpty()) {
             plataformasBuilder.append("Web/Backend ");
         } 
-        else if (!projeto.getFuncionalidadesIOS().isEmpty()) {
+
+        if (!projeto.getFuncionalidadesIOS().isEmpty()) {
             plataformasBuilder.append("iOS");
         }
 
