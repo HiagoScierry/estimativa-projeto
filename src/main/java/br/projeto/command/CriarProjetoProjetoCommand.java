@@ -30,22 +30,17 @@ public class CriarProjetoProjetoCommand implements ProjetoCommand {
         List<Perfil> perfis = new ArrayList<Perfil>();
         List<CustoAdicional> custoAdicional = new ArrayList<CustoAdicional>();
 
-        Projeto projeto = new Projeto(
-                0,
-                titulo,
-                "",
-                "EM ANDAMENTO",
-                false,
-                perfis,
-                funcionalidades,
-                funcionalidades,
-                funcionalidades,
-                custoAdicional,
-                nivelUI,
-                estimativa,
-                0.0,
-                0.0
-        );
+        Projeto projeto = new Projeto();
+        projeto.setNome(titulo);
+        projeto.setFuncionalidadesAndroid(funcionalidades);
+        projeto.setFuncionalidadesIOS(funcionalidades);
+        projeto.setFuncionalidadesWebBackend(funcionalidades);
+        projeto.setNivelUI(nivelUI);
+        projeto.setEstimativa(estimativa);
+        projeto.setPerfis(perfis);
+        projeto.setCustosAdicionais(custoAdicional);
+
+
 
         projetoSingleton.adicionarProjeto(projeto);
 

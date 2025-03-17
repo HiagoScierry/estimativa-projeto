@@ -53,7 +53,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                List<Funcionalidade> funcionalidades = funcionalidadeDao.buscarPorId(id);
+                List<Funcionalidade> funcionalidades = (List<Funcionalidade>) funcionalidadeDao.buscarPorId(id);
                 return new Perfil(
                     rs.getInt("id"),
                     rs.getString("nome"),
@@ -74,7 +74,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                List<Funcionalidade> funcionalidades = funcionalidadeDao.buscarFuncionalidadesPorPerfilId(rs.getInt("id"));
+                List<Funcionalidade> funcionalidades = new ArrayList<>();
                 perfis.add(new Perfil(
                     rs.getInt("id"),
                     rs.getString("nome"),
@@ -97,7 +97,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setInt(3, perfil.getId());
             stmt.executeUpdate();
 
-            funcionalidadeDao.atualizarFuncionalidades(perfil.getFuncionalidades(), perfil.getId());
+//            funcionalidadeDao.atualizarFuncionalidades(perfil.getFuncionalidades(), perfil.getId());
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar perfil: " + e.getMessage(), e);
         }
@@ -110,7 +110,7 @@ public class PerfilSQLiteDao implements IPerfilDAO {
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
-            funcionalidadeDao.excluirFuncionalidadesPorPerfilId(id);
+//            funcionalidadeDao.excluirFuncionalidadesPorPerfilId(id);
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao excluir perfil: " + e.getMessage(), e);
         }
