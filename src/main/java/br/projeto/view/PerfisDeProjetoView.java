@@ -5,13 +5,14 @@
 package br.projeto.view;
 
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 import javax.swing.JTable;
 
 /**
  *
  * @author Cauã
  */
-public class PerfisDeProjetoView extends javax.swing.JFrame {
+public class PerfisDeProjetoView extends JInternalFrame {
 
     /**
      * Creates new form PerfisDeProjetoViewa

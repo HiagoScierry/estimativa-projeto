@@ -4,11 +4,13 @@
  */
 package br.projeto.view;
 
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author Cauã
  */
-public class VisualizarEstimativaView extends javax.swing.JFrame {
+public class VisualizarEstimativaView extends JInternalFrame {
 
     /**
      * Creates new form VisualizarEstimativaView

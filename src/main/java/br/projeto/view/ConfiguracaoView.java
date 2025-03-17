@@ -5,12 +5,13 @@
 package br.projeto.view;
 
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author Cauã
  */
-public class ConfiguracaoView extends javax.swing.JFrame {
+public class ConfiguracaoView extends JInternalFrame {
 
     /**
      * Creates new form ConfiguracaoView
