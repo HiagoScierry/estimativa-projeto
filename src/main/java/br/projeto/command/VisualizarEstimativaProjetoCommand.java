@@ -34,20 +34,20 @@ public class VisualizarEstimativaProjetoCommand implements ProjetoCommand{
     }
 
     @Override
-    public void execute() {
+    public void execute() {      
         WindowManager windowManager = WindowManager.getInstance();
 
         if (windowManager.isFrameAberto(titulo)) {
             windowManager.bringToFront(titulo);
         } else {
-            
+                 
             if (projetoSingleton.getProjetoPorId(projetoId) == null ||
                 projetoSingleton.getProjetoPorId(projetoId).getEstimativa() == null) {
-
+                System.out.println(projetoSingleton.getProjetoPorId(projetoId).getEstimativa());
                 JOptionPane.showMessageDialog(null, "Estimativa indisponível! Não é possível acessar esta página.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            VisualizarEstimativaPresenter presenter = new VisualizarEstimativaPresenter();
+            VisualizarEstimativaPresenter presenter = new VisualizarEstimativaPresenter(projetoId);
             JInternalFrame frame = new JInternalFrame(titulo, true, true, true, true);
             frame.setContentPane(presenter.getView().getContentPane());
             frame.pack();

@@ -4,6 +4,10 @@
  */
 package br.projeto.view;
 
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Cauã
@@ -282,6 +286,22 @@ public class VisualizarEstimativaView extends javax.swing.JFrame {
             }
         });
     }
+
+    public JTextField getTxtPlataformas() {
+        return txtPlataformas;
+    }
+
+    public JTable getTblFuncionalidadesProjeto() {
+        return tblFuncionalidadesProjeto;
+    }
+
+    public JTable getTblTaxasExtras() {
+        return tblTaxasExtras;
+    }
+
+    public JTable getTblValoresFinais() {
+        return tblValoresFinais;
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
