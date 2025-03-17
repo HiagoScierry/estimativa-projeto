@@ -25,21 +25,64 @@ public class EstimativaSQLiteDao implements IEstimativaDAO {
 
     @Override
     public void inserir(Estimativa estimativa) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        String sql = "INSERT INTO Estimativa (custoTotal, tempoTotal, precoFinal) VALUES (?, ?, ?)";
 
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setDouble(1, estimativa.getCustoTotal());
+            stmt.setInt(2, estimativa.getTempoTotal());
+            stmt.setDouble(3, estimativa.getPrecoFinal());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     public void atualizar(Estimativa estimativa) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "UPDATE Estimativa SET custoTotal = ?, tempoTotal = ?, precoFinal = ? WHERE id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setDouble(1, estimativa.getCustoTotal());
+            stmt.setInt(2, estimativa.getTempoTotal());
+            stmt.setDouble(3, estimativa.getPrecoFinal());
+            stmt.setInt(4, estimativa.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void excluir(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        String sql = "DELETE FROM Estimativa WHERE id = ?";
 
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     public Estimativa buscarPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM Estimativa WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Estimativa(
+                    rs.getInt("id"),
+                    rs.getDouble("custoTotal"),
+                    rs.getInt("tempoTotal"),
+                    rs.getDouble("precoFinal")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar Estimativa por ID: " + e.getMessage());
+        }
+        return null;
     }
 }

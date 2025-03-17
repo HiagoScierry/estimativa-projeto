@@ -26,6 +26,7 @@ public class CriarProjetoProjetoCommand implements ProjetoCommand {
 
         List<Funcionalidade> funcionalidades = new ArrayList<Funcionalidade>();
         NivelUI nivelUI = new NivelUI(0, "UI Inicial", 0.0);
+        Estimativa estimativa = new Estimativa(0, 0, 0, 0); //precisa acertar essa parte
         List<Perfil> perfis = new ArrayList<Perfil>();
         List<CustoAdicional> custoAdicional = new ArrayList<CustoAdicional>();
 
@@ -41,6 +42,7 @@ public class CriarProjetoProjetoCommand implements ProjetoCommand {
                 funcionalidades,
                 custoAdicional,
                 nivelUI,
+                estimativa,
                 0.0,
                 0.0
         );

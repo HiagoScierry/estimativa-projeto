@@ -48,6 +48,14 @@ public class GeneratorCSVAdapter extends AGeneratorAdapter {
             for (CustoAdicional custo : projeto.getCustosAdicionais()) {
                 cw.writeNext(new String[]{"", custo.getDescricao(), String.valueOf(custo.getValor())});
             }
+                    
+            Estimativa estimativa = projeto.getEstimativa();
+            if (estimativa != null) {
+                cw.writeNext(new String[]{"Estimativa do Projeto", ""});
+                cw.writeNext(new String[]{"Custo Total", String.valueOf(estimativa.getCustoTotal())});
+                cw.writeNext(new String[]{"Tempo Total (em horas)", String.valueOf(estimativa.getTempoTotal())});
+                cw.writeNext(new String[]{"Preço Final", String.valueOf(estimativa.getPrecoFinal())});
+            }
 
             cw.close();
             fw.close();

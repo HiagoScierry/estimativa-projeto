@@ -8,6 +8,7 @@ import br.projeto.config.database.SQLiteConnection;
 import br.projeto.dao.DaoUtil;
 import br.projeto.dao.interfaces.IProjetoDAO;
 import br.projeto.model.CustoAdicional;
+import br.projeto.model.Estimativa;
 import br.projeto.model.Funcionalidade;
 import br.projeto.model.NivelUI;
 import br.projeto.model.Perfil;
@@ -94,6 +95,7 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                 Optional<Usuario> criador = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("criadorId"));
                 Optional<Usuario> compartilhadoPor = daoUtil.getUsuarioDao().buscarPorId(rs.getInt("compartilhadoPorId"));
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
 
                 List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(id);
 
@@ -115,6 +117,7 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                     funcionalidadesAndroid,
                     custosAdicionais,
                     nivelUI,
+                    estimativa,
                     rs.getDouble("percentualImpostos"),
                     rs.getDouble("percentualLucro")
                 );
@@ -136,6 +139,7 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
 
                 List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
 
@@ -157,6 +161,7 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                     funcionalidadesAndroid,
                     custosAdicionais,
                     nivelUI,
+                    estimativa,
                     rs.getDouble("percentualImpostos"),
                     rs.getDouble("percentualLucro")
                 );
@@ -183,6 +188,7 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
 
                 List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
 
@@ -204,6 +210,7 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                     funcionalidadesAndroid,
                     custosAdicionais,
                     nivelUI,
+                    estimativa,
                     rs.getDouble("percentualImpostos"),
                     rs.getDouble("percentualLucro")
                 );

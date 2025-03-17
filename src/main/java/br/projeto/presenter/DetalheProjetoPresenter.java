@@ -1,5 +1,6 @@
 package br.projeto.presenter;
 
+import br.projeto.model.Estimativa;
 import br.projeto.model.Funcionalidade;
 import br.projeto.model.Projeto;
 import br.projeto.model.Usuario;
@@ -113,18 +114,9 @@ public class DetalheProjetoPresenter implements Observer {
             dadosTabela[i][2] = valorUnitario;
             i++;
         }
-
-    /*  Preciso usar isso de alguma maneira  
-        calcularCustosAdicionais(double custoHardware, double custoSoftware, double custoRiscos, double custoGarantia, double fundoReserva, double outrosCustos)
-
-        calcularImpostos(double subtotal, double percentualImpostos)
     
-        calcularLucro(double subtotalComImpostos, double percentualLucro)
-
-        calcularPrecoFinal(double subtotalComImpostos, double lucro)
-        public double calcularPrecoFinal(double subtotalComImpostos, double lucro)*/
-    
-        view.atualizarTabela(dadosTabela, projeto.calcularPrecoFinal(50.0));
+        Estimativa estimativa = projeto.getEstimativa();
+        view.atualizarTabela(dadosTabela, estimativa.getPrecoFinal());
     }
     
     @Override

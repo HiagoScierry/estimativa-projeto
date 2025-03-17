@@ -29,24 +29,42 @@ public class GeneratorPDFAdapter extends AGeneratorAdapter {
             documentPDF.add(new Paragraph("Percentual de Impostos: " + projeto.getPercentualImpostos()));
             documentPDF.add(new Paragraph("Percentual de Lucro: " + projeto.getPercentualLucro()));
 
-            documentPDF.add(new Paragraph("Funcionalidades Web/Backend:"));
-            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
-                documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
-            }
-            
-            documentPDF.add(new Paragraph("Funcionalidades iOS:"));
-            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
-                documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
-            }
+documentPDF.add(new Paragraph("Funcionalidades Web/Backend:"));
+if (projeto.getFuncionalidadesWebBackend() != null && !projeto.getFuncionalidadesWebBackend().isEmpty()) {
+    for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
+        System.out.println("Adicionando Web/Backend: " + funcionalidade.getNome());  // Log de execução
+        documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
+    }
+}
 
-            documentPDF.add(new Paragraph("Funcionalidades Android:"));
-            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
-                documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
-            }
+documentPDF.add(new Paragraph("Funcionalidades iOS:"));
+if (projeto.getFuncionalidadesIOS() != null && !projeto.getFuncionalidadesIOS().isEmpty()) {
+    for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
+        System.out.println("Adicionando iOS: " + funcionalidade.getNome());  // Log de execução
+        documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
+    }
+}
+
+documentPDF.add(new Paragraph("Funcionalidades Android:"));
+if (projeto.getFuncionalidadesAndroid() != null && !projeto.getFuncionalidadesAndroid().isEmpty()) {
+    for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
+        System.out.println("Adicionando Android: " + funcionalidade.getNome());  // Log de execução
+        documentPDF.add(new Paragraph("- " + funcionalidade.getNome() + " (Horas Estimadas: " + funcionalidade.getHorasEstimadas() + ")"));
+    }
+}
+
             
             documentPDF.add(new Paragraph("Custos Adicionais:"));
             for (CustoAdicional custo : projeto.getCustosAdicionais()) {
                 documentPDF.add(new Paragraph("- " + custo.getDescricao() + " (Valor: " + custo.getValor() + ")"));
+            }
+            
+            Estimativa estimativa = projeto.getEstimativa();
+            if (estimativa != null) {
+                documentPDF.add(new Paragraph("Estimativa do Projeto:"));
+                documentPDF.add(new Paragraph("Custo Total: " + estimativa.getCustoTotal()));
+                documentPDF.add(new Paragraph("Tempo Total (em horas): " + estimativa.getTempoTotal()));
+                documentPDF.add(new Paragraph("Preço Final: " + estimativa.getPrecoFinal()));
             }
 
 

@@ -15,14 +15,15 @@ public class Projeto {
     private List<Funcionalidade> funcionalidadesIOS;
     private List<Funcionalidade> funcionalidadesAndroid;
     private List<CustoAdicional> custosAdicionais;
-    private NivelUI nivelUI; 
+    private NivelUI nivelUI;
+    private Estimativa estimativa; 
     private double percentualImpostos;
     private double percentualLucro;
 
     public Projeto(int id, String nome, String dataCriacao, String status, boolean compartilhado,
                    List<Perfil> perfis, List<Funcionalidade> funcionalidadesWebBackend,
                    List<Funcionalidade> funcionalidadesIOS, List<Funcionalidade> funcionalidadesAndroid, 
-                   List<CustoAdicional> custosAdicionais, NivelUI nivelUI, double percentualImpostos, double percentualLucro) {
+                   List<CustoAdicional> custosAdicionais, NivelUI nivelUI, Estimativa estimativa, double percentualImpostos, double percentualLucro) {
         this.id = id;
         this.nome = nome;
         this.dataCriacao = dataCriacao;
@@ -34,6 +35,7 @@ public class Projeto {
         this.funcionalidadesAndroid = funcionalidadesAndroid;
         this.custosAdicionais = custosAdicionais;
         this.nivelUI = nivelUI;
+        this.estimativa = estimativa;
         this.percentualImpostos = percentualImpostos;
         this.percentualLucro = percentualLucro;
     }
@@ -71,6 +73,9 @@ public class Projeto {
 
     public NivelUI getNivelUI() { return nivelUI; }
     public void setNivelUI(NivelUI nivelUI) { this.nivelUI = nivelUI; }
+    
+    public Estimativa getEstimativa() { return estimativa; }
+    public void setEstimativa(Estimativa estimativa) { this.estimativa = estimativa; }
 
     public double getPercentualImpostos() { return percentualImpostos; }
     public void setPercentualImpostos(double percentualImpostos) { this.percentualImpostos = percentualImpostos; }
