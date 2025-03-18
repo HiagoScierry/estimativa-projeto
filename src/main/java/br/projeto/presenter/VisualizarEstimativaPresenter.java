@@ -127,7 +127,7 @@ public class VisualizarEstimativaPresenter implements Observer {
             model.addRow(new Object[]{"", ""});
         }
 
-        double valorTotalFuncionalidades = 0;
+        double valorTotalFuncionalidades = projeto.getEstimativa().getCustoTotal();
         int dias = 0;
 
         // Calculando valores a partir da tabela de funcionalidades
@@ -146,19 +146,16 @@ public class VisualizarEstimativaPresenter implements Observer {
         double valorMaisTaxas = valorTotalFuncionalidades + taxaExtras;
         double valorMaisImposto = valorTotalFuncionalidades + valorImposto;
         double lucro = valorTotalFuncionalidades * projeto.getPercentualLucro();
-        double precoFinalCliente = valorImposto + lucro + valorMaisTaxas;
-        int meses = (dias / 30) > 0 ? dias / 30 : 1;
-        double mediaPorMes = precoFinalCliente / meses;
 
         model.setValueAt(valorTotalFuncionalidades, 0, 1);
         model.setValueAt(valorMaisTaxas, 1, 1);
         model.setValueAt(valorImposto, 2, 1);
         model.setValueAt(valorMaisImposto, 3, 1);
         model.setValueAt(lucro, 4, 1);
-        model.setValueAt(dias, 5, 1);
-        model.setValueAt(meses, 6, 1);
-        model.setValueAt(precoFinalCliente, 7, 1);
-        model.setValueAt(mediaPorMes, 8, 1);
+        model.setValueAt(estimaService.calcularDiasTotais(projeto), 5, 1);
+        model.setValueAt(estimaService.calcularDiasTotais(projeto)/30, 6, 1);
+        model.setValueAt(projeto.getEstimativa().getPrecoFinal(), 7, 1);
+        model.setValueAt(projeto.getEstimativa().getPrecoFinal()/30, 8, 1);
     }
     
     @Override
