@@ -307,7 +307,6 @@ public class ElaborarEstimativaPresenter implements Observer {
                 funcionalidadeNome = view.getTblEstimativaProjeto().getValueAt(i, 1).toString();
             }
             boolean rowMarked = view.getTblEstimativaProjeto().getValueAt(i, 0) != null ? true : false;
-            Funcionalidade funcionalidade = new Funcionalidade(0, funcionalidadeNome, 0, "");
 
             if (i > 2 && i < 6 && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
                 nivelUI.setNome(view.getTblEstimativaProjeto().getValueAt(i, 1).toString());
@@ -318,50 +317,59 @@ public class ElaborarEstimativaPresenter implements Observer {
             if (i > 5) {
                 // Web Backend
                 if (rowMarked && webBackend) {
+                    System.out.println("Adicionando funcionalidade WEB/BACKEND");
+                    Funcionalidade funcionalidadeWeb = new Funcionalidade(0, funcionalidadeNome, 0, "");
+
                     String valorWeb = view.getTblEstimativaProjeto().getValueAt(i, 2).toString().trim();
                     if (valorWeb.contains("-")) {
-                        funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                        funcionalidadeWeb.setHorasEstimadas(0); // Ou outro valor padrão
                     } else {
                         try {
-                            funcionalidade.setHorasEstimadas(Integer.parseInt(valorWeb));
+                            funcionalidadeWeb.setHorasEstimadas(Integer.parseInt(valorWeb));
                         } catch (NumberFormatException e) {
-                            funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                            funcionalidadeWeb.setHorasEstimadas(0); // Ou outro valor padrão
                         }
                     }
-                    funcionalidade.setPlataforma("WEB/BACKEND");
-                    funcionalidadesWebBackend.add(funcionalidade);
+                    funcionalidadeWeb.setPlataforma("WEB/BACKEND");
+                    funcionalidadesWebBackend.add(funcionalidadeWeb);
                 }
 
                 // iOS
                 if (rowMarked && ios) {
+                    System.out.println("Adicionando funcionalidade IOS");
+                    Funcionalidade funcionalidadeIOS = new Funcionalidade(0, funcionalidadeNome, 0, "");
+
                     String valorIOS = view.getTblEstimativaProjeto().getValueAt(i, 3).toString().trim();
                     if (valorIOS.contains("-")) {
-                        funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                        funcionalidadeIOS.setHorasEstimadas(0); // Ou outro valor padrão
                     } else {
                         try {
-                            funcionalidade.setHorasEstimadas(Integer.parseInt(valorIOS));
+                            funcionalidadeIOS.setHorasEstimadas(Integer.parseInt(valorIOS));
                         } catch (NumberFormatException e) {
-                            funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                            funcionalidadeIOS.setHorasEstimadas(0); // Ou outro valor padrão
                         }
                     }
-                    funcionalidade.setPlataforma("IOS");
-                    funcionalidadesIOS.add(funcionalidade);
+                    funcionalidadeIOS.setPlataforma("IOS");
+                    funcionalidadesIOS.add(funcionalidadeIOS);
                 }
 
                 // Android
                 if (rowMarked && android) {
+                    System.out.println("Adicionando funcionalidade IOS");
+                    Funcionalidade funcionalidadeAndroid = new Funcionalidade(0, funcionalidadeNome, 0, "");
+
                     String valorAndroid = view.getTblEstimativaProjeto().getValueAt(i, 4).toString().trim();
                     if (valorAndroid.contains("-")) {
-                        funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                        funcionalidadeAndroid.setHorasEstimadas(0); // Ou outro valor padrão
                     } else {
                         try {
-                            funcionalidade.setHorasEstimadas(Integer.parseInt(valorAndroid));
+                            funcionalidadeAndroid.setHorasEstimadas(Integer.parseInt(valorAndroid));
                         } catch (NumberFormatException e) {
-                            funcionalidade.setHorasEstimadas(0); // Ou outro valor padrão
+                            funcionalidadeAndroid.setHorasEstimadas(0); // Ou outro valor padrão
                         }
                     }
-                    funcionalidade.setPlataforma("ANDROID");
-                    funcionalidadesAndroid.add(funcionalidade);
+                    funcionalidadeAndroid.setPlataforma("ANDROID");
+                    funcionalidadesAndroid.add(funcionalidadeAndroid);
                 }
             }
         }
