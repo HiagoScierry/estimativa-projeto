@@ -87,13 +87,16 @@ public class DetalheProjetoPresenter implements Observer {
         }
 
         String plataformasFinal = plataformasBuilder.toString();
-
+        double diasInterface = projeto.getNivelUI().getDiasInterface() * (1 + projeto.getNivelUI().getPercentual());
+        String nivelInterface = projeto.getNivelUI().getNome() + " - Dias: " + diasInterface;
+        
         view.atualizarCabecalho(
             projeto.getNome(),
             nomeCriador,
             projeto.getDataCriacao(),
             plataformasFinal,
-            projeto.getStatus()
+            projeto.getStatus(),
+            nivelInterface
         );
     }
 

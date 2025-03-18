@@ -6,7 +6,7 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 public class DetalheProjetoView extends JInternalFrame {
-    private JLabel lblNome, lblCriador, lblData, lblTipoProjeto, lblStatus, lblValorTotal;
+    private JLabel lblNome, lblCriador, lblData, lblTipoProjeto, lblStatus, lblValorTotal, lblNivelInterface;
     private JTable tabelaDetalhes;
     private DefaultTableModel modeloTabela;
 
@@ -30,12 +30,14 @@ public class DetalheProjetoView extends JInternalFrame {
         lblData = new JLabel("Data de Criação: ");
         lblTipoProjeto = new JLabel("Tipo de Projeto: ");
         lblStatus = new JLabel("Status: ");
+        lblNivelInterface = new JLabel("Nível interface: ");
 
         painelCabecalho.add(lblNome);
         painelCabecalho.add(lblCriador);
         painelCabecalho.add(lblData);
         painelCabecalho.add(lblTipoProjeto);
         painelCabecalho.add(lblStatus);
+        painelCabecalho.add(lblNivelInterface);
 
         painelPrincipal.add(painelCabecalho, BorderLayout.NORTH);
 
@@ -63,12 +65,13 @@ public class DetalheProjetoView extends JInternalFrame {
         painelPrincipal.add(painelTabela, BorderLayout.CENTER);
     }
 
-    public void atualizarCabecalho(String nome, String criador, String data, String tipoProjeto, String status) {
+    public void atualizarCabecalho(String nome, String criador, String data, String tipoProjeto, String status, String nivelInterface) {
         lblNome.setText("Nome: " + nome);
         lblCriador.setText("Criador: " + criador);
         lblData.setText("Data de Criação: " + data);
         lblTipoProjeto.setText("Tipo de Projeto: " + tipoProjeto);
         lblStatus.setText("Status: " + status);
+        lblNivelInterface.setText("Nível interface: " + nivelInterface);
     }
 
     public void atualizarTabela(Object[][] dados, double valorTotal) {
