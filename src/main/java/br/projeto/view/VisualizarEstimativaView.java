@@ -5,6 +5,8 @@
 package br.projeto.view;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -283,6 +285,22 @@ public class VisualizarEstimativaView extends JInternalFrame {
                 new VisualizarEstimativaView().setVisible(true);
             }
         });
+    }
+
+    public JTable getTblFuncionalidadesProjeto() {
+        return tblFuncionalidadesProjeto;
+    }
+
+    public JTable getTblTaxasExtras() {
+        return tblTaxasExtras;
+    }
+
+    public JTable getTblValoresFinais() {
+        return tblValoresFinais;
+    }
+
+    public JTextField getTxtPlataformas() {
+        return txtPlataformas;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
