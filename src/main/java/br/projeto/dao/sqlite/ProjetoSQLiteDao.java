@@ -189,6 +189,8 @@ public class ProjetoSQLiteDao implements IProjetoDAO {
                 projeto.setDataCriacao(rs.getString("dataCriacao"));
                 projeto.setStatus(rs.getString("status"));
                 projeto.setCompartilhado(rs.getBoolean("compartilhado"));
+                projeto.setPercentualImpostos(rs.getDouble("percentualImpostos"));
+                projeto.setPercentualLucro(rs.getDouble("percentualLucro"));
 
                 NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
                 projeto.setNivelUI(nivelUI);

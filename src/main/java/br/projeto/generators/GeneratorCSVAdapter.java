@@ -29,17 +29,17 @@ public class GeneratorCSVAdapter extends AGeneratorAdapter {
             cw.writeNext(new String[]{"Percentual de Impostos", String.valueOf(projeto.getPercentualImpostos())});
             cw.writeNext(new String[]{"Percentual de Lucro", String.valueOf(projeto.getPercentualLucro())});
 
-            cw.writeNext(new String[]{"Funcionalidades Web/Backend", "Nome", "Horas Estimadas"});
+            cw.writeNext(new String[]{"Funcionalidades Web/Backend", "Nome", "Dias Estimadas"});
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
                 cw.writeNext(new String[]{"", funcionalidade.getNome(), String.valueOf(funcionalidade.getHorasEstimadas())});
             }
 
-            cw.writeNext(new String[]{"Funcionalidades iOS", "Nome", "Horas Estimadas"});
+            cw.writeNext(new String[]{"Funcionalidades iOS", "Nome", "Dias Estimadas"});
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
                 cw.writeNext(new String[]{"", funcionalidade.getNome(), String.valueOf(funcionalidade.getHorasEstimadas())});
             }
 
-            cw.writeNext(new String[]{"Funcionalidades Android", "Nome", "Horas Estimadas"});
+            cw.writeNext(new String[]{"Funcionalidades Android", "Nome", "Dias Estimadas"});
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
                 cw.writeNext(new String[]{"", funcionalidade.getNome(), String.valueOf(funcionalidade.getHorasEstimadas())});
             }
@@ -53,7 +53,7 @@ public class GeneratorCSVAdapter extends AGeneratorAdapter {
             if (estimativa != null) {
                 cw.writeNext(new String[]{"Estimativa do Projeto", ""});
                 cw.writeNext(new String[]{"Custo Total", String.valueOf(estimativa.getCustoTotal())});
-                cw.writeNext(new String[]{"Tempo Total (em horas)", String.valueOf(estimativa.getTempoTotal())});
+                cw.writeNext(new String[]{"Tempo Total (em dias)", String.valueOf(estimativa.getTempoTotal())});
                 cw.writeNext(new String[]{"Preço Final", String.valueOf(estimativa.getPrecoFinal())});
             }
 
