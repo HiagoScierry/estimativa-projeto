@@ -123,30 +123,6 @@ public class DetalheProjetoPresenter implements Observer {
             });
         }
 
-        NivelUI nivelUI = projeto.getNivelUI();
-
-        List<String> tiposProjetos = List.of("WEB/BACKEND", "ANDROID", "IOS");
-
-        int somaTipoProjeto = (projeto.getFuncionalidadesAndroid().isEmpty() ? 0 : 1)
-                + (projeto.getFuncionalidadesIOS().isEmpty() ? 0 : 1)
-                + (projeto.getFuncionalidadesWebBackend().isEmpty() ? 0 : 1);
-
-        if (somaTipoProjeto == 0) somaTipoProjeto = 1; // Evita divisão por zero
-
-        for (String tipoProjeto : tiposProjetos) {
-            funcionalidades.put(funcionalidades.size() + nivelUI.getId(), new Object[]{
-                    tipoProjeto,
-                    tipoProjeto + " : "+nivelUI.getNome(),
-                    nivelUI.getDiasInterface() / somaTipoProjeto
-            });
-
-            funcionalidades.put(funcionalidades.size() + nivelUI.getId() + 1, new Object[]{
-                    tipoProjeto,
-                    tipoProjeto + " : "+nivelUI.getNome(),
-                    (int) (nivelUI.getPercentual() * nivelUI.getDiasInterface() / somaTipoProjeto)
-            });
-        }
-
         // Criando matriz para popular tabela
         Object[][] dadosTabela = new Object[funcionalidades.size()][3];
         int i = 0;
