@@ -164,7 +164,7 @@ public final class PrincipalPresenter implements Observer {
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Compartilhar projeto de estimativa", "action", cmdCompartilhar));
                 noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Exportar projeto de estimativa", "action", cmdExportar));
             } else {
-                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", comandos.get("Visualizar estimativa")));
+                noProjeto.adicionarFilho(construtorDeArvoreNavegacaoService.criarNo("Visualizar estimativa", "action", cmdVisualizar));
             }
             noProjetos.adicionarFilho(noProjeto);
             totalProjetos++;

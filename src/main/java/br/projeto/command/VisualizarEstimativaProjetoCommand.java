@@ -47,6 +47,7 @@ public class VisualizarEstimativaProjetoCommand implements ProjetoCommand{
                 JOptionPane.showMessageDialog(null, "Estimativa indisponível! Não é possível acessar esta página.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
             VisualizarEstimativaPresenter presenter = new VisualizarEstimativaPresenter(projetoId);
             JInternalFrame frame = new JInternalFrame(titulo, true, true, true, true);
             frame.setContentPane(presenter.getView().getContentPane());
