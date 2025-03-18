@@ -42,14 +42,14 @@ public class CadastrarPresenter {
         List<String> errosSenha =  validadorSenha.validar(senha);
 
         //LEMBRAR DE TIRAR DO COMENTÁRIO QUANDO ENTREGAR
-        /*if (!errosSenha.isEmpty()) {
+        if (!errosSenha.isEmpty()) {
             String mensagemErro = "Erro ao cadastrar usuário!\n";
             for (String erro : errosSenha) {
                 mensagemErro += erro + "\n";
             }
             JOptionPane.showMessageDialog(view, mensagemErro, "Erro", JOptionPane.ERROR_MESSAGE);
             return;
-        }*/
+        }
 
         // Verifica se os campos não estão vazios
         if (nomeUsuario.isEmpty() || email.isEmpty() || senha.isEmpty()) {
