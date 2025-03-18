@@ -33,9 +33,7 @@ public class UsuarioH2Dao implements IUsuarioDAO{
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
-            ResultSet usuarioID = stmt.executeQuery(sql);
-
-            System.out.println("Valor retornado da criaçao : " + usuarioID);
+            stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println("Erro ao criar usuario");
         }

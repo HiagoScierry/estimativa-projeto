@@ -15,14 +15,15 @@ import br.projeto.model.Perfil;
 import br.projeto.model.Projeto;
 import br.projeto.singleton.UsuarioSingleton;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author hiago
  */
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProjetoH2Dao implements IProjetoDAO {
     private Connection connection;
@@ -57,23 +58,28 @@ public class ProjetoH2Dao implements IProjetoDAO {
                     UsuarioSingleton.getInstance().getUsuario().getId(),
                     true);
 
-            for (Perfil perfil : projeto.getPerfis()) {
-                daoUtil.getProjetoPerfilDao().associarPerfilaProjeto(projeto.getId(), perfil.getId());
-            }
+            // for (Perfil perfil : projeto.getPerfis()) {
+            //     daoUtil.getProjetoPerfilDao().associarPerfilaProjeto(projeto.getId(), perfil.getId());
+            // }
 
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
                 daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
                 daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
             for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
                 daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
             }
 
             for (CustoAdicional custo : projeto.getCustosAdicionais()) {
+                daoUtil.getCustoAdicionalDao().inserir(custo);
                 daoUtil.getProjetoCustoAdicionalDao().associarProjetoCustoAdicional(projeto.getId(), custo.getId());
             }
+
         } catch (Exception e) {
             System.out.println("Erro ao inserir o projeto: " + e.getMessage());
         }
@@ -98,16 +104,25 @@ public class ProjetoH2Dao implements IProjetoDAO {
                 projeto.setNivelUI(nivelUI);
                 Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
                 projeto.setEstimativa(estimativa);
-                projeto.setPerfis(daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id")));
-                projeto.setFuncionalidadesWebBackend(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND"));
-                projeto.setFuncionalidadesIOS(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS"));
-                projeto.setFuncionalidadesAndroid(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID"));
-                projeto.setCustosAdicionais(daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id")));
+                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
+                projeto.setPerfis(perfis);
+                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
+                List<Funcionalidade> funcionalidadesIOS =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
+                List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
+
+                projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
+                projeto.setFuncionalidadesIOS(funcionalidadesIOS);
+                projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
+
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                projeto.setCustosAdicionais(custosAdicionais);
 
                 return projeto;
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar o projeto por ID: " + e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(ProjetoH2Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -127,13 +142,23 @@ public class ProjetoH2Dao implements IProjetoDAO {
                 projeto.setStatus(rs.getString("status"));
                 projeto.setCompartilhado(rs.getBoolean("compartilhado"));
 
-                projeto.setNivelUI(daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId")));
-                projeto.setEstimativa(daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId")));
-                projeto.setPerfis(daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id")));
-                projeto.setFuncionalidadesWebBackend(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND"));
-                projeto.setFuncionalidadesIOS(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS"));
-                projeto.setFuncionalidadesAndroid(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID"));
-                projeto.setCustosAdicionais(daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id")));
+                NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                projeto.setNivelUI(nivelUI);
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
+                projeto.setEstimativa(estimativa);
+                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
+                projeto.setPerfis(perfis);
+                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
+                List<Funcionalidade> funcionalidadesIOS =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
+                List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
+
+                projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
+                projeto.setFuncionalidadesIOS(funcionalidadesIOS);
+                projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
+
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                projeto.setCustosAdicionais(custosAdicionais);
+
 
                 projetos.add(projeto);
             }
@@ -142,13 +167,16 @@ public class ProjetoH2Dao implements IProjetoDAO {
         }
         return projetos;
     }
-    
+
     @Override
     public List<Projeto> listarPorUsuario(int usuarioId) {
         List<Projeto> projetos = new ArrayList<>();
-        String sql = "SELECT p.* FROM Projeto p " +
-                     "JOIN ProjetoUsuarioCompartilhado puc ON p.id = puc.projetoId " +
-                     "WHERE puc.usuarioId = ?";
+        String sql = "SELECT *\n" +
+                "FROM Projeto p\n" +
+                "JOIN ProjetoUsuarioCompartilhado puc ON p.id = puc.projetoId\n" +
+                "JOIN Usuario u ON puc.usuarioId = u.id\n" +
+                "WHERE u.id = ?;";
+
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, usuarioId);
@@ -161,14 +189,26 @@ public class ProjetoH2Dao implements IProjetoDAO {
                 projeto.setDataCriacao(rs.getString("dataCriacao"));
                 projeto.setStatus(rs.getString("status"));
                 projeto.setCompartilhado(rs.getBoolean("compartilhado"));
+                projeto.setPercentualImpostos(rs.getDouble("percentualImpostos"));
+                projeto.setPercentualLucro(rs.getDouble("percentualLucro"));
 
-                projeto.setNivelUI(daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId")));
-                projeto.setEstimativa(daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId")));
-                projeto.setPerfis(daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id")));
-                projeto.setFuncionalidadesWebBackend(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND"));
-                projeto.setFuncionalidadesIOS(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS"));
-                projeto.setFuncionalidadesAndroid(daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID"));
-                projeto.setCustosAdicionais(daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id")));
+                NivelUI nivelUI = daoUtil.getNivelUIDao().buscarPorId(rs.getInt("nivelUIId"));
+                projeto.setNivelUI(nivelUI);
+                Estimativa estimativa = daoUtil.getEstimativaDao().buscarPorId(rs.getInt("estimativaId"));
+                projeto.setEstimativa(estimativa);
+                List<Perfil> perfis = daoUtil.getProjetoPerfilDao().listarPerfisPorProjeto(rs.getInt("id"));
+                projeto.setPerfis(perfis);
+                List<Funcionalidade> funcionalidadesWebBackend = daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "WEB/BACKEND");
+                List<Funcionalidade> funcionalidadesIOS =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "IOS");
+                List<Funcionalidade> funcionalidadesAndroid =  daoUtil.getProjetoFuncionalidadeDao().listarFuncionalidadesPorProjeto(rs.getInt("id"), "ANDROID");
+
+                projeto.setFuncionalidadesWebBackend(funcionalidadesWebBackend);
+                projeto.setFuncionalidadesIOS(funcionalidadesIOS);
+                projeto.setFuncionalidadesAndroid(funcionalidadesAndroid);
+
+                List<CustoAdicional> custosAdicionais = daoUtil.getProjetoCustoAdicionalDao().listarCustosAdicionaisPorProjeto(rs.getInt("id"));
+                projeto.setCustosAdicionais(custosAdicionais);
+
 
                 projetos.add(projeto);
             }
@@ -178,11 +218,13 @@ public class ProjetoH2Dao implements IProjetoDAO {
         return projetos;
     }
 
-
     @Override
     public void atualizar(Projeto projeto) {
-        String sql = "UPDATE Projeto SET nome = ?, dataCriacao = ?, status = ?, compartilhado = ?, nivelUIId = ?, percentualImpostos = ?, percentualLucro = ? WHERE id = ?";
+        String sql = "UPDATE Projeto SET nome = ?, dataCriacao = ?, status = ?, compartilhado = ?, nivelUIId = ?, percentualImpostos = ?, percentualLucro = ?, estimativaId = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            daoUtil.getNivelUIDao().inserir(projeto.getNivelUI());
+            daoUtil.getEstimativaDao().inserir(projeto.getEstimativa());
+
             stmt.setString(1, projeto.getNome());
             stmt.setString(2, projeto.getDataCriacao());
             stmt.setString(3, projeto.getStatus());
@@ -190,12 +232,31 @@ public class ProjetoH2Dao implements IProjetoDAO {
             stmt.setInt(5, projeto.getNivelUI() != null ? projeto.getNivelUI().getId() : 0);
             stmt.setDouble(6, projeto.getPercentualImpostos());
             stmt.setDouble(7, projeto.getPercentualLucro());
-            stmt.setInt(8, projeto.getId());
+            stmt.setInt(8, projeto.getEstimativa().getId());
+            stmt.setInt(9, projeto.getId());
             stmt.executeUpdate();
 
-            daoUtil.getProjetoPerfilDao().atualizarPerfisProjeto(projeto.getId(), projeto.getPerfis());
-            daoUtil.getProjetoFuncionalidadeDao().atualizarFuncionalidadesProjeto(projeto.getId(), projeto);
-            daoUtil.getProjetoCustoAdicionalDao().atualizarCustosAdicionaisProjeto(projeto.getId(), projeto.getCustosAdicionais());
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+            }
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+            }
+            for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
+                daoUtil.getFuncionalidadeDao().inserir(funcionalidade);
+                daoUtil.getProjetoFuncionalidadeDao().associarProjetoFuncionalidade(projeto.getId(), funcionalidade.getId());
+            }
+
+            for (CustoAdicional custo : projeto.getCustosAdicionais()) {
+                daoUtil.getCustoAdicionalDao().inserir(custo);
+                daoUtil.getProjetoCustoAdicionalDao().associarProjetoCustoAdicional(projeto.getId(), custo.getId());
+            }
+
+
+
+
         } catch (Exception e) {
             System.out.println("Erro ao atualizar projeto: " + e.getMessage());
         }

@@ -7,6 +7,10 @@ package br.projeto.dao.h2;
 import br.projeto.config.database.h2.H2Connection;
 import br.projeto.dao.interfaces.INivelUIDAO;
 import br.projeto.model.NivelUI;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -26,11 +30,19 @@ public class NivelUIH2Dao implements INivelUIDAO {
 
     @Override
     public void inserir(NivelUI nivelUI) {
-        String sql = "INSERT INTO NivelUI (nome, percentual) VALUES (?, ?)";
+        String sql = "INSERT INTO NivelUI (nome, percentual, diasInterface) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nivelUI.getNome());
             stmt.setDouble(2, nivelUI.getPercentual());
+            stmt.setInt(3, nivelUI.getDiasInterface());
             stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                nivelUI.setId(rs.getInt(1));
+            }
+
         } catch (SQLException e) {
             System.out.println("Erro ao inserir NivelUI: " + e.getMessage());
         }
@@ -78,7 +90,7 @@ public class NivelUIH2Dao implements INivelUIDAO {
 
     @Override
     public void atualizar(NivelUI nivelUI) {
-        String sql = "UPDATE NivelUI SET nome = ?, percentual = ? WHERE id = ?";
+        String sql = "UPDATE NivelUI SET nome = ?, percentual = ?, diasInterfaceWHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nivelUI.getNome());
             stmt.setDouble(2, nivelUI.getPercentual());

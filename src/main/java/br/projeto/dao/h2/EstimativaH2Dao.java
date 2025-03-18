@@ -4,14 +4,14 @@
  */
 package br.projeto.dao.h2;
 
-import br.projeto.config.database.sqlite.SQLiteConnection;
+import br.projeto.config.database.h2.H2Connection;
 import br.projeto.dao.interfaces.IEstimativaDAO;
 import br.projeto.model.Estimativa;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.*;
 
 
 /**
@@ -23,7 +23,7 @@ public class EstimativaH2Dao implements IEstimativaDAO {
     private Connection connection;
 
     public EstimativaH2Dao() throws Exception {
-        this.connection = SQLiteConnection.getConexao();
+        this.connection = H2Connection.getConexao();
     }
 
     @Override
@@ -34,13 +34,17 @@ public class EstimativaH2Dao implements IEstimativaDAO {
             stmt.setDouble(1, estimativa.getCustoTotal());
             stmt.setInt(2, estimativa.getTempoTotal());
             stmt.setDouble(3, estimativa.getPrecoFinal());
-
             stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                estimativa.setId(rs.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void atualizar(Estimativa estimativa) {
         String sql = "UPDATE Estimativa SET custoTotal = ?, tempoTotal = ?, precoFinal = ? WHERE id = ?";
@@ -68,7 +72,7 @@ public class EstimativaH2Dao implements IEstimativaDAO {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public Estimativa buscarPorId(int id) {
         String sql = "SELECT * FROM Estimativa WHERE id = ?";

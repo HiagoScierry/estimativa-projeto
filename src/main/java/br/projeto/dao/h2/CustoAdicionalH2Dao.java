@@ -7,6 +7,10 @@ package br.projeto.dao.h2;
 import br.projeto.config.database.h2.H2Connection;
 import br.projeto.dao.interfaces.ICustoAdicionalDAO;
 import br.projeto.model.CustoAdicional;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -29,6 +33,12 @@ public class CustoAdicionalH2Dao implements ICustoAdicionalDAO {
             stmt.setString(1, custo.getDescricao());
             stmt.setDouble(2, custo.getValor());
             stmt.executeUpdate();
+
+            //preciso pegar o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                custo.setId(rs.getInt(1));
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao inserir custo adicional: " + e.getMessage());
         }

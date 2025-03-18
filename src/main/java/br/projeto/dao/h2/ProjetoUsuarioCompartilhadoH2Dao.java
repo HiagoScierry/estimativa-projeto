@@ -27,6 +27,11 @@ public class ProjetoUsuarioCompartilhadoH2Dao implements IProjetoUsuarioComparti
 
     @Override
     public void compartilharProjetoComUsuario(int projetoId, int usuarioId, boolean isCriador) {
+        System.out.println("Compartilhando projeto com usuário");
+        System.out.println("Projeto: " + projetoId);
+        System.out.println("Usuário: " + usuarioId);
+        System.out.println("É criador: " + isCriador);
+
         String sql = "INSERT INTO ProjetoUsuarioCompartilhado (projetoId, usuarioId, isCriador) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, projetoId);
