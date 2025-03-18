@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS CustoAdicional (
 CREATE TABLE IF NOT EXISTS NivelUI (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    percentual DECIMAL(5, 2) NOT NULL
+    percentual DECIMAL(5, 2) NOT NULL,
+    diasInterface INT NOT NULL
 );
 
 -- Tabela Estimativa

@@ -46,7 +46,8 @@ public class NivelUIH2Dao implements INivelUIDAO {
                 return new NivelUI(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    rs.getDouble("percentual")
+                    rs.getDouble("percentual"),
+                    rs.getInt("diasInterface")
                 );
             }
         } catch (SQLException e) {
@@ -65,7 +66,8 @@ public class NivelUIH2Dao implements INivelUIDAO {
                 niveis.add(new NivelUI(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    rs.getDouble("percentual")
+                    rs.getDouble("percentual"),
+                    rs.getInt("diasInterface")
                 ));
             }
         } catch (SQLException e) {

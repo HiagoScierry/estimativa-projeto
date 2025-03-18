@@ -265,11 +265,11 @@ public class ElaborarEstimativaPresenter implements Observer {
                 int dias = table.getValueAt(row, 5).toString().trim() == "" ? 0 : Integer.parseInt(table.getValueAt(row, 5).toString().trim());
 
                 if(webBackend || android){
-                    valorFuncionalidade += estimaProjetoService.calcularValorUnitario("WEB/BACKEND", dias);
+                    valorFuncionalidade += estimaProjetoService.calcularValorUnitario("WEB/BACKEND", dias/3);
                 }
 
                 if(ios){
-                    valorFuncionalidade += estimaProjetoService.calcularValorUnitario("IOS", dias);
+                    valorFuncionalidade += estimaProjetoService.calcularValorUnitario("IOS", dias/3);
                 }
 
 
@@ -295,7 +295,7 @@ public class ElaborarEstimativaPresenter implements Observer {
         List<Funcionalidade> funcionalidadesIOS = new ArrayList<Funcionalidade>();
         List<Funcionalidade> funcionalidadesAndroid = new ArrayList<Funcionalidade>();
         List<CustoAdicional> custoAdicionals = new ArrayList<CustoAdicional>();
-        NivelUI nivelUI = new NivelUI(0, "", 0.0);
+        NivelUI nivelUI = new NivelUI(0, "", 0.0,0);
         Estimativa estimativa = new Estimativa(0, 0, 0 ,0);
 
         int rowCount = view.getTblEstimativaProjeto().getRowCount();
@@ -308,10 +308,16 @@ public class ElaborarEstimativaPresenter implements Observer {
             }
             boolean rowMarked = view.getTblEstimativaProjeto().getValueAt(i, 0) != null ? true : false;
 
-            if (i > 2 && i < 6 && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
-                nivelUI.setNome(view.getTblEstimativaProjeto().getValueAt(i, 1).toString());
-                System.out.println(view.getTblEstimativaProjeto().getValueAt(i, 5).toString());
-                nivelUI.setPercentual(Double.parseDouble(view.getTblEstimativaProjeto().getValueAt(i, 5).toString().trim()));
+            if (i < 6 && view.getTblEstimativaProjeto().getValueAt(i, 5) != null) {
+                if(i < 3){
+                    nivelUI.setNome(view.getTblEstimativaProjeto().getValueAt(i, 1).toString());
+                    nivelUI.setDiasInterface(Integer.parseInt(view.getTblEstimativaProjeto().getValueAt(i, 5).toString().trim().replace("%", "")));
+                } else {
+                    nivelUI.setNome(nivelUI.getNome() + "/" + view.getTblEstimativaProjeto().getValueAt(i, 1).toString());
+                    nivelUI.setPercentual(Double.parseDouble(view.getTblEstimativaProjeto().getValueAt(i, 5).toString().trim())/nivelUI.getDiasInterface()
+                    );
+                }
+
             }
 
             if (i > 5) {

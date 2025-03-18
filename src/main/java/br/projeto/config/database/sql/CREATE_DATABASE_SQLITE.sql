@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS CustoAdicional (
 CREATE TABLE IF NOT EXISTS NivelUI (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
-    percentual REAL NOT NULL
+    percentual REAL NOT NULL,
+    diasInterface INTEGER NOT NULL
 );
 
 -- Tabela Projeto

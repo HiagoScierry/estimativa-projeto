@@ -12,11 +12,13 @@ public class NivelUI {
     private int id;
     private String nome;
     private double percentual;
+    private int diasInterface;
 
-    public NivelUI(int id, String nome, double percentual) {
+    public NivelUI(int id, String nome, double percentual, int diasInterface) {
         this.id = id;
         this.nome = nome;
         this.percentual = percentual;
+        this.diasInterface = diasInterface;
     }
 
     // Getters e Setters
@@ -28,4 +30,7 @@ public class NivelUI {
 
     public double getPercentual() { return percentual; }
     public void setPercentual(double percentual) { this.percentual = percentual; }
+
+    public int getDiasInterface() { return diasInterface; }
+    public void setDiasInterface(int diasInterface) { this.diasInterface = diasInterface; }
 }

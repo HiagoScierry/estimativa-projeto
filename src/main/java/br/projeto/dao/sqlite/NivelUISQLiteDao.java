@@ -26,10 +26,11 @@ public class NivelUISQLiteDao implements INivelUIDAO {
 
     @Override
     public void inserir(NivelUI nivelUI) {
-        String sql = "INSERT INTO NivelUI (nome, percentual) VALUES (?, ?)";
+        String sql = "INSERT INTO NivelUI (nome, percentual, diasInterface) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nivelUI.getNome());
             stmt.setDouble(2, nivelUI.getPercentual());
+            stmt.setInt(3, nivelUI.getDiasInterface());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -53,7 +54,8 @@ public class NivelUISQLiteDao implements INivelUIDAO {
                 return new NivelUI(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    rs.getDouble("percentual")
+                    rs.getDouble("percentual"),
+                    rs.getInt("diasInterface")
                 );
             }
         } catch (SQLException e) {
@@ -72,7 +74,8 @@ public class NivelUISQLiteDao implements INivelUIDAO {
                 niveis.add(new NivelUI(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    rs.getDouble("percentual")
+                    rs.getDouble("percentual"),
+                    rs.getInt("diasInterface")
                 ));
             }
         } catch (SQLException e) {
@@ -83,7 +86,7 @@ public class NivelUISQLiteDao implements INivelUIDAO {
 
     @Override
     public void atualizar(NivelUI nivelUI) {
-        String sql = "UPDATE NivelUI SET nome = ?, percentual = ? WHERE id = ?";
+        String sql = "UPDATE NivelUI SET nome = ?, percentual = ?, diasInterfaceWHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nivelUI.getNome());
             stmt.setDouble(2, nivelUI.getPercentual());

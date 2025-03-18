@@ -2,6 +2,7 @@ package br.projeto.presenter;
 
 import br.projeto.model.Estimativa;
 import br.projeto.model.Funcionalidade;
+import br.projeto.model.NivelUI;
 import br.projeto.model.Projeto;
 import br.projeto.model.Usuario;
 import br.projeto.view.DetalheProjetoView;
@@ -99,27 +100,66 @@ public class DetalheProjetoPresenter implements Observer {
     private void carregarDetalhes(Projeto projeto) {
         Map<Integer, Object[]> funcionalidades = new HashMap<>();
 
-        // Adicionar funcionalidade na lista com o prefixo da plataforma antes do nome
-
+        // Adicionando funcionalidades à lista
         for (Funcionalidade funcionalidade : projeto.getFuncionalidadesWebBackend()) {
-            funcionalidades.put(funcionalidade.getId(), new Object[]{"WEB/BACKEND", funcionalidade.getPlataforma()+ " : " + funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+            funcionalidades.put(funcionalidade.getId(), new Object[]{
+                    "WEB/BACKEND",
+                    funcionalidade.getPlataforma() + " : " + funcionalidade.getNome(),
+                    funcionalidade.getHorasEstimadas()
+            });
         }
         for (Funcionalidade funcionalidade : projeto.getFuncionalidadesIOS()) {
-            funcionalidades.put(funcionalidade.getId(), new Object[]{"IOS", funcionalidade.getPlataforma()+ " : " + funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+            funcionalidades.put(funcionalidade.getId(), new Object[]{
+                    "IOS",
+                    funcionalidade.getPlataforma() + " : " + funcionalidade.getNome(),
+                    funcionalidade.getHorasEstimadas()
+            });
         }
         for (Funcionalidade funcionalidade : projeto.getFuncionalidadesAndroid()) {
-            funcionalidades.put(funcionalidade.getId(), new Object[]{"ANDROID", funcionalidade.getPlataforma()+ " : " + funcionalidade.getNome(), funcionalidade.getHorasEstimadas()});
+            funcionalidades.put(funcionalidade.getId(), new Object[]{
+                    "ANDROID",
+                    funcionalidade.getPlataforma() + " : " + funcionalidade.getNome(),
+                    funcionalidade.getHorasEstimadas()
+            });
         }
 
+        NivelUI nivelUI = projeto.getNivelUI();
+
+        List<String> tiposProjetos = List.of("WEB/BACKEND", "ANDROID", "IOS");
+
+        int somaTipoProjeto = (projeto.getFuncionalidadesAndroid().isEmpty() ? 0 : 1)
+                + (projeto.getFuncionalidadesIOS().isEmpty() ? 0 : 1)
+                + (projeto.getFuncionalidadesWebBackend().isEmpty() ? 0 : 1);
+
+        if (somaTipoProjeto == 0) somaTipoProjeto = 1; // Evita divisão por zero
+
+        for (String tipoProjeto : tiposProjetos) {
+            funcionalidades.put(funcionalidades.size() + nivelUI.getId(), new Object[]{
+                    tipoProjeto,
+                    tipoProjeto + " : "+nivelUI.getNome(),
+                    nivelUI.getDiasInterface() / somaTipoProjeto
+            });
+
+            funcionalidades.put(funcionalidades.size() + nivelUI.getId() + 1, new Object[]{
+                    tipoProjeto,
+                    tipoProjeto + " : "+nivelUI.getNome(),
+                    (int) (nivelUI.getPercentual() * nivelUI.getDiasInterface() / somaTipoProjeto)
+            });
+        }
+
+        // Criando matriz para popular tabela
         Object[][] dadosTabela = new Object[funcionalidades.size()][3];
         int i = 0;
 
         for (Map.Entry<Integer, Object[]> entry : funcionalidades.entrySet()) {
-            int id = entry.getKey();
             String tipoProjeto = (String) entry.getValue()[0];
             String nome = (String) entry.getValue()[1];
-            int horasEstimadas = (Integer) entry.getValue()[2];
 
+            // Garantindo que horasEstimadas pode ser Double ou Integer
+            Number horasEstimadasNum = (Number) entry.getValue()[2];
+            int horasEstimadas = horasEstimadasNum.intValue(); // Converte corretamente para int
+
+            // Calculando valor unitário
             double valorUnitario = estimaService.calcularValorUnitario(tipoProjeto, horasEstimadas);
 
             dadosTabela[i][0] = nome;
@@ -131,6 +171,7 @@ public class DetalheProjetoPresenter implements Observer {
         Estimativa estimativa = projeto.getEstimativa();
         view.atualizarTabela(dadosTabela, estimativa.getPrecoFinal());
     }
+
 
     @Override
     public void update(List<Projeto> projetos) {
