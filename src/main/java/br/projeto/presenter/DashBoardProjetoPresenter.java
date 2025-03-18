@@ -8,7 +8,9 @@ import br.projeto.singleton.UsuarioSingleton;
 import br.projeto.view.DashBoardProjetoView;
 import org.jfree.data.general.DefaultPieDataset;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DashBoardProjetoPresenter implements Observer {
     private final DashBoardProjetoView view;
@@ -62,14 +64,43 @@ public class DashBoardProjetoPresenter implements Observer {
 
     private DefaultPieDataset gerarDatasetProjetos(List<Projeto> projetos) {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        // A FAZER !!!
-//        Map<String, Long> tipos = projetos.stream()
-//                .flatMap(projeto -> projeto.getPerfis().stream())
-//                .collect(Collectors.groupingBy(tipo -> tipo, Collectors.counting()));
-//
-//        for (Map.Entry<String, Long> entry : tipos.entrySet()) {
-//            dataset.setValue(entry.getKey(), entry.getValue());
-//        }
+
+        Map<String, Long> tipos = new HashMap<String, Long>();
+
+        for (Projeto projeto : projetos) {
+            StringBuilder tipo = new StringBuilder();
+
+            if (!projeto.getFuncionalidadesAndroid().isEmpty()) {
+                System.out.println("Adicionando Android");
+                tipo.append("Android");
+            }
+
+            if (!projeto.getFuncionalidadesIOS().isEmpty()) {
+                System.out.println("Adicionando iOS");
+                if (tipo.length() > 0) {
+                    tipo.append(" e ");
+                }
+                tipo.append("iOS");
+            }
+
+            if (!projeto.getFuncionalidadesWebBackend().isEmpty()) {
+                System.out.println("Adicionando Web");
+                if (tipo.length() > 0) {
+                    tipo.append(" e ");
+                }
+                tipo.append("Web");
+            }
+
+            tipos.put(tipo.toString(), tipos.getOrDefault(tipo.toString(), 0L) + 1);
+        }
+
+
+
+       for (Map.Entry<String, Long> entry : tipos.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+
+           dataset.setValue(entry.getKey(), entry.getValue());
+       }
         return dataset;
     }
 
