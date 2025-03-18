@@ -11,12 +11,14 @@ public class EstimaProjetoService {
     private static final double VALOR_DIARIA_UI_UX = 550.0;
 
     public int calcularDiasTotais(Projeto projeto) {
-        return calcularDiasFuncionalidades(projeto.getFuncionalidadesEscolhidas());
+        int diasInterface = projeto.getNivelUI().getDiasInterface();
+        int diasDificuldade = (int) (projeto.getNivelUI().getPercentual() * projeto.getNivelUI().getDiasInterface());
+
+        return calcularDiasFuncionalidades(projeto.getFuncionalidadesEscolhidas()) + diasDificuldade + diasInterface;
     }
 
     public double calcularCusto(Projeto projeto) {
-        int diasTotais = calcularDiasTotais(projeto);
-        return diasTotais * VALOR_DIARIA_DESENVOLVIMENTO;
+        return projeto.getEstimativa().getCustoTotal();
     }
 
     public double calcularValorUnitario(String tipoProjeto, int dias) {
